@@ -1,0 +1,1001 @@
+vertex 0: label1 4 label109 1 label708 1 label789 95 
+vertex 1: label2 1 label98 1 label302 2 label542 96 label831 1 
+vertex 2: label3 1 label398 30 label698 2 label710 62 label797 5 label859 1 
+vertex 3: label4 1 label361 1 label363 1 label714 1 label796 1 label943 1 label952 95 
+vertex 4: label5 1 label39 1 label782 1 label855 1 label869 2 label913 95 
+vertex 5: label6 1 label113 1 label136 1 label471 1 label543 1 label752 1 label886 1 label911 1 label933 1 label949 89 label957 1 label981 1 label998 1 
+vertex 6: label7 1 label28 1 label143 1 label309 1 label436 1 label932 91 label942 4 label964 1 
+vertex 7: label8 1 label495 1 label527 1 label952 98 
+vertex 8: label9 19 label453 1 label460 1 label535 74 label593 3 label795 1 label847 1 label991 1 
+vertex 9: label10 1 label511 2 label773 1 label775 1 label784 1 label924 59 label987 1 label1000 35 
+vertex 10: label11 1 label220 1 label808 1 label859 1 label865 3 label909 94 
+vertex 11: label12 1 label67 4 label610 2 label913 93 label951 1 
+vertex 12: label13 1 label532 1 label977 99 
+vertex 13: label14 1 label553 2 label819 93 label902 3 label946 1 label958 1 
+vertex 14: label15 2 label67 1 label578 1 label717 2 label801 2 label913 93 
+vertex 15: label16 1 label191 1 label367 1 label504 2 label773 1 label806 91 label870 1 label908 2 label911 1 
+vertex 16: label17 1 label457 1 label630 1 label814 1 label823 2 label905 1 label949 1 label982 1 label991 92 
+vertex 17: label18 1 label630 93 label722 1 label901 1 label905 3 label961 1 label979 1 
+vertex 18: label19 1 label299 1 label459 1 label545 1 label890 1 label924 94 label984 1 label986 1 
+vertex 19: label20 2 label395 1 label398 21 label672 1 label700 1 label710 71 label797 1 label878 1 label917 1 label948 1 
+vertex 20: label21 2 label398 9 label698 1 label710 86 label744 1 label765 1 label895 1 
+vertex 21: label22 1 label28 7 label597 1 label630 4 label649 1 label682 1 label759 1 label763 1 label815 2 label832 58 label868 1 label932 4 label949 7 label952 10 label953 2 
+vertex 22: label23 1 label418 1 label498 1 label837 1 label895 94 label977 3 
+vertex 23: label24 1 label256 1 label405 1 label647 33 label771 2 label813 1 label860 1 label890 1 label915 57 label957 2 label966 1 
+vertex 24: label7 2 label9 3 label25 1 label418 1 label455 1 label515 21 label524 2 label535 18 label576 1 label590 1 label714 1 label737 2 label775 4 label889 1 label895 4 label898 1 label905 2 label946 1 label949 12 label952 19 label977 2 label996 1 
+vertex 25: label26 1 label735 1 label884 1 label974 2 label987 1 label1000 95 
+vertex 26: label27 1 label604 1 label647 34 label648 1 label813 1 label915 63 
+vertex 27: label28 7 label448 1 label505 1 label819 1 label832 21 label838 1 label868 2 label932 58 label942 1 label952 7 label996 1 
+vertex 28: label29 1 label431 6 label534 86 label550 1 label694 1 label728 1 label880 4 label981 1 
+vertex 29: label30 1 label626 1 label811 5 label956 92 label957 1 label977 1 
+vertex 30: label28 1 label31 1 label249 4 label649 16 label753 1 label830 1 label832 69 label895 1 label908 1 label959 6 
+vertex 31: label32 1 label599 1 label672 2 label767 1 label802 85 label918 1 label933 10 
+vertex 32: label33 5 label387 1 label511 1 label924 94 
+vertex 33: label34 1 label443 2 label471 1 label764 1 label918 95 label955 1 
+vertex 34: label35 1 label37 1 label547 2 label579 1 label776 1 label792 2 label881 92 label992 1 
+vertex 35: label36 1 label67 1 label826 1 label913 98 
+vertex 36: label37 1 label547 2 label674 1 label699 1 label792 2 label847 1 label881 91 label990 1 label992 1 
+vertex 37: label38 1 label351 1 label473 1 label599 1 label604 1 label674 1 label802 92 label933 1 label949 2 
+vertex 38: label39 2 label405 1 label417 2 label561 1 label630 3 label869 3 label913 87 label995 1 label1000 1 
+vertex 39: label40 4 label269 1 label505 1 label553 3 label689 1 label786 1 label819 85 label902 1 label946 2 label956 2 
+vertex 40: label41 1 label398 1 label571 1 label649 42 label698 1 label759 1 label832 50 label905 2 label953 1 label981 1 
+vertex 41: label42 2 label77 1 label452 2 label603 1 label723 94 label970 1 
+vertex 42: label43 1 label923 3 label952 97 
+vertex 43: label44 1 label896 7 label903 1 label918 1 label922 1 label952 1 label953 89 
+vertex 44: label45 1 label249 1 label292 1 label483 1 label516 1 label608 1 label649 26 label704 2 label753 2 label832 54 label891 3 label895 2 label917 4 label959 1 label976 1 
+vertex 45: label46 1 label377 1 label431 3 label534 89 label550 1 label694 1 label880 5 
+vertex 46: label47 1 label498 2 label514 1 label576 1 label601 95 label787 1 
+vertex 47: label48 1 label443 1 label896 1 label918 44 label919 1 label922 1 label929 2 label953 50 
+vertex 48: label7 1 label9 3 label49 1 label95 1 label119 1 label391 2 label515 29 label535 49 label737 1 label813 3 label898 5 label905 3 label926 1 label984 1 
+vertex 49: label50 1 label102 1 label775 93 label791 1 label892 1 label932 1 label936 1 label959 1 label981 1 
+vertex 50: label51 1 label289 1 label392 1 label630 95 label905 3 
+vertex 51: label52 1 label102 1 label295 1 label775 47 label838 1 label855 2 label913 46 label952 1 label959 1 
+vertex 52: label15 1 label53 2 label141 2 label425 2 label529 2 label820 91 label993 1 
+vertex 53: label54 1 label73 2 label91 3 label189 85 label243 6 label399 1 label447 1 label706 1 label792 1 
+vertex 54: label8 1 label55 1 label495 1 label645 1 label722 1 label796 1 label819 24 label907 1 label918 67 label952 1 label958 2 
+vertex 55: label56 1 label547 1 label663 1 label723 1 label859 1 label881 96 
+vertex 56: label57 2 label189 2 label219 1 label515 84 label692 4 label737 2 label889 2 label968 1 label978 1 label984 2 
+vertex 57: label58 1 label155 2 label497 1 label956 96 label964 1 
+vertex 58: label59 1 label497 1 label666 2 label786 1 label956 94 label957 1 label984 1 
+vertex 59: label60 1 label707 2 label896 5 label922 1 label953 91 label991 1 
+vertex 60: label15 1 label53 2 label61 2 label141 1 label368 1 label425 1 label529 1 label748 1 label820 91 
+vertex 61: label62 1 label653 1 label974 1 label987 2 label1000 96 
+vertex 62: label63 1 label479 2 label882 1 label981 96 label998 1 
+vertex 63: label64 1 label284 3 label416 1 label601 85 label777 6 label942 1 label953 3 label1000 1 
+vertex 64: label65 3 label733 4 label815 90 label878 1 label894 3 
+vertex 65: label66 3 label249 2 label467 1 label491 1 label649 3 label711 1 label777 1 label832 18 label913 3 label987 3 label989 1 label1000 64 
+vertex 66: label67 3 label405 1 label578 1 label869 3 label913 93 
+vertex 67: label68 1 label739 1 label864 1 label913 2 label932 83 label942 7 label964 5 label1000 1 
+vertex 68: label69 1 label647 32 label720 1 label860 1 label877 1 label890 1 label915 64 
+vertex 69: label70 2 label306 1 label806 95 label870 2 label908 1 
+vertex 70: label71 1 label178 1 label630 95 label888 1 label905 1 label979 1 label989 1 
+vertex 71: label72 1 label102 1 label775 96 label828 1 label892 1 label936 1 
+vertex 72: label73 2 label91 4 label189 86 label243 3 label417 1 label447 1 label694 1 label737 1 label978 1 label1000 1 
+vertex 73: label28 1 label74 1 label416 1 label896 4 label953 94 
+vertex 74: label75 1 label966 96 label991 1 label997 3 
+vertex 75: label7 1 label9 21 label25 1 label76 1 label418 2 label535 64 label576 1 label590 2 label593 1 label881 2 label911 1 label932 1 label962 1 label977 1 label994 1 
+vertex 76: label77 2 label79 1 label102 1 label653 1 label723 94 label767 1 label970 1 
+vertex 77: label72 1 label78 1 label866 1 label981 97 label998 1 
+vertex 78: label77 1 label79 1 label102 1 label606 1 label775 96 label936 1 
+vertex 79: label80 1 label195 2 label255 1 label302 3 label542 89 label831 1 label847 1 label895 2 label937 1 
+vertex 80: label81 1 label971 1 label977 98 label986 1 
+vertex 81: label82 1 label838 1 label923 1 label936 1 label952 97 
+vertex 82: label83 3 label352 1 label368 1 label727 2 label748 1 label820 89 label937 1 label947 1 label966 1 label970 1 
+vertex 83: label84 1 label112 1 label785 1 label895 96 label922 2 
+vertex 84: label85 1 label128 1 label431 5 label534 83 label634 7 label824 2 label880 1 label956 1 
+vertex 85: label86 1 label678 1 label833 1 label932 95 label942 2 label978 1 
+vertex 86: label87 1 label458 2 label739 1 label765 2 label806 1 label919 1 label932 83 label942 9 label991 1 
+vertex 87: label88 1 label452 1 label723 98 label767 1 
+vertex 88: label89 1 label771 1 label918 14 label966 82 label972 3 
+vertex 89: label90 1 label625 1 label876 1 label896 2 label903 2 label919 2 label953 92 
+vertex 90: label91 4 label189 81 label231 1 label243 11 label399 1 label487 1 label977 2 
+vertex 91: label92 1 label302 1 label331 1 label505 1 label542 94 label831 1 label925 1 label941 1 
+vertex 92: label93 1 label891 94 label970 5 label988 1 
+vertex 93: label94 1 label647 39 label737 1 label860 1 label915 59 
+vertex 94: label9 2 label33 1 label49 1 label95 1 label119 2 label238 1 label535 81 label630 3 label813 3 label848 1 label898 1 label924 2 label926 1 label981 1 
+vertex 95: label96 1 label345 1 label458 1 label617 1 label937 2 label947 1 label966 93 label991 1 
+vertex 96: label97 1 label194 1 label811 1 label956 97 label981 1 
+vertex 97: label89 1 label98 1 label302 1 label542 95 label831 1 label925 2 
+vertex 98: label67 1 label99 1 label836 1 label869 2 label913 96 
+vertex 99: label28 1 label100 1 label515 83 label737 3 label824 1 label835 2 label918 1 label932 1 label942 1 label953 1 label968 1 label978 1 label984 4 
+vertex 100: label101 1 label355 1 label604 1 label991 97 label994 1 
+vertex 101: label102 2 label499 1 label641 1 label775 95 label966 1 label992 1 
+vertex 102: label103 1 label299 1 label398 31 label672 2 label698 1 label710 51 label878 4 label917 6 label950 1 label962 1 label977 1 label991 1 
+vertex 103: label66 1 label104 1 label249 1 label371 2 label398 1 label423 1 label483 1 label546 1 label608 1 label630 1 label633 1 label649 20 label655 1 label710 1 label775 3 label802 2 label832 52 label924 3 label933 3 label981 4 
+vertex 104: label105 1 label631 1 label632 1 label912 1 label942 1 label949 6 label950 1 label991 88 label994 1 
+vertex 105: label9 2 label30 1 label89 1 label106 1 label238 1 label391 1 label515 9 label535 77 label578 1 label813 3 label891 2 label913 2 
+vertex 106: label107 1 label457 1 label515 89 label520 1 label737 1 label823 1 label984 7 
+vertex 107: label108 1 label497 1 label736 2 label942 1 label956 95 label957 1 
+vertex 108: label1 3 label109 1 label695 1 label789 96 
+vertex 109: label103 1 label110 1 label473 1 label848 1 label950 3 label991 93 label994 1 
+vertex 110: label17 1 label111 1 label727 1 label904 1 label911 1 label949 95 label958 1 
+vertex 111: label33 1 label112 2 label813 4 label924 94 
+vertex 112: label113 1 label524 3 label946 1 label949 96 
+vertex 113: label114 1 label183 1 label431 2 label534 92 label634 2 label728 1 label880 2 
+vertex 114: label38 1 label115 1 label398 2 label473 1 label604 1 label665 1 label752 1 label763 2 label802 1 label881 2 label912 1 label932 4 label949 71 label953 12 
+vertex 115: label116 2 label189 85 label243 11 label417 1 label705 1 label706 1 
+vertex 116: label117 1 label601 41 label659 2 label704 2 label708 1 label777 1 label789 2 label924 1 label937 49 label992 1 
+vertex 117: label118 1 label408 1 label689 1 label825 2 label896 3 label902 1 label953 92 
+vertex 118: label9 1 label25 1 label119 1 label310 1 label323 1 label494 1 label535 19 label630 66 label789 1 label819 1 label898 1 label905 3 label938 2 label979 1 label984 1 
+vertex 119: label120 1 label302 4 label517 1 label542 91 label831 3 label836 1 
+vertex 120: label121 1 label174 1 label398 20 label703 1 label710 68 label797 4 label878 2 label890 2 label893 1 label933 1 
+vertex 121: label1 1 label122 1 label474 1 label506 2 label645 1 label708 1 label722 1 label789 36 label868 1 label943 1 label977 55 
+vertex 122: label123 1 label806 96 label822 1 label870 3 
+vertex 123: label124 1 label135 1 label785 1 label895 97 label922 1 
+vertex 124: label31 1 label125 1 label914 1 label977 97 label986 1 
+vertex 125: label126 1 label194 1 label311 1 label368 1 label891 88 label935 1 label954 2 label960 1 label970 2 label976 2 label981 1 
+vertex 126: label127 4 label522 1 label775 96 
+vertex 127: label128 1 label431 3 label510 1 label534 88 label634 4 label723 1 label824 3 
+vertex 128: label65 1 label129 1 label542 48 label815 1 label840 1 label865 1 label887 1 label909 44 label934 2 label964 1 
+vertex 129: label130 1 label398 15 label698 1 label710 78 label766 1 label906 1 label917 2 label980 2 
+vertex 130: label131 1 label410 1 label534 1 label607 1 label689 1 label817 3 label819 15 label911 2 label913 74 label924 1 label949 1 
+vertex 131: label65 2 label132 1 label733 3 label815 93 label909 1 label934 1 
+vertex 132: label133 1 label515 84 label563 1 label630 1 label875 1 label897 1 label898 1 label968 1 label978 2 label984 8 
+vertex 133: label134 1 label141 2 label482 1 label559 1 label820 93 label975 3 
+vertex 134: label135 1 label517 1 label895 98 label922 1 
+vertex 135: label136 1 label546 1 label672 5 label802 20 label918 34 label933 2 label956 36 label957 2 
+vertex 136: label137 1 label1000 100 
+vertex 137: label138 1 label647 19 label860 1 label877 1 label915 78 label981 1 
+vertex 138: label139 1 label256 1 label363 2 label388 1 label647 34 label771 1 label860 2 label915 59 
+vertex 139: label114 1 label140 1 label394 1 label431 2 label534 90 label634 1 label787 1 label824 1 label880 3 
+vertex 140: label61 1 label134 1 label141 1 label673 1 label722 1 label820 95 label915 1 
+vertex 141: label142 1 label398 12 label710 79 label878 3 label891 1 label893 3 label917 1 label921 1 
+vertex 142: label143 1 label482 2 label739 1 label822 1 label850 1 label932 86 label942 7 label964 1 label991 1 
+vertex 143: label144 1 label290 1 label472 2 label655 1 label689 2 label762 2 label802 1 label819 87 label902 1 label913 1 label953 2 
+vertex 144: label30 1 label145 1 label244 1 label249 1 label292 2 label466 1 label630 2 label649 22 label654 1 label704 5 label753 2 label832 49 label895 2 label898 2 label905 2 label918 2 label924 2 label932 2 label959 1 
+vertex 145: label83 1 label141 1 label146 1 label324 2 label368 4 label727 1 label820 88 label937 2 label947 1 
+vertex 146: label147 1 label504 1 label582 1 label592 1 label629 1 label806 94 label870 2 
+vertex 147: label148 1 label431 9 label534 85 label694 1 label824 1 label880 4 
+vertex 148: label149 1 label237 1 label861 1 label956 1 label981 97 
+vertex 149: label112 1 label150 1 label693 1 label895 95 label922 2 label966 1 
+vertex 150: label151 1 label452 1 label663 1 label723 98 
+vertex 151: label59 1 label152 1 label484 1 label789 1 label811 1 label875 1 label949 1 label956 94 
+vertex 152: label153 1 label290 1 label449 2 label479 1 label542 3 label609 1 label628 1 label647 10 label687 1 label689 2 label786 1 label819 29 label877 1 label890 3 label891 3 label902 2 label915 32 label934 1 label946 2 label970 1 label981 1 label999 2 
+vertex 153: label154 1 label846 2 label1000 98 
+vertex 154: label155 1 label626 1 label665 2 label956 97 
+vertex 155: label156 1 label542 1 label932 96 label942 2 label964 1 
+vertex 156: label6 1 label141 1 label157 1 label752 1 label886 1 label945 1 label949 94 label954 1 
+vertex 157: label158 1 label715 1 label891 96 label920 1 label935 1 label970 1 
+vertex 158: label159 1 label545 1 label874 2 label942 1 label956 95 label957 1 
+vertex 159: label102 1 label160 1 label775 97 label952 1 label959 1 
+vertex 160: label161 1 label181 3 label260 1 label304 1 label388 1 label546 3 label672 1 label802 80 label850 1 label933 9 
+vertex 161: label162 1 label293 1 label515 82 label674 1 label692 1 label835 1 label895 2 label928 2 label953 4 label978 2 label984 4 
+vertex 162: label67 1 label163 1 label189 1 label764 1 label799 1 label801 1 label813 1 label913 60 label918 32 label929 1 label942 1 
+vertex 163: label164 1 label431 6 label534 84 label587 1 label634 5 label880 2 label937 2 
+vertex 164: label165 1 label398 15 label481 1 label710 73 label797 1 label878 2 label893 3 label906 2 label917 1 label954 1 label991 1 
+vertex 165: label166 1 label249 2 label649 20 label654 4 label708 1 label753 3 label832 66 label891 1 label916 1 label949 1 label972 1 
+vertex 166: label167 1 label930 2 label966 97 label997 1 
+vertex 167: label168 1 label328 1 label863 1 label950 2 label991 96 
+vertex 168: label169 1 label428 1 label447 2 label601 89 label606 1 label641 1 label746 1 label777 2 label942 1 label952 1 label1000 1 
+vertex 169: label9 19 label25 2 label76 1 label170 1 label505 1 label535 64 label590 1 label593 1 label735 2 label905 1 label934 1 label966 3 label981 3 label994 1 
+vertex 170: label67 3 label171 1 label836 1 label855 1 label913 95 
+vertex 171: label172 1 label769 1 label974 3 label987 1 label1000 95 
+vertex 172: label173 1 label808 1 label822 2 label932 90 label942 7 
+vertex 173: label174 2 label183 1 label398 18 label672 6 label710 64 label797 1 label806 1 label878 1 label912 1 label917 4 label921 1 label962 1 
+vertex 174: label175 1 label882 1 label980 1 label981 98 
+vertex 175: label67 1 label176 1 label494 1 label630 3 label691 3 label715 1 label772 2 label891 69 label913 6 label937 1 label970 1 label1000 12 
+vertex 176: label177 1 label735 2 label966 97 label972 1 
+vertex 177: label43 1 label71 1 label178 1 label591 1 label612 1 label865 1 label909 95 
+vertex 178: label179 1 label923 4 label952 94 label996 2 
+vertex 179: label180 1 label646 1 label727 1 label911 1 label924 95 label986 2 
+vertex 180: label181 1 label398 24 label649 1 label654 1 label710 66 label797 2 label832 4 label917 2 
+vertex 181: label182 1 label268 1 label761 1 label974 1 label987 1 label1000 96 
+vertex 182: label174 1 label181 1 label183 1 label398 12 label654 3 label672 1 label703 2 label710 69 label797 3 label832 1 label878 3 label890 1 label893 1 label917 1 label921 1 
+vertex 183: label184 1 label194 1 label776 1 label882 1 label981 97 
+vertex 184: label185 1 label553 1 label689 6 label729 1 label786 2 label806 1 label819 78 label902 2 label946 5 label949 3 label958 1 
+vertex 185: label186 1 label329 1 label576 1 label601 93 label641 1 label777 4 
+vertex 186: label57 1 label187 1 label445 1 label647 1 label693 1 label874 1 label895 27 label913 29 label937 37 label975 1 label992 1 
+vertex 187: label188 1 label474 1 label491 1 label515 30 label630 1 label926 1 label950 1 label968 1 label977 1 label981 2 label984 2 label991 58 label993 1 
+vertex 188: label116 2 label189 92 label243 3 label705 3 label913 1 
+vertex 189: label190 1 label741 1 label765 1 label808 1 label932 92 label942 4 label949 1 
+vertex 190: label191 1 label367 1 label376 2 label556 2 label749 1 label773 94 
+vertex 191: label192 1 label671 1 label861 1 label882 1 label981 95 label998 2 
+vertex 192: label193 2 label527 1 label714 1 label952 96 label968 1 
+vertex 193: label194 5 label941 1 label981 95 
+vertex 194: label195 6 label255 1 label302 3 label542 85 label895 3 label953 1 label981 2 
+vertex 195: label196 1 label229 1 label597 1 label630 1 label762 1 label786 2 label817 1 label819 73 label902 8 label937 8 label946 1 label993 2 label999 1 
+vertex 196: label197 1 label542 92 label799 1 label831 3 label896 1 label922 2 label925 1 
+vertex 197: label1 1 label198 1 label322 1 label370 1 label452 1 label630 41 label672 1 label675 1 label708 2 label723 12 label753 1 label789 6 label825 1 label832 5 label836 1 label911 2 label922 1 label937 6 label949 3 label953 5 label972 1 label977 2 label979 1 label981 4 
+vertex 198: label199 1 label341 1 label491 1 label974 1 label1000 97 
+vertex 199: label200 1 label494 1 label630 93 label905 5 label995 1 
+vertex 200: label34 1 label201 1 label252 1 label443 1 label763 1 label918 94 label929 1 label967 1 
+vertex 201: label202 1 label458 2 label735 1 label966 97 
+vertex 202: label203 1 label515 87 label835 1 label889 2 label938 2 label978 2 label984 6 
+vertex 203: label204 1 label249 1 label433 1 label582 1 label670 2 label716 1 label918 93 label959 1 
+vertex 204: label205 1 label586 1 label775 96 label791 1 label936 1 label978 1 
+vertex 205: label194 1 label206 1 label882 1 label943 1 label981 97 
+vertex 206: label207 1 label639 1 label919 1 label953 97 label983 1 
+vertex 207: label7 2 label9 6 label25 1 label30 1 label208 1 label238 1 label418 1 label535 57 label561 1 label576 1 label590 2 label898 2 label932 2 label942 1 label962 2 label977 15 label991 5 
+vertex 208: label209 1 label414 1 label527 1 label966 98 
+vertex 209: label210 2 label480 1 label752 1 label782 1 label787 1 label845 1 label891 46 label913 45 label920 1 label954 1 label970 1 
+vertex 210: label211 1 label375 1 label881 99 
+vertex 211: label212 2 label498 1 label601 88 label659 1 label952 9 
+vertex 212: label213 1 label846 1 label864 1 label912 2 label924 2 label937 1 label949 90 label952 1 label956 1 label958 1 
+vertex 213: label214 1 label408 1 label642 1 label896 3 label948 1 label953 93 label977 1 
+vertex 214: label215 1 label229 1 label504 4 label629 1 label711 1 label787 1 label806 88 label870 1 label891 1 label908 2 
+vertex 215: label216 1 label696 1 label787 1 label891 94 label954 2 label970 1 label976 1 
+vertex 216: label217 1 label511 1 label813 1 label914 2 label924 95 label977 1 
+vertex 217: label218 1 label727 1 label945 3 label949 96 
+vertex 218: label32 1 label112 1 label219 1 label515 86 label672 1 label737 1 label815 1 label889 2 label933 1 label978 2 label984 4 
+vertex 219: label11 1 label220 2 label534 2 label595 1 label689 1 label806 1 label819 32 label870 1 label878 1 label902 3 label905 1 label980 1 label981 54 
+vertex 220: label221 2 label891 94 label937 1 label970 2 label988 2 
+vertex 221: label222 1 label966 97 label972 2 label997 1 
+vertex 222: label223 1 label351 1 label546 1 label672 8 label726 1 label767 1 label802 79 label933 9 
+vertex 223: label224 1 label775 97 label959 1 label987 2 
+vertex 224: label225 1 label505 1 label542 24 label653 1 label723 39 label924 1 label934 1 label952 33 
+vertex 225: label33 2 label226 1 label511 1 label919 1 label924 95 label987 1 
+vertex 226: label227 1 label524 3 label819 2 label894 1 label949 94 
+vertex 227: label228 1 label513 1 label981 97 label998 2 
+vertex 228: label229 1 label290 1 label553 2 label689 1 label786 2 label817 1 label819 83 label902 8 label966 1 label991 1 
+vertex 229: label64 2 label77 1 label169 1 label230 1 label282 1 label321 1 label576 1 label601 76 label746 2 label775 1 label777 2 label806 3 label942 9 
+vertex 230: label189 1 label231 2 label548 1 label553 1 label689 3 label762 3 label819 83 label851 1 label902 3 label915 1 label946 1 label977 1 
+vertex 231: label30 1 label232 1 label487 2 label830 1 label977 96 
+vertex 232: label233 1 label416 1 label418 1 label576 1 label601 92 label777 5 
+vertex 233: label234 1 label340 1 label505 2 label547 2 label665 1 label881 94 
+vertex 234: label135 1 label235 1 label891 89 label895 1 label920 1 label965 1 label970 3 label976 4 
+vertex 235: label236 1 label363 2 label647 42 label860 1 label915 53 label952 2 
+vertex 236: label149 1 label237 1 label443 1 label511 1 label630 1 label647 7 label771 1 label877 1 label890 1 label915 13 label918 39 label924 33 label929 1 
+vertex 237: label9 2 label119 1 label238 1 label398 1 label535 88 label630 1 label795 1 label813 1 label898 1 label905 4 
+vertex 238: label239 1 label896 4 label919 1 label953 95 
+vertex 239: label65 3 label240 1 label496 1 label733 1 label815 95 
+vertex 240: label241 2 label830 1 label971 1 label977 97 
+vertex 241: label242 1 label515 89 label737 3 label768 2 label858 1 label978 3 label984 2 
+vertex 242: label91 1 label189 91 label243 4 label575 1 label705 1 label773 1 label840 2 
+vertex 243: label145 1 label244 1 label929 1 label932 89 label942 9 
+vertex 244: label245 1 label630 1 label649 2 label832 7 label834 1 label932 28 label949 30 label950 1 label1000 30 
+vertex 245: label9 9 label25 1 label246 1 label424 1 label535 76 label559 1 label590 1 label593 1 label717 1 label795 2 label802 5 label813 1 label913 1 
+vertex 246: label247 1 label846 1 label987 1 label1000 98 
+vertex 247: label112 1 label248 2 label254 1 label398 13 label649 6 label710 15 label819 1 label832 11 label852 1 label891 45 label895 3 label908 1 label949 1 
+vertex 248: label66 1 label249 6 label649 17 label654 3 label753 1 label832 69 label949 2 label959 1 label977 1 
+vertex 249: label250 1 label847 1 label937 95 label975 3 label988 1 
+vertex 250: label28 1 label251 1 label437 1 label806 1 label891 2 label926 1 label937 41 label950 3 label991 47 label993 2 label994 1 
+vertex 251: label252 2 label317 3 label801 1 label820 95 
+vertex 252: label253 1 label334 2 label541 1 label596 1 label891 95 label970 1 
+vertex 253: label229 1 label254 1 label290 1 label320 1 label599 1 label603 1 label672 1 label689 2 label710 1 label789 1 label802 1 label815 1 label819 75 label891 6 label946 4 label993 1 label999 1 label1000 1 
+vertex 254: label255 1 label775 98 label805 1 label892 1 
+vertex 255: label256 3 label515 27 label647 5 label689 1 label737 2 label799 1 label860 1 label915 11 label918 48 label978 1 label984 1 
+vertex 256: label91 8 label189 79 label243 7 label257 1 label510 1 label575 1 label705 2 label918 2 
+vertex 257: label258 2 label837 1 label895 97 label922 1 
+vertex 258: label259 1 label700 2 label775 96 label791 1 label992 1 
+vertex 259: label260 1 label351 2 label546 4 label802 92 label918 1 label933 1 
+vertex 260: label261 1 label821 1 label970 1 label981 96 label998 2 
+vertex 261: label262 1 label551 1 label620 1 label716 1 label733 1 label815 94 label828 1 label932 1 
+vertex 262: label263 1 label398 4 label594 2 label710 10 label797 1 label845 1 label895 55 label918 27 
+vertex 263: label264 1 label630 94 label905 4 label916 1 label995 1 
+vertex 264: label226 1 label265 1 label511 1 label542 36 label815 1 label919 1 label924 31 label956 29 
+vertex 265: label266 1 label479 1 label511 2 label924 95 label986 2 
+vertex 266: label138 1 label267 1 label515 93 label520 1 label664 1 label889 1 label968 1 label984 2 
+vertex 267: label256 1 label268 3 label974 2 label1000 95 
+vertex 268: label40 1 label269 1 label546 1 label836 1 label855 1 label913 96 
+vertex 269: label270 1 label547 1 label647 53 label721 1 label860 1 label915 44 
+vertex 270: label271 1 label364 1 label452 4 label723 95 
+vertex 271: label181 1 label272 1 label351 2 label391 1 label528 1 label546 1 label723 1 label789 1 label802 91 label949 1 
+vertex 272: label67 1 label176 1 label273 1 label553 1 label630 1 label691 1 label772 1 label817 1 label819 1 label869 1 label913 91 
+vertex 273: label274 1 label554 1 label887 2 label909 97 
+vertex 274: label57 1 label275 1 label937 99 
+vertex 275: label276 1 label474 1 label830 1 label977 98 
+vertex 276: label277 1 label448 1 label837 1 label895 96 label922 2 
+vertex 277: label278 1 label506 1 label649 31 label654 1 label832 66 label954 1 
+vertex 278: label98 1 label279 1 label880 1 label895 98 
+vertex 279: label91 3 label189 89 label243 3 label280 1 label575 2 label705 1 label771 1 label864 1 
+vertex 280: label91 3 label189 84 label243 7 label281 1 label601 1 label705 2 label773 1 label840 2 
+vertex 281: label77 1 label282 1 label775 98 label936 1 
+vertex 282: label283 1 label597 1 label630 95 label735 1 label899 1 label905 2 
+vertex 283: label284 3 label498 1 label601 90 label659 1 label671 1 label777 4 label834 1 
+vertex 284: label285 1 label847 1 label937 96 label939 1 label992 2 
+vertex 285: label286 1 label735 1 label740 1 label771 1 label787 3 label885 1 label891 92 label966 1 
+vertex 286: label21 1 label287 1 label398 7 label710 85 label765 1 label893 1 label917 4 label993 1 
+vertex 287: label288 1 label771 1 label966 99 
+vertex 288: label51 1 label200 1 label289 1 label565 1 label876 1 label956 96 
+vertex 289: label290 1 label679 1 label811 1 label956 97 label957 1 
+vertex 290: label291 1 label727 1 label949 98 label958 1 
+vertex 291: label292 1 label550 2 label608 2 label630 3 label649 47 label704 1 label832 41 label898 1 label950 1 label979 1 label991 1 
+vertex 292: label293 1 label515 86 label737 3 label835 1 label928 1 label953 4 label978 3 label984 2 
+vertex 293: label294 1 label352 1 label847 3 label937 95 label981 1 
+vertex 294: label52 1 label82 1 label295 1 label838 3 label952 95 
+vertex 295: label296 1 label948 1 label977 99 
+vertex 296: label297 1 label980 2 label981 97 label998 1 
+vertex 297: label298 1 label452 2 label663 1 label723 97 
+vertex 298: label299 1 label586 1 label781 1 label907 1 label924 94 label986 3 
+vertex 299: label300 1 label547 1 label665 1 label716 1 label881 97 
+vertex 300: label301 1 label813 1 label909 2 label910 1 label924 95 label986 1 
+vertex 301: label195 1 label302 2 label542 91 label674 1 label831 2 label895 1 label981 2 label983 1 
+vertex 302: label7 1 label9 4 label238 1 label303 1 label391 1 label418 1 label460 1 label477 2 label515 1 label528 1 label535 73 label561 1 label601 1 label672 1 label789 1 label802 2 label813 2 label855 2 label898 2 label905 1 label913 1 
+vertex 303: label32 1 label304 1 label546 2 label655 1 label672 3 label802 84 label850 1 label933 7 label978 1 
+vertex 304: label305 1 label424 2 label665 1 label881 97 
+vertex 305: label306 1 label321 4 label713 2 label806 92 label873 1 label993 1 
+vertex 306: label307 1 label727 2 label845 1 label886 2 label949 95 
+vertex 307: label308 1 label727 2 label949 95 label958 3 
+vertex 308: label309 1 label340 1 label422 1 label808 1 label932 93 label942 4 
+vertex 309: label119 2 label310 1 label535 82 label630 7 label813 4 label815 1 label898 1 label905 1 label932 1 label981 1 
+vertex 310: label126 1 label311 1 label751 1 label891 93 label954 1 label970 1 label976 3 
+vertex 311: label312 1 label515 96 label875 1 label889 1 label978 1 label984 1 
+vertex 312: label313 1 label784 2 label974 1 label987 1 label1000 96 
+vertex 313: label314 1 label621 1 label828 1 label966 96 label991 1 label997 1 
+vertex 314: label315 1 label630 42 label742 1 label775 41 label825 1 label896 1 label905 1 label952 13 
+vertex 315: label316 1 label473 1 label476 1 label711 1 label913 1 label950 1 label991 95 
+vertex 316: label252 1 label317 4 label482 2 label820 94 
+vertex 317: label318 2 label398 9 label710 83 label878 2 label893 1 label906 3 label921 1 
+vertex 318: label319 1 label458 1 label466 3 label907 1 label918 94 label929 1 
+vertex 319: label181 1 label195 1 label256 1 label320 1 label599 1 label655 1 label672 3 label767 1 label802 87 label933 4 
+vertex 320: label321 1 label1000 100 
+vertex 321: label322 1 label494 1 label630 55 label672 1 label832 1 label911 1 label922 1 label949 37 label958 1 label979 1 label995 1 
+vertex 322: label65 1 label323 1 label551 3 label639 1 label815 95 
+vertex 323: label324 1 label368 3 label425 3 label820 94 
+vertex 324: label65 1 label325 1 label716 1 label723 2 label733 2 label759 1 label815 86 label832 6 label919 1 
+vertex 325: label66 1 label241 1 label249 3 label326 1 label571 1 label649 11 label753 1 label832 77 label916 1 label932 2 label959 1 label977 1 
+vertex 326: label327 1 label445 2 label837 1 label895 97 
+vertex 327: label252 1 label328 1 label461 1 label477 1 label603 1 label750 1 label789 35 label849 1 label863 1 label891 23 label918 35 
+vertex 328: label329 1 label962 3 label977 97 
+vertex 329: label330 1 label775 100 
+vertex 330: label59 1 label331 1 label727 2 label911 1 label937 27 label941 1 label949 28 label956 3 label981 37 
+vertex 331: label332 1 label410 1 label553 1 label621 1 label689 3 label817 1 label819 82 label902 1 label946 9 label999 1 
+vertex 332: label333 1 label784 1 label974 1 label987 2 label1000 96 
+vertex 333: label253 1 label318 1 label334 2 label952 97 
+vertex 334: label335 1 label714 1 label853 1 label923 1 label952 96 label996 1 
+vertex 335: label336 1 label403 1 label525 1 label699 1 label789 97 
+vertex 336: label337 1 label763 3 label886 1 label949 96 
+vertex 337: label338 1 label619 1 label649 14 label753 1 label832 81 label864 1 label981 2 
+vertex 338: label220 1 label339 1 label806 92 label870 6 label905 1 
+vertex 339: label252 1 label340 1 label505 1 label645 1 label776 1 label850 1 label881 95 
+vertex 340: label341 1 label742 1 label865 1 label909 98 
+vertex 341: label342 1 label912 1 label949 97 label958 1 label995 1 
+vertex 342: label302 1 label343 1 label505 1 label542 96 label799 1 label941 1 
+vertex 343: label344 1 label458 1 label630 1 label720 1 label744 1 label895 36 label977 31 label1000 29 
+vertex 344: label57 1 label345 1 label725 1 label937 97 label975 1 
+vertex 345: label302 1 label346 1 label542 95 label723 2 label831 2 
+vertex 346: label347 1 label398 16 label698 1 label710 75 label766 1 label797 1 label859 1 label909 4 label917 1 
+vertex 347: label33 2 label229 1 label348 1 label542 9 label648 1 label815 8 label842 1 label860 1 label924 76 label956 1 
+vertex 348: label349 1 label822 1 label896 3 label953 96 
+vertex 349: label350 1 label564 2 label806 95 label870 3 
+vertex 350: label181 1 label351 1 label546 4 label802 88 label881 2 label918 1 label933 4 
+vertex 351: label59 1 label352 1 label666 3 label679 1 label956 95 
+vertex 352: label213 1 label353 1 label727 1 label904 1 label949 97 
+vertex 353: label354 1 label608 1 label619 1 label649 22 label654 1 label753 1 label832 72 label918 2 
+vertex 354: label355 2 label511 2 label556 1 label781 1 label924 95 
+vertex 355: label356 4 label697 1 label813 1 label924 93 label937 2 
+vertex 356: label357 1 label430 1 label918 96 label926 1 label967 2 
+vertex 357: label358 1 label647 30 label860 1 label915 69 
+vertex 358: label252 2 label317 1 label359 1 label368 1 label545 1 label820 93 label831 1 label923 1 
+vertex 359: label210 1 label360 1 label390 1 label891 95 label920 1 label965 1 label981 1 
+vertex 360: label361 1 label756 1 label923 2 label952 95 label968 1 label985 1 
+vertex 361: label362 1 label367 2 label615 1 label765 2 label773 94 label853 1 
+vertex 362: label317 1 label318 2 label363 1 label425 1 label482 2 label775 26 label820 24 label915 1 label952 43 
+vertex 363: label364 1 label452 1 label686 1 label723 98 
+vertex 364: label365 1 label771 2 label963 1 label966 1 label981 95 label998 1 
+vertex 365: label366 1 label740 1 label971 2 label977 97 
+vertex 366: label191 1 label221 1 label367 1 label376 1 label556 1 label765 2 label773 94 
+vertex 367: label351 1 label368 1 label425 1 label539 2 label820 96 
+vertex 368: label369 1 label630 97 label888 1 label905 1 label979 1 
+vertex 369: label239 1 label370 1 label825 1 label953 97 label983 1 
+vertex 370: label258 2 label371 1 label550 1 label649 2 label775 32 label832 15 label868 1 label924 47 
+vertex 371: label355 1 label372 1 label924 98 label969 1 
+vertex 372: label373 1 label505 1 label813 1 label924 98 
+vertex 373: label156 2 label374 1 label458 1 label927 1 label932 92 label942 3 label964 1 
+vertex 374: label375 1 label452 1 label568 1 label723 98 
+vertex 375: label191 2 label367 1 label376 2 label556 1 label765 4 label773 87 label891 3 label937 1 
+vertex 376: label377 2 label647 33 label769 1 label860 2 label915 63 
+vertex 377: label378 1 label398 8 label408 1 label604 1 label710 1 label837 1 label903 1 label917 1 label932 2 label953 84 
+vertex 378: label28 1 label379 1 label733 2 label815 6 label891 79 label924 9 label928 1 label954 1 label988 1 
+vertex 379: label380 1 label712 2 label771 1 label966 96 label991 1 
+vertex 380: label42 1 label381 1 label452 1 label723 96 label796 1 label979 1 
+vertex 381: label382 1 label433 1 label491 1 label510 3 label784 1 label819 6 label918 79 label987 1 label1000 8 
+vertex 382: label383 1 label682 1 label752 3 label763 1 label886 2 label949 93 
+vertex 383: label384 1 label459 1 label883 2 label891 96 label970 1 
+vertex 384: label385 1 label947 1 label991 99 
+vertex 385: label386 1 label818 1 label846 1 label987 1 label1000 97 
+vertex 386: label33 3 label387 2 label511 1 label924 95 
+vertex 387: label256 1 label388 1 label647 37 label860 2 label915 60 
+vertex 388: label389 1 label531 1 label941 1 label981 98 
+vertex 389: label390 1 label891 96 label954 2 label970 2 
+vertex 390: label9 3 label391 1 label535 87 label630 1 label710 1 label813 4 label855 1 label898 2 label905 1 
+vertex 391: label381 1 label392 1 label494 1 label630 96 label979 2 
+vertex 392: label9 10 label95 1 label393 1 label424 1 label515 3 label535 80 label593 1 label795 2 label978 1 label994 1 
+vertex 393: label394 1 label534 97 label634 1 label880 2 
+vertex 394: label20 1 label395 1 label398 17 label710 75 label912 1 label917 6 
+vertex 395: label189 1 label396 1 label515 12 label519 1 label529 1 label735 1 label737 1 label820 64 label947 1 label966 16 label1000 2 
+vertex 396: label70 1 label397 1 label806 96 label813 1 label870 1 label872 1 
+vertex 397: label398 28 label710 69 label797 3 label878 1 
+vertex 398: label91 1 label116 1 label189 91 label243 7 label399 1 
+vertex 399: label160 1 label400 1 label775 98 label959 1 
+vertex 400: label361 1 label401 1 label556 1 label923 2 label952 95 label985 1 
+vertex 401: label1 1 label402 1 label551 1 label675 1 label789 96 label815 1 
+vertex 402: label375 1 label403 1 label891 93 label927 1 label970 4 label988 1 
+vertex 403: label404 1 label557 1 label764 3 label849 2 label918 92 label929 2 
+vertex 404: label39 1 label405 1 label450 1 label836 1 label869 2 label913 95 
+vertex 405: label9 1 label110 2 label406 1 label457 1 label534 9 label535 2 label824 1 label848 1 label950 3 label991 80 
+vertex 406: label407 1 label784 3 label987 1 label1000 96 
+vertex 407: label408 1 label570 1 label648 1 label896 1 label919 1 label953 96 
+vertex 408: label409 1 label410 1 label449 1 label609 1 label687 1 label689 4 label786 2 label819 80 label882 1 label902 5 label946 4 
+vertex 409: label102 1 label290 1 label410 2 label455 1 label689 4 label786 1 label789 1 label819 61 label901 1 label902 1 label913 26 label949 1 
+vertex 410: label325 1 label411 1 label616 1 label716 1 label733 2 label815 95 
+vertex 411: label398 2 label412 1 label630 1 label710 86 label878 1 label893 3 label906 3 label917 3 label921 1 
+vertex 412: label413 1 label890 1 label924 97 label986 2 
+vertex 413: label301 1 label414 1 label458 1 label909 1 label910 1 label924 82 label937 4 label966 8 label986 1 label992 1 
+vertex 414: label415 1 label859 1 label865 5 label909 94 
+vertex 415: label284 1 label416 1 label576 1 label601 90 label659 1 label671 1 label777 4 label942 2 
+vertex 416: label417 2 label421 1 label884 2 label1000 96 
+vertex 417: label212 1 label418 1 label498 2 label601 93 label616 1 label777 2 label855 1 
+vertex 418: label419 1 label630 93 label873 1 label905 5 label979 1 
+vertex 419: label420 1 label937 98 label973 2 
+vertex 420: label421 1 label431 1 label534 95 label634 1 label880 3 
+vertex 421: label422 1 label583 1 label932 95 label942 2 label964 1 label967 1 
+vertex 422: label423 1 label483 1 label571 1 label630 2 label649 13 label654 1 label815 1 label832 77 label916 1 label924 1 label954 1 label981 1 
+vertex 423: label351 3 label424 1 label546 2 label599 1 label802 92 label881 1 label933 1 
+vertex 424: label141 1 label157 1 label368 2 label425 2 label820 94 label954 1 
+vertex 425: label426 1 label630 97 label764 1 label951 1 label995 1 
+vertex 426: label427 1 label491 1 label515 89 label889 1 label978 1 label984 8 
+vertex 427: label428 1 label586 1 label606 1 label775 97 label791 1 
+vertex 428: label429 1 label879 1 label888 2 label891 94 label954 1 label970 2 
+vertex 429: label57 1 label196 1 label373 1 label430 1 label597 1 label775 2 label819 45 label902 2 label918 1 label924 1 label937 40 label975 2 label992 1 label999 2 
+vertex 430: label128 1 label431 7 label534 86 label634 1 label824 1 label880 3 label918 2 
+vertex 431: label432 1 label576 1 label583 1 label932 92 label942 5 label975 1 
+vertex 432: label433 1 label466 1 label918 99 
+vertex 433: label240 1 label434 2 label622 1 label819 7 label905 1 label944 1 label981 86 label994 2 
+vertex 434: label67 1 label242 1 label435 1 label578 1 label836 1 label858 1 label913 95 
+vertex 435: label143 2 label183 1 label309 1 label436 1 label932 95 label942 1 
+vertex 436: label28 1 label57 1 label437 1 label483 1 label521 1 label832 2 label865 1 label937 2 label975 1 label981 90 
+vertex 437: label438 1 label578 1 label610 1 label765 1 label932 93 label942 4 
+vertex 438: label398 5 label439 1 label710 88 label878 2 label891 1 label906 3 label921 1 
+vertex 439: label440 1 label681 1 label839 1 label991 95 label993 3 
+vertex 440: label441 1 label823 1 label947 1 label991 97 label993 1 
+vertex 441: label414 1 label442 1 label811 1 label956 95 label957 2 label994 1 
+vertex 442: label443 1 label543 1 label764 1 label918 98 
+vertex 443: label70 1 label321 1 label444 1 label713 2 label806 96 
+vertex 444: label445 1 label693 1 label709 1 label837 2 label895 95 label992 1 
+vertex 445: label446 1 label588 1 label865 2 label909 96 label932 1 
+vertex 446: label417 1 label447 1 label569 1 label884 1 label987 1 label1000 96 
+vertex 447: label277 1 label439 1 label448 1 label895 98 
+vertex 448: label409 1 label449 1 label689 7 label819 79 label882 1 label902 9 label946 2 label981 1 
+vertex 449: label329 1 label450 2 label772 1 label836 1 label869 1 label913 95 
+vertex 450: label398 8 label412 1 label451 1 label559 1 label710 83 label893 1 label906 3 label917 3 
+vertex 451: label452 3 label723 98 
+vertex 452: label453 1 label841 1 label847 1 label937 96 label975 1 label992 1 
+vertex 453: label7 1 label9 2 label30 1 label95 1 label393 1 label418 1 label454 1 label515 18 label535 51 label590 1 label630 1 label671 1 label898 4 label905 3 label942 1 label977 10 label991 2 label993 1 
+vertex 454: label450 1 label455 1 label649 1 label677 2 label911 1 label913 95 
+vertex 455: label181 1 label388 1 label456 1 label546 2 label655 2 label672 1 label767 1 label802 86 label897 1 label933 3 label978 1 label984 1 
+vertex 456: label457 1 label504 1 label630 1 label806 95 label870 3 
+vertex 457: label458 2 label735 1 label836 1 label966 96 label997 1 
+vertex 458: label459 3 label545 1 label883 1 label924 96 
+vertex 459: label9 7 label398 1 label460 2 label535 86 label795 2 label898 1 label926 1 label949 1 
+vertex 460: label229 1 label410 1 label417 1 label461 1 label689 6 label786 2 label819 81 label881 1 label902 4 label946 2 label991 1 
+vertex 461: label83 1 label368 1 label425 1 label462 1 label482 1 label539 1 label559 1 label820 92 label966 1 label975 1 
+vertex 462: label31 1 label463 1 label483 1 label649 22 label753 2 label832 69 label895 3 label959 2 
+vertex 463: label434 1 label464 1 label533 1 label865 2 label909 96 
+vertex 464: label284 1 label465 1 label471 1 label981 98 
+vertex 465: label466 4 label849 2 label918 95 
+vertex 466: label66 3 label249 7 label467 1 label649 8 label832 77 label959 4 label1000 1 
+vertex 467: label390 1 label468 1 label787 1 label879 1 label891 95 label970 2 
+vertex 468: label469 1 label630 96 label888 2 label899 1 label979 1 
+vertex 469: label33 4 label470 1 label648 1 label813 4 label924 91 
+vertex 470: label471 1 label811 1 label981 98 label998 1 
+vertex 471: label40 1 label472 1 label513 1 label553 2 label773 2 label786 1 label817 1 label819 89 label902 1 label946 2 
+vertex 472: label473 3 label804 1 label991 93 label993 4 
+vertex 473: label296 1 label474 1 label971 1 label977 98 
+vertex 474: label351 1 label383 1 label475 1 label547 2 label756 1 label792 1 label881 94 
+vertex 475: label476 2 label532 1 label695 1 label733 2 label789 38 label815 1 label977 56 
+vertex 476: label7 1 label454 1 label477 1 label535 3 label645 1 label655 1 label722 1 label789 71 label802 19 label851 1 label898 1 
+vertex 477: label478 1 label847 2 label937 97 label975 1 
+vertex 478: label479 1 label628 2 label981 97 label998 1 
+vertex 479: label207 1 label480 1 label639 1 label865 2 label909 96 
+vertex 480: label398 19 label481 1 label500 1 label710 76 label893 1 label906 1 label917 2 
+vertex 481: label252 1 label317 1 label482 1 label820 98 
+vertex 482: label483 1 label556 1 label571 1 label649 23 label753 4 label832 71 
+vertex 483: label484 1 label763 1 label945 2 label949 97 
+vertex 484: label384 1 label485 1 label891 97 label970 2 
+vertex 485: label398 14 label486 1 label516 1 label698 1 label710 75 label878 1 label917 8 
+vertex 486: label91 5 label189 91 label243 1 label487 1 label694 1 label705 1 label792 1 
+vertex 487: label488 1 label515 96 label755 1 label799 1 label826 1 label875 1 
+vertex 488: label466 1 label489 1 label601 1 label795 2 label849 1 label889 1 label918 94 
+vertex 489: label490 1 label929 1 label932 91 label942 8 
+vertex 490: label491 2 label515 38 label826 1 label909 3 label953 2 label964 1 label1000 54 
+vertex 491: label466 3 label492 1 label849 1 label918 94 label929 2 
+vertex 492: label361 1 label493 1 label923 1 label950 1 label952 97 
+vertex 493: label494 1 label630 96 label733 1 label905 2 label914 1 
+vertex 494: label8 1 label495 2 label738 1 label952 97 
+vertex 495: label496 1 label716 1 label815 99 
+vertex 496: label59 1 label497 1 label666 3 label956 96 
+vertex 497: label418 1 label498 1 label576 1 label601 96 label777 1 label998 1 
+vertex 498: label117 1 label498 1 label499 1 label601 95 label641 1 label659 1 label949 1 
+vertex 499: label500 1 label757 1 label954 1 label966 97 label991 1 
+vertex 500: label501 1 label635 1 label871 1 label891 40 label991 58 
+vertex 501: label502 1 label626 2 label956 98 
+vertex 502: label503 1 label515 92 label875 1 label889 2 label954 1 label978 1 label984 3 
+vertex 503: label16 1 label70 1 label504 4 label780 1 label806 92 label908 2 
+vertex 504: label40 1 label505 6 label881 94 
+vertex 505: label506 1 label608 1 label649 26 label832 73 
+vertex 506: label507 1 label750 1 label830 1 label977 98 
+vertex 507: label508 1 label578 1 label754 1 label911 2 label913 96 
+vertex 508: label505 1 label509 1 label713 2 label806 96 label956 1 
+vertex 509: label433 2 label463 1 label510 2 label918 95 label959 1 
+vertex 510: label511 2 label813 1 label924 97 label987 1 
+vertex 511: label438 1 label512 1 label665 2 label850 1 label881 96 
+vertex 512: label513 1 label553 1 label689 2 label786 1 label817 1 label819 86 label901 1 label902 4 label946 1 label968 1 label981 2 
+vertex 513: label452 2 label514 1 label723 97 label780 1 
+vertex 514: label515 94 label652 1 label736 1 label737 1 label889 1 label978 2 label984 1 
+vertex 515: label398 13 label516 1 label698 1 label710 71 label893 1 label917 13 label993 1 
+vertex 516: label517 1 label724 1 label837 2 label895 97 
+vertex 517: label466 1 label518 1 label907 2 label918 96 label993 1 
+vertex 518: label519 1 label735 1 label947 2 label966 95 label976 1 label997 1 
+vertex 519: label520 1 label847 4 label937 96 
+vertex 520: label199 1 label294 1 label521 1 label821 1 label981 97 
+vertex 521: label367 1 label522 1 label615 1 label643 2 label697 1 label741 1 label773 93 label839 1 
+vertex 522: label523 1 label752 1 label912 3 label949 96 
+vertex 523: label524 2 label946 1 label949 98 
+vertex 524: label525 1 label541 1 label645 1 label789 97 label984 1 
+vertex 525: label367 1 label526 1 label556 1 label615 1 label765 1 label773 96 
+vertex 526: label458 1 label527 1 label923 2 label952 96 label997 1 
+vertex 527: label477 1 label528 1 label535 5 label546 1 label672 1 label789 12 label802 48 label813 1 label891 1 label933 1 label949 1 label952 28 
+vertex 528: label15 1 label53 1 label134 1 label368 1 label529 1 label820 96 
+vertex 529: label290 1 label530 1 label553 3 label786 2 label817 1 label819 86 label902 5 label937 1 label946 1 
+vertex 530: label531 1 label938 1 label960 2 label981 97 
+vertex 531: label474 1 label532 1 label971 1 label977 98 
+vertex 532: label341 1 label533 1 label865 1 label887 1 label909 97 
+vertex 533: label431 3 label534 93 label824 1 label880 4 
+vertex 534: label9 4 label30 1 label238 2 label535 87 label813 1 label848 2 label905 2 label956 1 label1000 1 
+vertex 535: label536 1 label882 2 label981 96 label984 1 label998 1 
+vertex 536: label368 1 label425 2 label537 1 label539 1 label820 96 
+vertex 537: label538 1 label765 2 label909 1 label932 96 label942 1 
+vertex 538: label252 1 label317 1 label368 1 label539 1 label820 97 
+vertex 539: label540 1 label604 1 label822 1 label900 1 label915 2 label932 86 label942 9 
+vertex 540: label541 1 label542 4 label647 10 label805 1 label860 2 label915 11 label925 1 label934 1 label956 70 
+vertex 541: label302 1 label517 2 label542 96 label831 2 
+vertex 542: label543 1 label843 1 label923 2 label952 96 label996 1 
+vertex 543: label544 1 label896 1 label919 1 label953 97 label962 1 
+vertex 544: label59 1 label545 1 label679 1 label875 1 label902 1 label956 96 
+vertex 545: label181 1 label260 1 label546 4 label672 1 label802 92 label933 2 
+vertex 546: label547 4 label685 1 label758 1 label881 95 
+vertex 547: label448 1 label548 1 label553 2 label689 3 label762 1 label817 1 label819 88 label895 3 label946 1 
+vertex 548: label549 1 label769 1 label987 1 label1000 98 
+vertex 549: label550 2 label971 2 label977 97 
+vertex 550: label402 1 label551 2 label620 1 label716 1 label815 96 
+vertex 551: label302 1 label542 96 label552 1 label831 3 
+vertex 552: label553 2 label689 1 label786 3 label817 1 label819 88 label902 5 label946 1 
+vertex 553: label554 1 label742 2 label909 98 
+vertex 554: label555 1 label681 1 label913 1 label991 96 label993 2 
+vertex 555: label367 1 label556 1 label765 2 label773 96 label848 1 
+vertex 556: label474 1 label557 1 label582 1 label764 1 label918 96 label948 1 
+vertex 557: label479 1 label558 1 label882 1 label981 97 label990 1 
+vertex 558: label559 1 label717 2 label913 98 
+vertex 559: label460 2 label560 1 label643 1 label773 37 label847 1 label913 31 label937 27 label973 1 
+vertex 560: label303 1 label561 1 label578 1 label647 1 label855 2 label913 95 
+vertex 561: label562 1 label838 1 label883 1 label952 98 
+vertex 562: label282 2 label515 88 label563 1 label814 1 label968 1 label978 1 label984 7 
+vertex 563: label504 1 label564 1 label806 93 label815 1 label870 4 label908 1 
+vertex 564: label565 1 label683 1 label811 1 label838 1 label876 1 label937 1 label952 39 label953 29 label956 26 label968 1 
+vertex 565: label32 1 label181 1 label566 1 label672 5 label802 83 label850 1 label933 8 label978 1 
+vertex 566: label567 1 label604 2 label822 1 label919 1 label932 87 label942 9 
+vertex 567: label568 1 label723 99 label796 1 
+vertex 568: label569 1 label600 1 label780 2 label891 65 label913 6 label980 1 label987 2 label988 1 label1000 22 
+vertex 569: label260 1 label351 1 label546 3 label570 1 label672 1 label802 91 label933 2 label951 1 
+vertex 570: label61 1 label326 1 label571 1 label608 1 label649 52 label718 1 label832 44 
+vertex 571: label572 1 label771 2 label966 98 
+vertex 572: label515 89 label573 1 label773 1 label978 1 label984 9 
+vertex 573: label574 1 label693 1 label837 1 label895 98 
+vertex 574: label91 1 label189 88 label243 9 label575 1 label840 1 label891 1 
+vertex 575: label64 1 label542 15 label576 1 label601 10 label630 2 label631 1 label932 49 label934 1 label942 18 label991 3 
+vertex 576: label65 1 label577 1 label620 1 label725 1 label733 1 label815 96 
+vertex 577: label67 2 label405 2 label578 1 label869 2 label913 94 
+vertex 578: label340 2 label535 1 label542 6 label579 1 label607 1 label776 1 label881 75 label911 1 label918 1 label949 11 label952 1 
+vertex 579: label34 1 label580 1 label849 1 label918 96 label948 1 label975 1 
+vertex 580: label210 1 label581 1 label991 97 label993 2 
+vertex 581: label194 1 label319 1 label466 3 label582 1 label918 94 label974 1 
+vertex 582: label156 1 label190 1 label583 1 label932 95 label942 2 label964 1 
+vertex 583: label584 1 label630 96 label888 1 label905 1 label989 1 label995 1 
+vertex 584: label585 1 label686 1 label971 1 label977 98 
+vertex 585: label367 1 label586 1 label773 97 label838 1 label848 1 
+vertex 586: label515 24 label587 1 label773 33 label789 1 label853 2 label937 35 label968 1 label975 1 label977 1 label984 2 
+vertex 587: label356 1 label511 1 label588 1 label813 1 label924 97 
+vertex 588: label589 1 label630 97 label837 1 label888 1 label989 1 
+vertex 589: label7 1 label9 15 label25 3 label418 1 label455 1 label535 68 label576 1 label590 3 label593 1 label630 4 label952 3 
+vertex 590: label591 1 label783 1 label865 1 label909 97 label920 1 
+vertex 591: label89 1 label592 1 label918 99 
+vertex 592: label9 6 label535 87 label593 1 label630 2 label735 1 label795 3 label937 1 
+vertex 593: label594 1 label630 96 label834 1 label905 1 label916 1 label951 1 
+vertex 594: label524 1 label595 1 label949 99 
+vertex 595: label596 1 label787 1 label846 1 label891 96 label927 1 label970 1 
+vertex 596: label597 1 label630 95 label905 3 label961 1 label979 1 
+vertex 597: label598 1 label674 1 label764 4 label918 94 label929 1 
+vertex 598: label599 1 label672 5 label674 1 label767 1 label802 85 label933 8 
+vertex 599: label195 1 label352 1 label600 1 label689 1 label748 1 label819 4 label891 9 label902 1 label937 80 label946 1 label970 1 
+vertex 600: label498 2 label601 98 label998 1 
+vertex 601: label602 1 label752 1 label882 1 label980 1 label981 96 label998 1 
+vertex 602: label185 1 label603 1 label891 96 label970 2 label1000 1 
+vertex 603: label145 1 label604 2 label932 82 label942 14 label991 2 
+vertex 604: label398 5 label605 1 label865 1 label896 1 label909 2 label918 1 label953 74 label966 16 
+vertex 605: label606 1 label775 99 label903 1 
+vertex 606: label33 2 label511 2 label607 1 label813 1 label924 95 
+vertex 607: label65 1 label506 1 label608 3 label649 39 label753 1 label832 55 label868 1 
+vertex 608: label609 1 label729 1 label789 10 label817 2 label819 81 label902 1 label946 5 
+vertex 609: label39 1 label67 2 label578 1 label610 1 label801 1 label913 95 
+vertex 610: label461 1 label611 1 label881 99 
+vertex 611: label43 1 label533 1 label612 1 label909 98 
+vertex 612: label135 1 label613 1 label895 99 
+vertex 613: label189 19 label242 1 label243 1 label515 26 label614 1 label768 1 label829 1 label918 50 label984 1 
+vertex 614: label367 1 label615 1 label765 4 label773 94 label797 1 
+vertex 615: label616 1 label716 1 label733 4 label815 94 label894 1 
+vertex 616: label617 1 label818 1 label880 1 label895 98 
+vertex 617: label268 1 label618 1 label974 2 label987 1 label1000 96 
+vertex 618: label458 1 label619 1 label735 1 label966 96 label996 1 label997 1 
+vertex 619: label620 1 label716 1 label815 99 
+vertex 620: label597 1 label621 1 label947 1 label966 96 label997 2 
+vertex 621: label466 1 label622 1 label918 98 label929 1 
+vertex 622: label623 1 label861 1 label882 1 label981 97 label998 1 
+vertex 623: label624 1 label647 36 label805 1 label915 62 label949 1 
+vertex 624: label625 1 label891 96 label937 1 label970 2 label993 1 
+vertex 625: label626 1 label811 1 label956 99 
+vertex 626: label627 1 label838 1 label923 1 label952 97 label996 1 
+vertex 627: label412 1 label628 1 label630 97 label905 2 
+vertex 628: label504 2 label629 2 label806 95 label870 1 label908 1 
+vertex 629: label597 1 label630 97 label905 3 
+vertex 630: label515 27 label631 1 label632 1 label725 1 label949 9 label952 59 label968 2 label984 1 
+vertex 631: label631 1 label632 1 label942 1 label943 2 label991 93 label993 3 
+vertex 632: label299 1 label398 24 label633 1 label698 1 label710 72 label917 2 
+vertex 633: label431 6 label534 90 label634 3 label880 2 
+vertex 634: label635 1 label814 1 label991 97 label993 2 
+vertex 635: label216 1 label636 1 label918 1 label947 1 label966 97 
+vertex 636: label98 1 label637 1 label838 1 label923 3 label952 95 
+vertex 637: label624 1 label638 1 label647 20 label860 1 label915 78 
+vertex 638: label639 1 label865 4 label909 96 
+vertex 639: label640 1 label929 1 label932 84 label942 15 
+vertex 640: label64 1 label169 1 label601 94 label641 1 label746 1 label777 2 label942 1 
+vertex 641: label408 1 label642 1 label948 1 label971 1 label977 97 
+vertex 642: label443 1 label615 1 label643 1 label765 2 label773 96 
+vertex 643: label98 1 label644 1 label912 1 label923 4 label952 94 
+vertex 644: label252 1 label645 1 label750 1 label789 98 
+vertex 645: label646 1 label924 98 label969 1 label975 1 
+vertex 646: label624 1 label647 27 label805 1 label860 1 label915 71 
+vertex 647: label511 1 label648 1 label907 1 label924 97 label969 1 
+vertex 648: label571 1 label608 2 label649 50 label654 1 label832 46 label905 1 
+vertex 649: label650 1 label784 1 label831 1 label846 1 label884 1 label1000 96 
+vertex 650: label651 1 label658 1 label891 95 label954 1 label965 2 label976 1 
+vertex 651: label132 1 label515 95 label652 2 label889 1 label978 2 
+vertex 652: label653 1 label723 99 label746 1 
+vertex 653: label608 2 label649 48 label654 2 label718 1 label832 47 label949 1 
+vertex 654: label546 1 label655 1 label802 95 label933 3 label984 1 
+vertex 655: label550 1 label656 1 label971 2 label977 97 
+vertex 656: label342 1 label515 1 label657 1 label769 1 label949 15 label956 1 label984 4 label987 2 label1000 75 
+vertex 657: label97 1 label502 1 label658 1 label956 98 
+vertex 658: label601 96 label641 2 label659 1 label777 2 
+vertex 659: label518 1 label660 1 label701 1 label918 97 label967 1 
+vertex 660: label661 1 label713 1 label735 1 label966 96 label997 2 
+vertex 661: label332 1 label553 1 label629 1 label662 1 label689 2 label786 1 label819 85 label902 4 label924 1 label946 3 label979 1 
+vertex 662: label452 1 label663 1 label723 99 
+vertex 663: label515 91 label664 1 label950 1 label968 1 label984 7 
+vertex 664: label305 1 label665 2 label881 98 
+vertex 665: label497 1 label666 2 label956 98 
+vertex 666: label515 4 label667 1 label847 1 label871 1 label874 1 label889 1 label937 79 label968 1 label977 12 
+vertex 667: label668 1 label770 1 label847 1 label895 1 label937 96 label939 1 
+vertex 668: label483 1 label608 3 label649 51 label669 1 label753 1 label821 1 label832 43 
+vertex 669: label433 1 label466 1 label670 1 label918 97 label967 1 
+vertex 670: label671 1 label822 1 label932 89 label942 7 label964 2 label977 1 
+vertex 671: label32 1 label672 8 label802 85 label933 7 
+vertex 672: label53 1 label61 1 label141 1 label189 17 label256 1 label647 13 label673 1 label722 1 label820 41 label915 23 label918 1 
+vertex 673: label598 1 label674 1 label719 1 label764 1 label889 1 label918 45 label956 51 
+vertex 674: label675 1 label836 1 label940 1 label977 40 label981 56 label998 2 
+vertex 675: label676 1 label865 2 label909 97 label911 1 
+vertex 676: label677 1 label923 3 label952 94 label996 3 
+vertex 677: label678 1 label971 1 label977 99 
+vertex 678: label679 1 label811 2 label956 98 
+vertex 679: label663 1 label680 1 label723 99 
+vertex 680: label316 1 label473 2 label681 1 label687 1 label991 94 label993 2 
+vertex 681: label682 1 label727 1 label945 1 label949 98 
+vertex 682: label683 1 label771 2 label789 4 label937 78 label938 1 label966 13 label968 2 
+vertex 683: label89 1 label578 2 label684 1 label913 97 
+vertex 684: label547 1 label685 1 label758 1 label881 97 label932 1 
+vertex 685: label686 2 label962 1 label977 98 
+vertex 686: label601 1 label687 1 label876 1 label896 2 label903 1 label919 1 label953 94 
+vertex 687: label433 1 label688 1 label907 1 label918 95 label967 3 
+vertex 688: label461 1 label553 1 label622 1 label689 4 label786 1 label819 84 label870 1 label902 3 label944 1 label946 3 label1000 1 
+vertex 689: label690 1 label775 100 
+vertex 690: label668 1 label691 1 label937 97 label939 2 
+vertex 691: label515 89 label652 1 label692 2 label737 2 label968 1 label978 4 label984 2 
+vertex 692: label112 1 label693 1 label895 98 label922 1 
+vertex 693: label431 3 label534 93 label694 1 label728 1 label880 3 
+vertex 694: label1 1 label695 1 label789 99 
+vertex 695: label696 1 label891 98 label954 1 label970 1 
+vertex 696: label697 1 label741 1 label765 1 label773 12 label802 1 label889 1 label924 68 label932 16 
+vertex 697: label398 8 label698 1 label710 86 label878 1 label906 1 label917 4 
+vertex 698: label476 1 label699 2 label789 98 
+vertex 699: label20 1 label700 1 label775 98 label936 1 
+vertex 700: label319 1 label701 1 label889 1 label918 98 
+vertex 701: label553 3 label702 1 label815 2 label819 85 label901 1 label902 5 label946 1 label978 1 label991 2 
+vertex 702: label174 1 label183 1 label398 5 label674 1 label698 1 label703 1 label710 83 label797 1 label806 1 label906 2 label917 3 label921 1 
+vertex 703: label30 1 label546 1 label704 1 label753 1 label802 1 label837 1 label895 52 label924 43 
+vertex 704: label91 4 label189 92 label243 2 label487 1 label575 1 label705 1 
+vertex 705: label91 1 label189 88 label243 7 label575 2 label706 1 label918 1 label961 1 
+vertex 706: label249 1 label707 2 label789 30 label806 33 label896 1 label953 34 
+vertex 707: label1 1 label708 2 label789 98 
+vertex 708: label588 1 label613 1 label709 1 label895 98 
+vertex 709: label21 1 label33 1 label398 5 label710 90 label878 1 label906 1 label917 2 
+vertex 710: label711 1 label1000 100 
+vertex 711: label209 1 label712 1 label771 3 label966 96 
+vertex 712: label321 1 label713 2 label806 95 label870 3 
+vertex 713: label328 1 label692 1 label714 1 label879 1 label891 94 label970 3 
+vertex 714: label602 1 label715 1 label891 97 label954 1 label970 1 
+vertex 715: label65 1 label716 1 label791 1 label815 98 
+vertex 716: label717 1 label913 98 label956 2 
+vertex 717: label608 2 label649 38 label718 1 label753 1 label832 57 label908 1 label949 1 
+vertex 718: label112 1 label319 1 label515 95 label719 1 label889 2 label984 1 
+vertex 719: label65 1 label348 1 label720 2 label815 97 
+vertex 720: label647 32 label721 1 label860 1 label915 66 label957 1 
+vertex 721: label1 1 label477 1 label645 1 label707 1 label722 1 label789 96 
+vertex 722: label452 2 label723 98 label974 1 
+vertex 723: label724 1 label841 1 label895 99 
+vertex 724: label377 1 label515 1 label547 1 label725 1 label881 8 label977 89 
+vertex 725: label524 1 label726 1 label752 1 label912 1 label949 96 label958 1 
+vertex 726: label727 2 label845 1 label860 1 label949 97 
+vertex 727: label74 1 label728 1 label759 1 label825 1 label896 1 label953 96 
+vertex 728: label410 1 label689 6 label729 1 label817 1 label819 84 label902 1 label946 4 label949 3 
+vertex 729: label82 1 label193 1 label730 1 label943 1 label952 97 
+vertex 730: label731 1 label785 1 label895 99 
+vertex 731: label608 3 label649 49 label732 1 label832 47 label918 1 
+vertex 732: label65 3 label733 5 label815 93 
+vertex 733: label734 1 label947 1 label966 96 label991 2 label997 1 
+vertex 734: label735 1 label963 1 label966 99 
+vertex 735: label30 1 label497 1 label679 1 label736 1 label956 97 
+vertex 736: label515 91 label737 1 label984 8 label992 1 
+vertex 737: label738 1 label770 1 label847 1 label937 97 label992 1 
+vertex 738: label458 3 label739 1 label771 1 label966 96 
+vertex 739: label735 1 label740 1 label954 1 label966 98 
+vertex 740: label183 1 label432 1 label741 1 label932 95 label942 2 label964 1 
+vertex 741: label639 1 label742 1 label865 1 label909 98 
+vertex 742: label743 1 label847 2 label937 96 label939 2 
+vertex 743: label445 1 label744 1 label837 1 label895 98 
+vertex 744: label268 1 label745 1 label761 1 label784 1 label974 1 label1000 96 
+vertex 745: label601 2 label671 1 label746 1 label932 1 label942 5 label971 1 label977 90 
+vertex 746: label747 1 label890 1 label924 99 
+vertex 747: label368 2 label748 1 label820 98 
+vertex 748: label723 100 label749 1 
+vertex 749: label699 1 label750 1 label789 98 label851 1 
+vertex 750: label692 1 label751 1 label788 1 label865 3 label891 58 label909 13 label911 1 label949 23 
+vertex 751: label752 1 label763 1 label886 1 label949 97 label958 1 
+vertex 752: label483 1 label649 15 label753 5 label832 79 label916 1 
+vertex 753: label39 1 label66 1 label754 1 label855 1 label913 97 
+vertex 754: label515 94 label652 1 label755 1 label984 5 
+vertex 755: label756 1 label923 5 label952 94 label996 1 
+vertex 756: label757 1 label830 1 label977 99 
+vertex 757: label611 1 label685 2 label758 1 label881 97 
+vertex 758: label759 3 label815 16 label832 9 label896 1 label901 2 label952 1 label953 69 
+vertex 759: label680 1 label760 1 label966 97 label991 1 label997 1 
+vertex 760: label582 1 label761 1 label918 98 label929 1 
+vertex 761: label553 1 label689 1 label762 2 label819 89 label851 1 label902 3 label930 1 label946 1 label958 2 
+vertex 762: label682 1 label763 2 label779 1 label949 97 
+vertex 763: label433 1 label764 1 label907 1 label918 97 label967 1 
+vertex 764: label367 1 label556 2 label615 1 label765 2 label773 95 
+vertex 765: label398 27 label698 1 label710 71 label766 1 label917 1 
+vertex 766: label351 2 label546 1 label599 1 label672 2 label767 1 label802 89 label933 5 
+vertex 767: label491 1 label515 92 label692 2 label768 1 label968 1 label976 1 label984 2 label991 1 
+vertex 768: label711 1 label769 1 label974 1 label1000 98 
+vertex 769: label770 1 label847 1 label937 95 label939 2 label992 2 
+vertex 770: label771 2 label966 99 
+vertex 771: label258 1 label772 1 label895 99 
+vertex 772: label367 1 label556 1 label765 1 label773 98 
+vertex 773: label517 1 label630 49 label724 1 label774 1 label895 43 label905 1 label966 4 label979 1 
+vertex 774: label127 1 label775 100 
+vertex 775: label340 1 label579 1 label758 1 label776 1 label881 97 
+vertex 776: label498 1 label576 1 label601 97 label777 2 
+vertex 777: label778 1 label882 1 label960 2 label981 97 
+vertex 778: label688 1 label779 2 label891 5 label909 30 label954 1 label1000 62 
+vertex 779: label780 1 label980 1 label981 99 
+vertex 780: label278 1 label355 1 label459 1 label781 1 label890 1 label924 96 
+vertex 781: label458 1 label619 1 label782 1 label966 96 label972 2 
+vertex 782: label639 1 label779 1 label783 1 label859 1 label865 3 label909 94 
+vertex 783: label457 1 label784 2 label1000 98 
+vertex 784: label693 1 label785 1 label895 99 
+vertex 785: label553 4 label786 1 label817 1 label819 91 label902 2 label946 2 
+vertex 786: label787 2 label891 98 label965 1 
+vertex 787: label692 1 label787 1 label788 1 label891 96 label970 2 
+vertex 788: label1 1 label477 1 label699 1 label789 98 
+vertex 789: label790 1 label896 2 label953 96 label981 1 label991 1 
+vertex 790: label606 1 label716 1 label775 98 label791 1 
+vertex 791: label547 2 label792 2 label881 97 
+vertex 792: label340 1 label547 1 label758 1 label776 1 label793 1 label881 96 
+vertex 793: label609 1 label689 2 label762 1 label794 1 label817 2 label819 85 label901 2 label902 2 label946 2 label952 3 
+vertex 794: label189 7 label466 1 label593 1 label601 2 label795 2 label917 1 label918 51 label953 36 
+vertex 795: label452 2 label723 98 label796 1 
+vertex 796: label398 12 label710 84 label797 3 label832 1 label878 1 
+vertex 797: label735 1 label798 1 label966 97 label976 1 label997 1 
+vertex 798: label89 1 label670 1 label799 1 label918 98 
+vertex 799: label142 1 label800 1 label891 98 label970 1 
+vertex 800: label67 2 label578 1 label801 1 label913 97 
+vertex 801: label32 1 label260 1 label672 1 label802 94 label902 1 label933 2 label978 1 
+vertex 802: label803 1 label838 1 label923 2 label943 1 label952 96 
+vertex 803: label804 1 label991 98 label993 2 
+vertex 804: label647 41 label805 1 label860 1 label915 58 
+vertex 805: label70 1 label806 96 label870 4 
+vertex 806: label473 1 label807 1 label823 1 label991 97 label993 1 
+vertex 807: label586 1 label643 1 label773 36 label808 1 label839 1 label891 29 label909 32 
+vertex 808: label716 1 label733 2 label809 1 label815 97 
+vertex 809: label644 1 label810 1 label943 1 label952 98 
+vertex 810: label452 1 label626 1 label811 2 label956 97 
+vertex 811: label692 1 label812 1 label891 98 label970 1 
+vertex 812: label356 1 label648 1 label813 2 label924 97 
+vertex 813: label440 1 label814 1 label823 1 label943 1 label991 96 label993 1 
+vertex 814: label65 1 label620 1 label815 99 
+vertex 815: label630 97 label816 1 label905 3 
+vertex 816: label553 2 label689 3 label762 1 label817 3 label819 87 label902 2 label946 3 
+vertex 817: label818 1 label895 100 
+vertex 818: label553 3 label762 1 label817 1 label819 94 label902 1 label946 1 
+vertex 819: label141 1 label425 1 label820 99 
+vertex 820: label821 1 label960 1 label981 98 label998 1 
+vertex 821: label369 1 label822 2 label932 94 label942 4 
+vertex 822: label457 1 label823 1 label950 1 label991 98 
+vertex 823: label128 1 label394 1 label431 3 label534 91 label634 1 label824 2 label880 2 
+vertex 824: label239 1 label825 1 label896 3 label953 96 
+vertex 825: label515 97 label600 1 label826 1 label984 2 
+vertex 826: label769 1 label827 1 label884 1 label987 1 label1000 97 
+vertex 827: label775 97 label828 1 label936 1 label959 1 label992 1 
+vertex 828: label764 1 label829 1 label918 96 label926 1 label929 2 
+vertex 829: label474 1 label830 2 label977 98 
+vertex 830: label302 2 label542 96 label831 3 
+vertex 831: label649 13 label654 1 label753 1 label797 1 label832 85 
+vertex 832: label309 1 label833 1 label932 98 label942 1 
+vertex 833: label447 1 label601 4 label630 8 label834 2 label1000 86 
+vertex 834: label515 90 label814 1 label835 1 label889 2 label978 2 label984 5 
+vertex 835: label329 1 label836 3 label913 97 
+vertex 836: label445 1 label448 1 label837 2 label895 97 
+vertex 837: label838 1 label883 1 label923 1 label952 98 
+vertex 838: label367 2 label765 1 label773 96 label839 2 
+vertex 839: label91 1 label189 88 label243 9 label705 1 label840 1 label862 1 
+vertex 840: label841 1 label847 1 label937 97 label973 1 label975 1 
+vertex 841: label626 1 label842 1 label956 99 
+vertex 842: label543 1 label843 1 label923 1 label924 1 label952 96 label996 1 
+vertex 843: label515 92 label520 1 label737 1 label844 1 label968 1 label978 3 label984 2 
+vertex 844: label752 1 label763 2 label845 2 label886 1 label949 95 
+vertex 845: label846 1 label864 1 label1000 99 
+vertex 846: label200 1 label847 1 label937 98 label939 1 
+vertex 847: label630 97 label848 1 label905 1 label964 1 label979 1 
+vertex 848: label433 1 label510 1 label764 1 label849 1 label918 97 
+vertex 849: label340 1 label444 1 label850 1 label881 98 
+vertex 850: label689 2 label762 1 label786 1 label819 91 label851 1 label902 5 
+vertex 851: label248 1 label787 1 label852 1 label891 96 label949 1 label988 1 
+vertex 852: label191 1 label556 1 label643 1 label773 97 label853 1 
+vertex 853: label838 1 label854 1 label923 2 label952 96 label996 1 
+vertex 854: label67 1 label855 2 label913 98 
+vertex 855: label856 1 label971 1 label977 98 label986 1 
+vertex 856: label65 1 label716 1 label773 11 label802 32 label815 54 label839 1 label857 1 
+vertex 857: label630 96 label858 1 label905 4 
+vertex 858: label639 1 label742 1 label859 1 label865 1 label909 97 
+vertex 859: label256 1 label647 37 label805 1 label860 1 label915 61 
+vertex 860: label194 1 label623 1 label861 1 label981 98 
+vertex 861: label531 1 label699 1 label862 1 label981 98 
+vertex 862: label849 1 label863 1 label918 98 label967 1 
+vertex 863: label630 39 label864 2 label932 15 label942 1 label987 1 label1000 43 
+vertex 864: label783 1 label865 1 label909 99 
+vertex 865: label707 1 label866 1 label981 99 
+vertex 866: label601 31 label641 1 label867 1 label918 54 label949 13 label958 1 
+vertex 867: label28 2 label249 1 label649 3 label753 1 label832 92 label868 1 label959 1 
+vertex 868: label39 1 label578 1 label869 2 label913 97 
+vertex 869: label306 1 label713 1 label806 97 label870 1 label908 1 
+vertex 870: label871 1 label962 1 label971 3 label977 96 
+vertex 871: label515 5 label802 13 label814 1 label872 1 label875 1 label918 75 label929 1 label978 3 label984 1 
+vertex 872: label321 1 label630 93 label873 1 label905 6 
+vertex 873: label832 5 label874 2 label916 1 label937 24 label971 1 label977 68 
+vertex 874: label515 96 label563 1 label875 1 label978 1 label984 2 
+vertex 875: label74 1 label398 1 label876 1 label953 98 
+vertex 876: label256 1 label647 30 label771 1 label877 1 label890 1 label915 67 
+vertex 877: label398 13 label672 1 label698 1 label710 83 label878 2 label917 1 
+vertex 878: label715 1 label879 1 label891 98 label970 1 
+vertex 879: label114 1 label431 5 label534 94 label880 1 
+vertex 880: label547 1 label665 1 label881 99 
+vertex 881: label194 1 label882 2 label981 98 
+vertex 882: label361 1 label545 1 label883 1 label923 2 label952 96 
+vertex 883: label417 1 label884 1 label1000 99 
+vertex 884: label603 1 label711 1 label787 1 label885 1 label891 95 label954 2 
+vertex 885: label752 2 label763 1 label886 2 label949 96 
+vertex 886: label865 3 label887 1 label909 96 label964 1 
+vertex 887: label630 98 label888 1 label905 1 label995 1 
+vertex 888: label515 96 label889 1 label984 4 
+vertex 889: label647 28 label825 1 label890 1 label915 71 
+vertex 890: label603 1 label891 98 label970 2 
+vertex 891: label102 1 label775 98 label892 1 label959 1 
+vertex 892: label398 4 label710 92 label893 1 label906 1 label917 2 label921 1 
+vertex 893: label65 3 label716 1 label733 2 label815 94 label894 1 
+vertex 894: label837 1 label895 99 label922 1 
+vertex 895: label896 4 label922 1 label953 96 
+vertex 896: label515 90 label875 1 label889 2 label897 1 label978 2 label984 5 
+vertex 897: label535 1 label630 86 label649 2 label654 1 label832 2 label898 2 label905 7 
+vertex 898: label188 1 label597 1 label630 98 label899 1 
+vertex 899: label604 1 label822 2 label900 1 label932 93 label942 3 label964 1 
+vertex 900: label102 1 label775 42 label819 5 label901 2 label981 50 label982 1 
+vertex 901: label553 3 label689 3 label786 1 label817 1 label819 84 label902 8 label946 1 
+vertex 902: label408 1 label825 1 label896 2 label903 2 label953 95 
+vertex 903: label727 1 label904 1 label949 98 label958 1 
+vertex 904: label630 94 label888 1 label901 1 label905 5 
+vertex 905: label398 7 label710 88 label878 2 label906 3 label917 1 
+vertex 906: label433 1 label907 2 label918 98 
+vertex 907: label504 1 label592 1 label806 97 label870 1 label908 1 
+vertex 908: label865 1 label909 100 
+vertex 909: label355 1 label511 1 label910 1 label924 97 label986 1 
+vertex 910: label727 2 label911 2 label949 97 
+vertex 911: label213 1 label845 1 label912 2 label923 1 label949 7 label952 35 label966 54 
+vertex 912: label67 1 label455 1 label869 1 label913 98 
+vertex 913: label550 1 label914 1 label977 99 
+vertex 914: label256 1 label647 32 label915 68 
+vertex 915: label630 97 label905 2 label916 1 label951 1 
+vertex 916: label398 17 label698 1 label710 80 label797 1 label917 2 
+vertex 917: label796 1 label918 99 label929 1 
+vertex 918: label306 1 label733 1 label806 66 label815 17 label877 1 label919 2 label932 12 label942 1 
+vertex 919: label210 1 label787 1 label891 97 label920 1 label970 1 
+vertex 920: label398 10 label710 85 label797 1 label878 3 label893 1 label921 1 
+vertex 921: label135 1 label895 98 label922 2 
+vertex 922: label401 1 label923 3 label952 96 label996 1 
+vertex 923: label33 1 label511 1 label924 99 
+vertex 924: label302 2 label542 96 label831 1 label860 1 label925 1 
+vertex 925: label926 1 label943 1 label991 97 label993 1 label994 1 
+vertex 926: label891 99 label927 1 label970 1 
+vertex 927: label733 2 label815 97 label928 1 label953 1 
+vertex 928: label466 2 label582 1 label849 1 label918 95 label929 2 
+vertex 929: label433 1 label762 1 label817 1 label819 8 label918 81 label930 1 label949 8 
+vertex 930: label443 1 label764 1 label918 97 label929 1 label931 1 
+vertex 931: label765 1 label932 100 
+vertex 932: label181 1 label546 1 label672 2 label802 93 label933 4 
+vertex 933: label505 1 label542 98 label934 2 
+vertex 934: label541 1 label891 96 label935 1 label970 3 
+vertex 935: label102 1 label775 97 label936 1 label952 1 label959 1 
+vertex 936: label847 2 label937 98 label988 1 
+vertex 937: label515 16 label789 64 label819 14 label901 1 label938 1 label946 1 label968 1 label978 1 label984 2 
+vertex 938: label847 2 label937 98 label939 1 
+vertex 939: label471 1 label940 1 label981 99 
+vertex 940: label331 1 label941 1 label981 99 
+vertex 941: label28 1 label932 92 label942 7 label964 1 
+vertex 942: label630 40 label943 1 label952 33 label979 1 label982 1 label991 24 label993 1 
+vertex 943: label821 1 label861 1 label944 1 label981 98 
+vertex 944: label113 1 label727 1 label763 1 label945 1 label949 97 
+vertex 945: label553 1 label786 1 label817 1 label819 89 label902 7 label946 2 
+vertex 946: label947 1 label966 99 label991 1 
+vertex 947: label474 1 label948 1 label977 99 
+vertex 948: label912 1 label945 1 label949 99 
+vertex 949: label950 2 label991 98 label993 1 
+vertex 950: label392 1 label630 96 label905 2 label951 1 label979 1 
+vertex 951: label527 1 label923 1 label952 99 
+vertex 952: label896 2 label919 1 label953 98 
+vertex 953: label891 97 label924 1 label954 3 
+vertex 954: label466 1 label918 98 label929 1 label955 1 
+vertex 955: label59 1 label942 1 label956 99 
+vertex 956: label811 1 label875 1 label956 97 label957 2 
+vertex 957: label524 1 label911 1 label949 98 label958 1 
+vertex 958: label249 1 label483 1 label649 23 label832 75 label959 1 
+vertex 959: label194 1 label531 1 label960 1 label981 98 
+vertex 960: label630 97 label905 3 label961 1 
+vertex 961: label822 1 label962 1 label977 99 
+vertex 962: label458 1 label932 8 label949 2 label963 1 label966 88 label972 1 
+vertex 963: label808 1 label932 96 label942 2 label964 2 
+vertex 964: label891 98 label920 1 label954 1 label965 1 
+vertex 965: label735 1 label966 100 
+vertex 966: label582 1 label764 1 label918 97 label929 1 label967 1 
+vertex 967: label225 1 label838 1 label952 98 label968 1 
+vertex 968: label33 1 label924 99 label969 1 
+vertex 969: label375 1 label390 1 label603 1 label891 96 label970 2 
+vertex 970: label30 1 label971 1 label977 99 
+vertex 971: label771 1 label966 99 label972 1 
+vertex 972: label352 1 label847 2 label937 97 label973 1 
+vertex 973: label974 1 label1000 100 
+vertex 974: label57 1 label847 1 label937 96 label975 3 
+vertex 975: label751 1 label787 1 label891 94 label970 3 label976 2 
+vertex 976: label532 1 label971 1 label977 99 
+vertex 977: label515 95 label737 3 label889 1 label978 2 
+vertex 978: label292 1 label494 1 label630 97 label979 2 
+vertex 979: label595 1 label980 1 label981 98 label998 1 
+vertex 980: label882 1 label981 99 label998 1 
+vertex 981: label194 1 label981 98 label982 1 label998 1 
+vertex 982: label195 1 label542 2 label895 73 label953 24 label983 1 
+vertex 983: label515 92 label889 1 label968 1 label978 1 label984 6 
+vertex 984: label318 1 label952 99 label985 1 
+vertex 985: label33 1 label459 1 label511 1 label813 1 label924 96 label986 1 
+vertex 986: label491 1 label784 1 label987 2 label1000 97 
+vertex 987: label891 98 label937 1 label970 1 label988 1 
+vertex 988: label630 96 label888 1 label905 2 label979 1 label989 1 
+vertex 989: label515 1 label542 21 label674 1 label799 1 label881 75 label981 1 label990 1 
+vertex 990: label937 33 label947 1 label966 7 label991 60 
+vertex 991: label874 1 label937 99 label992 1 
+vertex 992: label555 1 label815 31 label819 3 label991 64 label993 2 
+vertex 993: label473 1 label949 2 label956 59 label991 38 label994 1 
+vertex 994: label494 1 label630 99 label995 1 
+vertex 995: label714 1 label952 99 label996 1 
+vertex 996: label414 1 label458 1 label966 98 label997 1 
+vertex 997: label479 1 label882 1 label981 97 label998 2 
+vertex 998: label229 1 label290 1 label689 1 label786 1 label819 92 label902 3 label946 1 label999 1 
+vertex 999: label268 1 label974 1 label987 1 label1000 98 
+0.825817	0.973653
