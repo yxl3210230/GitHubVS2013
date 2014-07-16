@@ -1250,7 +1250,7 @@ int main()
 	//MAX_T=0;
 	//while(MAX_T<100){
 	//	MAX_T++;
-	c=1;
+	c=10;
 	while(c--){
 
 	synlist=(int *)malloc(net->nvertices*sizeof(int));
