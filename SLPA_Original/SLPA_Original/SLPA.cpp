@@ -98,8 +98,8 @@ void SLPA::start(){
 		cout<<" run="<<run<<"......"<<endl;
 
 		//1.initial WQ and clear network
-		initWQueue_more();
-		//initLQueue();
+		//initWQueue_more();
+		initLQueue();
 
 		//2.GLPA
 		if(isSyn){
@@ -112,7 +112,7 @@ void SLPA::start(){
 		//3.threshould and post-processing
 		//a. create WQhistogram
 		//st1=time(NULL);
-		post_createWQHistogram_MapEntryList();
+		//post_createWQHistogram_MapEntryList();
 		//cout<<"post_createWQHistogram_MapEntryList: "<<difftime(time(NULL),st1)<<endl;
 
 		//b. thresholding and output cpm
@@ -400,13 +400,13 @@ void SLPA::GLPA_asyn_pointer(){
 				//st1=time(NULL);
 				//int randnum=mtrand2.randInt(nbv->WQueue.size()-1);
 				//srand (time(NULL));
-				int randnum=rand()%nbv->WQueue.size();
-				//int randnum=chooseLabel(nbv);
+				//int randnum=rand()%nbv->WQueue.size();
+				int randnum=chooseLabel(nbv);
 				//dt1+=difftime(time(NULL),st1);
 
 				//st1=time(NULL);
-				addLabeltoVectorINT_INT(nbWs1,nbv->WQueue[randnum]);
-				//addLabeltoVectorINT_INT(nbWs1,randnum);
+				//addLabeltoVectorINT_INT(nbWs1,nbv->WQueue[randnum]);
+				addLabeltoVectorINT_INT(nbWs1,randnum);
 				//dt2+=difftime(time(NULL),st1);
 
 			}
@@ -422,9 +422,9 @@ void SLPA::GLPA_asyn_pointer(){
 
 			//c. update the WQ **IMMEDIATELY**
 			//st1=time(NULL);
-			v->WQueue.push_back(label);
-			//addLabeltoLQueue(v,label);
-			//deleteLabel(v,nbWs1);
+			//v->WQueue.push_back(label);
+			addLabeltoLQueue(v,label);
+			deleteLabel(v,nbWs1);
 			//dt4+=difftime(time(NULL),st1);
 		}
 
@@ -558,9 +558,9 @@ void SLPA::dothreshold_createCPM_pointer(int thrc,vector<vector<int>* >& cpm){
 		//sortMapInt_Int(v->MQueue,pairList);
 		//post_thresholding(pairList,thrc,WS);
 
-		//post_thresholding(v->LQueue,thrc,WS);
+		post_thresholding(v->LQueue,thrc,WS);
 
-		post_thresholding(v->WQHistMapEntryList,thrc,WS); //***TO IMP
+		//post_thresholding(v->WQHistMapEntryList,thrc,WS); //***TO IMP
 
 		if(WS.size()<1) cout<<"ERROR:empty WS"<<endl;
 		if(WS.size()>1) ov_cn++;
