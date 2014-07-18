@@ -450,7 +450,7 @@ void LabelRank::LabelRank_syn_pointer(){
 	//1. speedup1: compute newBC for node with isToUpdate=true and re-check majority at the end
 
 	//cout<<"-------------------init------------------"<<endl;
-	//printAllBCHistogram();
+	printAllBCHistogram();
 	//printAllW();
 	//printAllUpdateFlag();
 
