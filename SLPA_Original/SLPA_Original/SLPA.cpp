@@ -98,12 +98,12 @@ void SLPA::start(){
 		cout<<" run="<<run<<"......"<<endl;
 
 		//1.initial WQ and clear network
-		initWQueue_more();
-		//initLQueue();
+		//initWQueue_more();
+		initLQueue();
 
 		//2.GLPA
 		if(isSyn){
-			//GLPA_syn();
+			GLPA_syn();
 		}
 		else{
 			GLPA_asyn_pointer();
@@ -244,6 +244,7 @@ void SLPA::addLabeltoVectorINT_INT(vector<pair<int,int>>& pairList, int label)
 	}
 }
 
+
 int SLPA::selectMostFrequentLabel(vector<pair<int,int>>& pairList)
 {
 	vector<int> v;
@@ -356,6 +357,102 @@ void SLPA::deleteLabel1(NODE *v, vector<pair<int,int>>& pairList)
 	}
 }
 
+void SLPA::addLabeltoVector(vector<pair<int, int>>& pairList, NODE *v)
+{
+	int i, j, flag;
+	for (i = 0; i < v->LQueue.size(); i++){
+		flag = 0;
+		for (j = 0; j < pairList.size(); j++){
+			if (v->LQueue[i].first == pairList[j].first){
+				pairList[j].second += v->LQueue[i].second;
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0){
+			pairList.push_back(v->LQueue[i]);
+		}
+	}
+}
+
+void SLPA::addLabeltoNode(vector<pair<int, int>>& pairList, NODE *v)
+{
+	int i, j, flag;
+	for (i = 0; i < pairList.size(); i++){
+		flag = 0;
+		for (j = 0; j < v->LQueue.size(); j++){
+			if (pairList[i].first == v->LQueue[j].first){
+				v->LQueue[j].second += pairList[i].second;
+				v->nlabels += pairList[i].second;
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0){
+			v->LQueue.push_back(pairList[i]);
+			v->nlabels += pairList[i].second;
+		}
+	}
+}
+
+void SLPA::thresholdLabelInNode(NODE *v)
+{
+	int i, j, n, m;
+	double pro, threshold;
+	pair<int, int> tmp;
+	threshold = (double)1 / (2 * v->numNbs);
+	n = v->LQueue.size();
+	m = 0;
+	for (i = 0; i < n; i++){
+		pro = (double)v->LQueue[i].second / v->nlabels;
+		if (pro < threshold){
+			if (i != n - 1){
+				tmp = v->LQueue[i];
+				v->LQueue[i] = v->LQueue[n-1];
+				--n;
+				--i;
+			}
+			++m;
+		}
+	}
+	while (m--){
+		v->LQueue.pop_back();
+	}
+}
+
+void SLPA::GLPA_syn()
+{
+	time_t st = time(NULL);
+	NODE *v, *nbv;
+	vector<pair<int, int>> nbWs1;
+
+	cout << "Start iteration:";
+
+	for (int t = 1; t<maxT; t++){
+		cout << "*";
+		srand(time(NULL)); 
+		random_shuffle(net->NODES.begin(), net->NODES.end());
+
+		for (int i = 0; i<net->N; i++){
+			v = net->NODES[i];
+			nbWs1.clear();
+			nbWs1.reserve(100);
+			for (int j = 0; j<v->numNbs; j++){
+				nbv = v->nbList_P[j];
+				addLabeltoVector(nbWs1, nbv);
+			}
+			addLabeltoNode(nbWs1, v);
+			thresholdLabelInNode(v);
+		}
+	}
+
+	//for(int i=0;i<net->N;i++){
+	//	sortVectorInt_Int(net->NODES[i]->LQueue);
+	//}
+
+	cout << endl;
+	cout << "Iteration is over (takes " << difftime(time(NULL), st) << " seconds)" << endl;
+}
 
 void SLPA::GLPA_asyn_pointer(){
 	//pointer version:
@@ -400,14 +497,16 @@ void SLPA::GLPA_asyn_pointer(){
 				//st1=time(NULL);
 				//int randnum=mtrand2.randInt(nbv->WQueue.size()-1);
 				//srand (time(NULL));
-				int randnum=rand()%nbv->WQueue.size();
+				//int randnum=rand()%nbv->WQueue.size();
 				//int randnum=chooseLabel(nbv);
 				//dt1+=difftime(time(NULL),st1);
 
 				//st1=time(NULL);
-				addLabeltoVectorINT_INT(nbWs1,nbv->WQueue[randnum]);
+				//addLabeltoVectorINT_INT(nbWs1,nbv->WQueue[randnum]);
 				//addLabeltoVectorINT_INT(nbWs1,randnum);
 				//dt2+=difftime(time(NULL),st1);
+
+				addLabeltoVector(nbWs1, nbv);
 
 			}
 			//when call addLabeltoVectorINT_INT1
@@ -416,16 +515,18 @@ void SLPA::GLPA_asyn_pointer(){
 			//b.select one of the most frequent label
 			//st1=time(NULL);
 			//label=ceateHistogram_selRandMax(nbWs);
-			label=selectMostFrequentLabel(nbWs1);
+			//label=selectMostFrequentLabel(nbWs1);
 			//dt3+=difftime(time(NULL),st1);
 
 
 			//c. update the WQ **IMMEDIATELY**
 			//st1=time(NULL);
-			v->WQueue.push_back(label);
+			//v->WQueue.push_back(label);
 			//addLabeltoLQueue(v,label);
 			//deleteLabel(v,nbWs1);
 			//dt4+=difftime(time(NULL),st1);
+
+			addLabeltoNode(nbWs1, v);
 		}
 
 		//cout<<" Take :" <<difftime(time(NULL),st)<< " seconds."<<endl;

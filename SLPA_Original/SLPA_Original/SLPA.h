@@ -83,11 +83,14 @@ public:
 	void addLabeltoLQueue1(NODE *v, int label);
 	void addLabeltoVectorINT_INT(vector<pair<int,int>>& pairList, int label);
 	void addLabeltoVectorINT_INT1(vector<pair<int,int>>& pairList, int label);
+	void addLabeltoVector(vector<pair<int, int>>& pairList, NODE *v);
+	void addLabeltoNode(vector<pair<int, int>>& pairList, NODE *v);
 	int selectMostFrequentLabel(vector<pair<int,int>>& pairList);
 	void deleteLabel(NODE *v, vector<pair<int,int>>& pairList);
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
+	void thresholdLabelInNode(NODE *v);
 
-	//void GLPA_asyn();
+	void GLPA_syn();
 	void GLPA_asyn_pointer();
 
 	int ceateHistogram_selRandMax(const vector<int>& wordsList);
