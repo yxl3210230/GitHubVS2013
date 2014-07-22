@@ -78,16 +78,18 @@ public:
 	void initWQueue_more();
 
 	void initLQueue();
+	void initPQueue();
 	int chooseLabel(NODE *v);
 	void addLabeltoLQueue(NODE *v, int label);
 	void addLabeltoLQueue1(NODE *v, int label);
 	void addLabeltoVectorINT_INT(vector<pair<int,int>>& pairList, int label);
 	void addLabeltoVectorINT_INT1(vector<pair<int,int>>& pairList, int label);
-	void addLabeltoVector(vector<pair<int, int>>& pairList, NODE *v);
-	void addLabeltoNode(vector<pair<int, int>>& pairList, NODE *v);
+	void addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v);
+	void addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);
 	int selectMostFrequentLabel(vector<pair<int,int>>& pairList);
 	void deleteLabel(NODE *v, vector<pair<int,int>>& pairList);
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
+	void norm_probability(NODE *v);
 	void thresholdLabelInNode(NODE *v);
 
 	void GLPA_syn();

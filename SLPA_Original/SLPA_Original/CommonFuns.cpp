@@ -25,6 +25,11 @@ void sortVectorInt_Int(vector<pair<int,int> > & wordsvec)
 	sort (wordsvec.begin(), wordsvec.begin()+wordsvec.size(), sort_pair_INT_INT());
 }
 
+void sortVectorInt_Double(vector<pair<int, double> > & wordsvec)
+{
+	sort(wordsvec.begin(), wordsvec.begin() + wordsvec.size(), sort_pair_INT_DOUBLE());
+}
+
 
 
 

@@ -42,6 +42,8 @@ public:
 	vector<pair<int,int>> LQueue;
 	int nlabels;
 
+	vector<pair<int, double>> PQueue;
+
 	//----------------
 	int status;
 	int t; 		               //for asynchronous update

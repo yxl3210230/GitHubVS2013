@@ -99,10 +99,11 @@ void SLPA::start(){
 
 		//1.initial WQ and clear network
 		//initWQueue_more();
-		initLQueue();
+		//initLQueue();
+		initPQueue();
 
 		//2.GLPA
-		if(isSyn){
+		if(true){
 			GLPA_syn();
 		}
 		else{
@@ -112,7 +113,7 @@ void SLPA::start(){
 		//3.threshould and post-processing
 		//a. create WQhistogram
 		//st1=time(NULL);
-		post_createWQHistogram_MapEntryList();
+		//post_createWQHistogram_MapEntryList();
 		//cout<<"post_createWQHistogram_MapEntryList: "<<difftime(time(NULL),st1)<<endl;
 
 		//b. thresholding and output cpm
@@ -159,7 +160,8 @@ void SLPA::initWQueue_more(){
 }
 
 
-void SLPA::initLQueue(){
+void SLPA::initLQueue()
+{
 	time_t st=time(NULL);
 	cout<<"Progress: Initializing memory......."<<endl;
 
@@ -175,6 +177,25 @@ void SLPA::initLQueue(){
 	}
 
 	cout<<" Take :" <<difftime(time(NULL),st)<< " seconds."<<endl;
+}
+
+
+void SLPA::initPQueue()
+{
+	time_t st = time(NULL);
+	cout << "Progress: Initializing memory......." << endl;
+
+	//label is node id
+	NODE *v;
+	for (int i = 0; i<net->N; i++){
+
+		v = net->NODES[i];
+		v->PQueue.clear();
+		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+
+	}
+
+	cout << " Take :" << difftime(time(NULL), st) << " seconds." << endl;
 }
 
 
@@ -357,58 +378,73 @@ void SLPA::deleteLabel1(NODE *v, vector<pair<int,int>>& pairList)
 	}
 }
 
-void SLPA::addLabeltoVector(vector<pair<int, int>>& pairList, NODE *v)
+void SLPA::addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v)
 {
 	int i, j, flag;
-	for (i = 0; i < v->LQueue.size(); i++){
+	for (i = 0; i < v->PQueue.size(); i++){
 		flag = 0;
 		for (j = 0; j < pairList.size(); j++){
-			if (v->LQueue[i].first == pairList[j].first){
-				pairList[j].second += v->LQueue[i].second;
+			if (v->PQueue[i].first == pairList[j].first){
+				pairList[j].second += v->PQueue[i].second;
 				flag = 1;
 				break;
 			}
 		}
 		if (flag == 0){
-			pairList.push_back(v->LQueue[i]);
+			pairList.push_back(v->PQueue[i]);
 		}
 	}
 }
 
-void SLPA::addLabeltoNode(vector<pair<int, int>>& pairList, NODE *v)
+void SLPA::addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
 {
 	int i, j, flag;
 	for (i = 0; i < pairList.size(); i++){
 		flag = 0;
-		for (j = 0; j < v->LQueue.size(); j++){
-			if (pairList[i].first == v->LQueue[j].first){
-				v->LQueue[j].second += pairList[i].second;
-				v->nlabels += pairList[i].second;
+		for (j = 0; j < v->PQueue.size(); j++){
+			if (pairList[i].first == v->PQueue[j].first){
+				v->PQueue[j].second += pairList[i].second;
 				flag = 1;
 				break;
 			}
 		}
 		if (flag == 0){
-			v->LQueue.push_back(pairList[i]);
-			v->nlabels += pairList[i].second;
+			v->PQueue.push_back(pairList[i]);
 		}
 	}
 }
 
+
+void SLPA::norm_probability(NODE *v)
+{
+	int i;
+	double sum=0;
+	for (i = 0; i < v->PQueue.size(); i++){
+		sum += v->PQueue[i].second;
+	}
+	if (sum == 1.0){
+		return;
+	}
+	for (i = 0; i < v->PQueue.size(); i++){
+		v->PQueue[i].second /= sum;
+	}
+}
+
+
 void SLPA::thresholdLabelInNode(NODE *v)
 {
 	int i, j, n, m;
-	double pro, threshold;
-	pair<int, int> tmp;
+	double threshold;
+	pair<int, double> tmp;
 	threshold = (double)1 / (2 * v->numNbs);
-	n = v->LQueue.size();
+	n = v->PQueue.size();
 	m = 0;
 	for (i = 0; i < n; i++){
-		pro = (double)v->LQueue[i].second / v->nlabels;
-		if (pro < threshold){
+		if (v->PQueue[i].second < threshold){
 			if (i != n - 1){
-				tmp = v->LQueue[i];
-				v->LQueue[i] = v->LQueue[n-1];
+				tmp = v->PQueue[i];
+				v->PQueue[i] = v->PQueue[n - 1];
+				v->PQueue[n - 1] = tmp;
 				--n;
 				--i;
 			}
@@ -416,15 +452,17 @@ void SLPA::thresholdLabelInNode(NODE *v)
 		}
 	}
 	while (m--){
-		v->LQueue.pop_back();
+		v->PQueue.pop_back();
 	}
 }
 
 void SLPA::GLPA_syn()
 {
+	int i, j;
 	time_t st = time(NULL);
 	NODE *v, *nbv;
-	vector<pair<int, int>> nbWs1;
+	vector<pair<int, double>> nbp;
+	vector<vector<pair<int, double>>> synlist;
 
 	cout << "Start iteration:";
 
@@ -432,25 +470,47 @@ void SLPA::GLPA_syn()
 		cout << "*";
 		srand(time(NULL)); 
 		random_shuffle(net->NODES.begin(), net->NODES.end());
-
-		for (int i = 0; i<net->N; i++){
+		synlist.clear();
+		synlist.reserve(net->N);
+		for (i = 0; i<net->N; i++){
 			v = net->NODES[i];
-			nbWs1.clear();
-			nbWs1.reserve(100);
+			nbp.clear();
+			nbp.reserve(100);
 			for (int j = 0; j<v->numNbs; j++){
 				nbv = v->nbList_P[j];
-				addLabeltoVector(nbWs1, nbv);
+				addLabeltoVector(nbp, nbv);
 			}
-			addLabeltoNode(nbWs1, v);
+			synlist.push_back(nbp);
+		}
+		for (i = 0; i < net->N; i++){
+			v = net->NODES[i];
+			addLabeltoNode(synlist[i], v);
+			norm_probability(v);
 			thresholdLabelInNode(v);
+		}
+
+	}
+
+	cout << endl;
+
+	for(int i=0;i<net->N;i++){
+		v = net->NODES[i];
+		norm_probability(v);
+		sortVectorInt_Double(v->PQueue);
+		if (v->PQueue.size() > 1){
+			cout << v->ID << " : ";
+		}
+		for (j = 0; j < v->PQueue.size(); j++){
+			if (v->PQueue.size() > 1){
+				cout << v->PQueue[j].first << "(" << v->PQueue[j].second << ") ";
+			}
+			v->LQueue.push_back(pair<int, int>(v->PQueue[j].first, (int)((v->PQueue[j].second + 0.5) * 100)));
+		}
+		if (v->PQueue.size() > 1){
+			cout << endl;
 		}
 	}
 
-	//for(int i=0;i<net->N;i++){
-	//	sortVectorInt_Int(net->NODES[i]->LQueue);
-	//}
-
-	cout << endl;
 	cout << "Iteration is over (takes " << difftime(time(NULL), st) << " seconds)" << endl;
 }
 
@@ -464,7 +524,8 @@ void SLPA::GLPA_asyn_pointer(){
 	NODE *v,*nbv;
 	int label;
 	vector<int> nbWs;
-	vector<pair<int,int>> nbWs1;
+	vector<pair<int, int>> nbWs1;
+	vector<pair<int, double>> nbp;
 
 	//t=1 because we initialize the WQ(t=0)
 	cout<<"Start iteration:";
@@ -487,8 +548,10 @@ void SLPA::GLPA_asyn_pointer(){
 
 			//a.collect labels from nbs
 			//nbWs.clear();
-			nbWs1.clear();
-			nbWs1.reserve(100);
+			//nbWs1.clear();
+			//nbWs1.reserve(100);
+			nbp.clear();
+			nbp.reserve(100);
 			for(int j=0;j<v->numNbs;j++){
 				nbv=v->nbList_P[j];
 				//nbWs.push_back(nbv->WQueue[mtrand2.randInt(nbv->WQueue.size()-1)]);
@@ -506,7 +569,7 @@ void SLPA::GLPA_asyn_pointer(){
 				//addLabeltoVectorINT_INT(nbWs1,randnum);
 				//dt2+=difftime(time(NULL),st1);
 
-				addLabeltoVector(nbWs1, nbv);
+				addLabeltoVector(nbp, nbv);
 
 			}
 			//when call addLabeltoVectorINT_INT1
@@ -526,7 +589,9 @@ void SLPA::GLPA_asyn_pointer(){
 			//deleteLabel(v,nbWs1);
 			//dt4+=difftime(time(NULL),st1);
 
-			addLabeltoNode(nbWs1, v);
+			addLabeltoNode(nbp, v);
+			norm_probability(v);
+			thresholdLabelInNode(v);
 		}
 
 		//cout<<" Take :" <<difftime(time(NULL),st)<< " seconds."<<endl;
@@ -659,9 +724,9 @@ void SLPA::dothreshold_createCPM_pointer(int thrc,vector<vector<int>* >& cpm){
 		//sortMapInt_Int(v->MQueue,pairList);
 		//post_thresholding(pairList,thrc,WS);
 
-		//post_thresholding(v->LQueue,thrc,WS);
+		post_thresholding(v->LQueue,thrc,WS);
 
-		post_thresholding(v->WQHistMapEntryList,thrc,WS); //***TO IMP
+		//post_thresholding(v->WQHistMapEntryList,thrc,WS); //***TO IMP
 
 		if(WS.size()<1) cout<<"ERROR:empty WS"<<endl;
 		if(WS.size()>1) ov_cn++;

@@ -34,6 +34,12 @@ struct sort_pair_INT_INT {
 	}
 };//sort_pair_intint_dec;
 
+struct sort_pair_INT_DOUBLE {
+	bool operator()(const std::pair<int, double> &i, const std::pair<int, double> &j) {
+		return i.second > j.second;
+	}
+};
+
 struct sort_INT_DEC {
 	bool operator()(int i, int j) {
 		return i > j;
@@ -51,6 +57,7 @@ struct sort_INT_INC {
 
 //-----------------
 void sortVectorInt_Int(vector<pair<int,int> > & wordsvec);
+void sortVectorInt_Double(vector<pair<int, double> > & wordsvec);
 void sortMapInt_Int( map<int,int> & words, vector< pair<int,int> >& wordsvec);
 void createHistogram(map<int,int>& hist, const vector<int>& wordsList);
 
