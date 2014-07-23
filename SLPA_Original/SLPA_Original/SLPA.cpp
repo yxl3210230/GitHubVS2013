@@ -436,7 +436,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	int i, j, n, m;
 	double threshold;
 	pair<int, double> tmp;
-	threshold = (double)1 / (2 * v->numNbs);
+	threshold = (double)1 / (3 * v->numNbs);
 	n = v->PQueue.size();
 	m = 0;
 	for (i = 0; i < n; i++){
@@ -456,6 +456,29 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	}
 }
 
+//void SLPA::thresholdLabelInNode(NODE *v)
+//{
+//	int i, j, n, m;
+//	double tmp;
+//	if (v->PQueue.size() <= v->numNbs){
+//		return;
+//	}
+//	sortVectorInt_Double(v->PQueue);
+//	tmp = v->PQueue[v->numNbs - 1].second;
+//	i = v->numNbs;
+//	while (i < v->PQueue.size()){
+//		if (v->PQueue[i].second < tmp){
+//			break;
+//		}
+//		++i;
+//	}
+//	i = v->PQueue.size()-i;
+//	while (i--){
+//		v->PQueue.pop_back();
+//	}
+//
+//}
+
 void SLPA::GLPA_syn()
 {
 	int i, j;
@@ -463,6 +486,8 @@ void SLPA::GLPA_syn()
 	NODE *v, *nbv;
 	vector<pair<int, double>> nbp;
 	vector<vector<pair<int, double>>> synlist;
+	vector<string> output;
+	string line;
 
 	cout << "Start iteration:";
 
@@ -482,14 +507,19 @@ void SLPA::GLPA_syn()
 			}
 			synlist.push_back(nbp);
 		}
+		line.clear();
 		for (i = 0; i < net->N; i++){
 			v = net->NODES[i];
 			addLabeltoNode(synlist[i], v);
 			norm_probability(v);
 			thresholdLabelInNode(v);
+			line += int2str(v->PQueue.size());
+			line += " ";
 		}
+		output.push_back(line);
 
 	}
+	writeToTxt("output.txt", false, output);
 
 	cout << endl;
 
