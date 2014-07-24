@@ -40,6 +40,12 @@ struct sort_pair_INT_DOUBLE {
 	}
 };
 
+struct sort_pair_INT_DOUBLE_first {
+	bool operator()(const std::pair<int, double> &i, const std::pair<int, double> &j) {
+		return i.first < j.first;
+	}
+};
+
 struct sort_INT_DEC {
 	bool operator()(int i, int j) {
 		return i > j;
@@ -60,6 +66,8 @@ void sortVectorInt_Int(vector<pair<int,int> > & wordsvec);
 void sortVectorInt_Double(vector<pair<int, double> > & wordsvec);
 void sortMapInt_Int( map<int,int> & words, vector< pair<int,int> >& wordsvec);
 void createHistogram(map<int,int>& hist, const vector<int>& wordsList);
+void sortVectorInt_Double_first(vector<pair<int, double> > & wordsvec);
+bool isSubSet(vector < pair<int, double> > set1, vector < pair<int, double> > set2);
 
 double myround(double value);
 string int2str(int i);

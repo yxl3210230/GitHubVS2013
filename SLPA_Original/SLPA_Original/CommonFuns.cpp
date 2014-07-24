@@ -30,6 +30,43 @@ void sortVectorInt_Double(vector<pair<int, double> > & wordsvec)
 	sort(wordsvec.begin(), wordsvec.begin() + wordsvec.size(), sort_pair_INT_DOUBLE());
 }
 
+void sortVectorInt_Double_first(vector<pair<int, double> > & wordsvec)
+{
+	sort(wordsvec.begin(), wordsvec.begin() + wordsvec.size(), sort_pair_INT_DOUBLE_first());
+}
+
+bool isSubSet(vector < pair<int, double> > set1, vector < pair<int, double> > set2)
+{
+	if (set1.size() > set2.size()){
+		return false;
+	}
+	
+	int diff = set2.size() - set1.size();
+
+	sortVectorInt_Double_first(set1);
+	sortVectorInt_Double_first(set2);
+	
+	int i = 0, j = 0;
+	while (i < set1.size() && j < set2.size()){
+		if (set1[i].first > set2[j].first){
+			++j;
+			--diff;
+		}
+		else if (set1[i].first < set2[j].first){
+			return false;
+		}
+		else{
+			++i;
+			++j;
+		}
+
+		if (diff < 0){
+			return false;
+		}
+	}
+
+	return true;
+}
 
 
 

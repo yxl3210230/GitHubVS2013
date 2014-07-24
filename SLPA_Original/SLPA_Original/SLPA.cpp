@@ -192,6 +192,8 @@ void SLPA::initPQueue()
 		v = net->NODES[i];
 		v->PQueue.clear();
 		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+		v->isToUpdate = 1;
+		v->isChanged = 0;
 
 	}
 
@@ -431,30 +433,30 @@ void SLPA::norm_probability(NODE *v)
 }
 
 
-void SLPA::thresholdLabelInNode(NODE *v)
-{
-	int i, j, n, m;
-	double threshold;
-	pair<int, double> tmp;
-	threshold = (double)1 / (3 * v->numNbs);
-	n = v->PQueue.size();
-	m = 0;
-	for (i = 0; i < n; i++){
-		if (v->PQueue[i].second < threshold){
-			if (i != n - 1){
-				tmp = v->PQueue[i];
-				v->PQueue[i] = v->PQueue[n - 1];
-				v->PQueue[n - 1] = tmp;
-				--n;
-				--i;
-			}
-			++m;
-		}
-	}
-	while (m--){
-		v->PQueue.pop_back();
-	}
-}
+//void SLPA::thresholdLabelInNode(NODE *v)
+//{
+//	int i, j, n, m;
+//	double threshold;
+//	pair<int, double> tmp;
+//	threshold = (double)1 / (3 * v->numNbs);
+//	n = v->PQueue.size();
+//	m = 0;
+//	for (i = 0; i < n; i++){
+//		if (v->PQueue[i].second < threshold){
+//			if (i != n - 1){
+//				tmp = v->PQueue[i];
+//				v->PQueue[i] = v->PQueue[n - 1];
+//				v->PQueue[n - 1] = tmp;
+//				--n;
+//				--i;
+//			}
+//			++m;
+//		}
+//	}
+//	while (m--){
+//		v->PQueue.pop_back();
+//	}
+//}
 
 //void SLPA::thresholdLabelInNode(NODE *v)
 //{
@@ -479,13 +481,139 @@ void SLPA::thresholdLabelInNode(NODE *v)
 //
 //}
 
+//void SLPA::thresholdLabelInNode(NODE *v)
+//{
+//	int i, j, n, m;
+//	double tmp;
+//	if (v->PQueue.size() <= v->numNbs){
+//		return;
+//	}
+//
+//	sortVectorInt_Double(v->PQueue);
+//
+//	tmp = v->PQueue[v->numNbs - 1].second;
+//	for (i = v->numNbs; i < v->PQueue.size(); i++){
+//		if (v->PQueue[i].second < tmp){
+//			break;
+//		}
+//	}
+//	if (i != v->PQueue.size()){
+//		v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
+//	}
+//	
+//	norm_probability(v);
+//
+//	for (i = 1; i < v->PQueue.size(); i++){
+//		tmp = v->PQueue[i].second / v->PQueue[i - 1].second;
+//		if (tmp < 0.5){
+//			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
+//			norm_probability(v);
+//			break;
+//		}
+//	}
+//}
+
+void SLPA::thresholdLabelInNode(NODE *v)
+{
+	int i, j, n, m;
+	double tmp,sum;
+
+	sortVectorInt_Double(v->PQueue);
+
+	sum = v->PQueue[0].second;
+	for (i = 1; i < v->PQueue.size(); i++){
+		tmp = v->PQueue[i].second / v->PQueue[i - 1].second;
+		if (tmp < 0.5){
+			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
+			norm_probability(v);
+			break;
+		}
+		sum += v->PQueue[i].second;
+		if (sum > 0.5&&i != v->PQueue.size()-1){
+			v->PQueue.erase(v->PQueue.begin() + i + 1, v->PQueue.end());
+			norm_probability(v);
+			break;
+		}
+
+	}
+}
+
+void SLPA::stateDetection(NODE *v)
+{
+	int i, j, k, l;
+	if (v->PQueue.size() == 1){
+		for (i = 0, k = 0; i < v->numNbs; i++){
+			if ((v->nbList_P[i]->PQueue.size() == 1) && (v->nbList_P[i]->PQueue[0].first == v->PQueue[0].first)){
+				++k;
+			}
+		}
+		if (k >(v->numNbs / 2)){
+			v->isToUpdate = 0;
+		}
+		else{
+			v->isToUpdate = 1;
+		}
+	}
+	else{
+		for (i = 0, k = 0; i < v->numNbs; i++){
+			if (v->nbList_P[i]->PQueue.size() >= v->PQueue.size()){
+				++k;
+			}
+		}
+		if ((k / v->PQueue.size()) > 0.6){
+			for (i = 0, j = 0; i < v->numNbs; i++){
+				if (isSubSet(v->PQueue, v->nbList_P[i]->PQueue)){
+					++j;
+				}
+			}
+			if ((j / v->PQueue.size()) > 0.6){
+				v->isToUpdate = 0;
+			}
+			else{
+				v->isToUpdate = 1;
+			}
+		}
+		else{
+			v->isToUpdate = 1;
+		}
+	}
+}
+
+bool SLPA::checkLabelChange(NODE *v, vector<pair<int, double>> pairList)
+{
+	if (v->PQueue.size() != pairList.size()){
+		v->isChanged = 1;
+		return true;
+	}
+	if (v->PQueue.size() == 1 && pairList.size() == 1){
+		if (v->PQueue[0].first != pairList[0].first){
+			v->isChanged = 1;
+			return true;
+		}
+		else{
+			v->isChanged = 0;
+			return false;
+		}
+	}
+	sortVectorInt_Double_first(v->PQueue);
+	sortVectorInt_Double_first(pairList);
+	for (int i = 0; i < pairList.size(); i++){
+		if (v->PQueue[i].first != pairList[i].first){
+			v->isChanged = 1;
+			return true;
+		}
+	}
+	v->isChanged = 0;
+	return false;
+}
+
 void SLPA::GLPA_syn()
 {
-	int i, j;
+	int i, j, k;
 	time_t st = time(NULL);
 	NODE *v, *nbv;
-	vector<pair<int, double>> nbp;
-	vector<vector<pair<int, double>>> synlist;
+	vector<pair<int, double>> nbp, snapelement;
+	vector<vector<pair<int, double>>> synlist, snapshot;
 	vector<string> output;
 	string line;
 
@@ -497,26 +625,50 @@ void SLPA::GLPA_syn()
 		random_shuffle(net->NODES.begin(), net->NODES.end());
 		synlist.clear();
 		synlist.reserve(net->N);
+		snapshot.clear();
 		for (i = 0; i<net->N; i++){
 			v = net->NODES[i];
-			nbp.clear();
-			nbp.reserve(100);
-			for (int j = 0; j<v->numNbs; j++){
-				nbv = v->nbList_P[j];
-				addLabeltoVector(nbp, nbv);
+			v->isChanged = 0;
+			if (v->isToUpdate){
+				nbp.clear();
+				nbp.reserve(100);
+				
+				snapelement.clear();
+				for (j = 0; j < v->PQueue.size(); j++){
+					snapelement.push_back(v->PQueue[j]);
+				}
+				snapshot.push_back(snapelement);
+				
+				for (j = 0; j < v->numNbs; j++){
+					nbv = v->nbList_P[j];
+					addLabeltoVector(nbp, nbv);
+				}
+				synlist.push_back(nbp);
 			}
-			synlist.push_back(nbp);
+			else{
+				synlist.push_back(vector<pair<int,double>>());
+			}
 		}
 		line.clear();
-		for (i = 0; i < net->N; i++){
+		for (i = 0, j = 0, k = 0; i < net->N; i++){
 			v = net->NODES[i];
-			addLabeltoNode(synlist[i], v);
-			norm_probability(v);
-			thresholdLabelInNode(v);
-			line += int2str(v->PQueue.size());
+			if (v->isToUpdate){
+				addLabeltoNode(synlist[i], v);
+				norm_probability(v);
+				thresholdLabelInNode(v);
+				if (checkLabelChange(v, snapshot[j++]) == true){
+					++k;
+				}
+			}
+			stateDetection(v);
+			line += int2str(v->isToUpdate);
 			line += " ";
 		}
 		output.push_back(line);
+
+		if (k == 0){
+			break;
+		}
 
 	}
 	writeToTxt("output.txt", false, output);
@@ -534,7 +686,7 @@ void SLPA::GLPA_syn()
 			if (v->PQueue.size() > 1){
 				cout << v->PQueue[j].first << "(" << v->PQueue[j].second << ") ";
 			}
-			v->LQueue.push_back(pair<int, int>(v->PQueue[j].first, (int)((v->PQueue[j].second + 0.5) * 100)));
+			v->LQueue.push_back(pair<int, int>(v->PQueue[j].first, (int)((v->PQueue[j].second * 100) + 0.5)));
 		}
 		if (v->PQueue.size() > 1){
 			cout << endl;

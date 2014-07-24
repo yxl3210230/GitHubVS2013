@@ -43,6 +43,8 @@ public:
 	int nlabels;
 
 	vector<pair<int, double>> PQueue;
+	int isToUpdate;
+	int isChanged;
 
 	//----------------
 	int status;

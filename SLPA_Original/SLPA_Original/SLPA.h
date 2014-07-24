@@ -91,6 +91,8 @@ public:
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
 	void norm_probability(NODE *v);
 	void thresholdLabelInNode(NODE *v);
+	void stateDetection(NODE *v);
+	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
 
 	void GLPA_syn();
 	void GLPA_asyn_pointer();
