@@ -714,6 +714,7 @@ void SLPA::GLPA_syn()
 		output.push_back(line);
 
 		if (k == 0){
+			//cout << "1";
 			break;
 		}
 
