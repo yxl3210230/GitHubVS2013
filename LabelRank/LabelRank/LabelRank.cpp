@@ -477,6 +477,7 @@ void LabelRank::LabelRank_syn_pointer(){
 		//1.collect nbv->BChist(t-1) from nbs, accumulate(weighted),
 		//  and *normalize* in v->newBCHistgram(t)
 		//-----------------------
+		cout << "*";
 		for(int i=0;i<net->N;i++){
 			v=net->NODES[i];
 
@@ -538,7 +539,7 @@ void LabelRank::LabelRank_syn_pointer(){
 			}
 		}
 	}//end of t
-
+	cout << endl;
 	stopT=t;
 
 	more_process(t,numchange_t);
@@ -1633,6 +1634,9 @@ void LabelRank::printAllUpdateFlag(){
 	for(int i=0;i<net->N;i++){
 		v=net->NODES[i];
 		cout<<"ID="<<v->ID<<" updateFlag="<<v->isToUpdate<<endl;
+		if (i % 100 == 0){
+			system("pause");
+		}
 	}
 }
 
@@ -1860,7 +1864,8 @@ void LabelRank::post_threshold_createCPM_pointer_thr_exp(int t,double thr,string
 	convert_cpmVectPtr2cpm(cpm, cpmIDs);
 
 	//**need the org_net***
-	Q=mq.calQ_unw_givenCpm(cpmIDs,"",org_net,isUseLargestComp,isSymmetrize);
+	//Q=mq.calQ_unw_givenCpm(cpmIDs,"",org_net,isUseLargestComp,isSymmetrize);
+	Q = 1;
 	//cout<<"Q("<<t<<")="<<Q<<endl;
 	if(bestQ<Q){
 		bestQ=Q;

@@ -93,6 +93,7 @@ public:
 	void thresholdLabelInNode(NODE *v);
 	void stateDetection(NODE *v);
 	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
+	void labelinflation(NODE *v);
 
 	void GLPA_syn();
 	void GLPA_asyn_pointer();

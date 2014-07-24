@@ -414,6 +414,7 @@ void SLPA::addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
 			v->PQueue.push_back(pairList[i]);
 		}
 	}
+	norm_probability(v);
 }
 
 
@@ -513,70 +514,116 @@ void SLPA::norm_probability(NODE *v)
 //	}
 //}
 
+//void SLPA::thresholdLabelInNode(NODE *v)
+//{
+//	int i, j, n, m;
+//	double tmp,sum;
+//
+//	sortVectorInt_Double(v->PQueue);
+//
+//	sum = v->PQueue[0].second;
+//	for (i = 1; i < v->PQueue.size(); i++){
+//		tmp = v->PQueue[i].second / v->PQueue[i - 1].second;
+//		if (tmp < 0.5){
+//			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
+//			norm_probability(v);
+//			break;
+//		}
+//		sum += v->PQueue[i].second;
+//		if (sum > 0.5&&i != v->PQueue.size()-1){
+//			v->PQueue.erase(v->PQueue.begin() + i + 1, v->PQueue.end());
+//			norm_probability(v);
+//			break;
+//		}
+//
+//	}
+//}
+
 void SLPA::thresholdLabelInNode(NODE *v)
 {
 	int i, j, n, m;
-	double tmp,sum;
+	double tmp, maxl;
 
 	sortVectorInt_Double(v->PQueue);
 
-	sum = v->PQueue[0].second;
+	maxl = v->PQueue[0].first;
 	for (i = 1; i < v->PQueue.size(); i++){
-		tmp = v->PQueue[i].second / v->PQueue[i - 1].second;
-		if (tmp < 0.5){
+		if (v->PQueue[i].second == v->PQueue[0].second){
+			continue;
+		}
+		if (v->PQueue[i].second < 0.1){
 			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
-			norm_probability(v);
 			break;
 		}
-		sum += v->PQueue[i].second;
-		if (sum > 0.5&&i != v->PQueue.size()-1){
-			v->PQueue.erase(v->PQueue.begin() + i + 1, v->PQueue.end());
-			norm_probability(v);
-			break;
-		}
-
 	}
+	norm_probability(v);
 }
+
+void SLPA::labelinflation(NODE *v)
+{
+	for (int i = 0; i < v->PQueue.size(); i++){
+		v->PQueue[i].second = pow(v->PQueue[i].second, 2);
+	}
+	norm_probability(v);
+}
+
+//void SLPA::stateDetection(NODE *v)
+//{
+//	int i, j, k, l;
+//	if (v->PQueue.size() == 1){
+//		for (i = 0, k = 0; i < v->numNbs; i++){
+//			if ((v->nbList_P[i]->PQueue.size() == 1) && (v->nbList_P[i]->PQueue[0].first == v->PQueue[0].first)){
+//				++k;
+//			}
+//		}
+//		if (k >(v->numNbs / 2)){
+//			v->isToUpdate = 0;
+//		}
+//		else{
+//			v->isToUpdate = 1;
+//		}
+//	}
+//	else{
+//		for (i = 0, k = 0; i < v->numNbs; i++){
+//			if (v->nbList_P[i]->PQueue.size() >= v->PQueue.size()){
+//				++k;
+//			}
+//		}
+//		if ((k / v->numNbs) > 0.6){
+//			for (i = 0, j = 0; i < v->numNbs; i++){
+//				if (isSubSet(v->PQueue, v->nbList_P[i]->PQueue)){
+//					++j;
+//				}
+//			}
+//			if ((j / v->numNbs) > 0.6){
+//				v->isToUpdate = 0;
+//			}
+//			else{
+//				v->isToUpdate = 1;
+//			}
+//		}
+//		else{
+//			v->isToUpdate = 1;
+//		}
+//	}
+//}
 
 void SLPA::stateDetection(NODE *v)
 {
 	int i, j, k, l;
-	if (v->PQueue.size() == 1){
-		for (i = 0, k = 0; i < v->numNbs; i++){
-			if ((v->nbList_P[i]->PQueue.size() == 1) && (v->nbList_P[i]->PQueue[0].first == v->PQueue[0].first)){
-				++k;
-			}
+
+	for (i = 0, j = 0; i < v->numNbs; i++){
+		if (isSubSet(v->PQueue, v->nbList_P[i]->PQueue)){
+			++j;
 		}
-		if (k >(v->numNbs / 2)){
-			v->isToUpdate = 0;
-		}
-		else{
-			v->isToUpdate = 1;
-		}
+	}
+	if (((double)j / v->numNbs) >= 0.6){
+		v->isToUpdate = 0;
 	}
 	else{
-		for (i = 0, k = 0; i < v->numNbs; i++){
-			if (v->nbList_P[i]->PQueue.size() >= v->PQueue.size()){
-				++k;
-			}
-		}
-		if ((k / v->PQueue.size()) > 0.6){
-			for (i = 0, j = 0; i < v->numNbs; i++){
-				if (isSubSet(v->PQueue, v->nbList_P[i]->PQueue)){
-					++j;
-				}
-			}
-			if ((j / v->PQueue.size()) > 0.6){
-				v->isToUpdate = 0;
-			}
-			else{
-				v->isToUpdate = 1;
-			}
-		}
-		else{
-			v->isToUpdate = 1;
-		}
+		v->isToUpdate = 1;
 	}
+		
 }
 
 bool SLPA::checkLabelChange(NODE *v, vector<pair<int, double>> pairList)
@@ -609,7 +656,7 @@ bool SLPA::checkLabelChange(NODE *v, vector<pair<int, double>> pairList)
 
 void SLPA::GLPA_syn()
 {
-	int i, j, k;
+	int i, j, k, t;
 	time_t st = time(NULL);
 	NODE *v, *nbv;
 	vector<pair<int, double>> nbp, snapelement;
@@ -619,10 +666,10 @@ void SLPA::GLPA_syn()
 
 	cout << "Start iteration:";
 
-	for (int t = 1; t<maxT; t++){
+	for (t = 1; t <= maxT; t++){
 		cout << "*";
 		srand(time(NULL)); 
-		random_shuffle(net->NODES.begin(), net->NODES.end());
+		//random_shuffle(net->NODES.begin(), net->NODES.end());
 		synlist.clear();
 		synlist.reserve(net->N);
 		snapshot.clear();
@@ -654,7 +701,7 @@ void SLPA::GLPA_syn()
 			v = net->NODES[i];
 			if (v->isToUpdate){
 				addLabeltoNode(synlist[i], v);
-				norm_probability(v);
+				labelinflation(v);
 				thresholdLabelInNode(v);
 				if (checkLabelChange(v, snapshot[j++]) == true){
 					++k;
@@ -679,21 +726,21 @@ void SLPA::GLPA_syn()
 		v = net->NODES[i];
 		norm_probability(v);
 		sortVectorInt_Double(v->PQueue);
-		if (v->PQueue.size() > 1){
-			cout << v->ID << " : ";
-		}
+		//if (v->PQueue.size() > 1){
+		//	cout << v->ID << " : ";
+		//}
 		for (j = 0; j < v->PQueue.size(); j++){
-			if (v->PQueue.size() > 1){
-				cout << v->PQueue[j].first << "(" << v->PQueue[j].second << ") ";
-			}
+			//if (v->PQueue.size() > 1){
+			//	cout << v->PQueue[j].first << "(" << v->PQueue[j].second << ") ";
+			//}
 			v->LQueue.push_back(pair<int, int>(v->PQueue[j].first, (int)((v->PQueue[j].second * 100) + 0.5)));
 		}
-		if (v->PQueue.size() > 1){
-			cout << endl;
-		}
+		//if (v->PQueue.size() > 1){
+		//	cout << endl;
+		//}
 	}
 
-	cout << "Iteration is over (takes " << difftime(time(NULL), st) << " seconds)" << endl;
+	cout << "Iteration(" << t << ") is over (takes " << difftime(time(NULL), st) << " seconds)" << endl;
 }
 
 void SLPA::GLPA_asyn_pointer(){
