@@ -117,7 +117,7 @@ void SLPA::start(){
 		}
 		else{
 			//比对网络
-			if (compareNetwork() > 0.5){
+			if (compareNetwork() > 0.9){
 				initPQueue();
 				++countremix;
 				cout << "remix the net............................................!!!" << endl;
@@ -311,28 +311,55 @@ double SLPA::compareNetwork()
 	//	}
 	//}
 	int nochg = 0;
+	//for (int i = 0; i < net->N; ++i){
+	//	v = net->NODES[i];
+	//	map<int, NODE*>::iterator it;
+	//	if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
+	//		if (v->nbSet == it->second->nbSet){		//未改变的节点
+	//			v->PQueue = it->second->PQueue;
+	//			v->influ = 0;
+	//			++nochg;
+	//		}
+	//		else{		//受影响的节点
+	//			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+	//			v->influ = 1;
+	//		}
+	//	}
+	//	else{			//新增节点
+	//		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+	//		v->influ = 1;
+	//	}
+	//	v->isToUpdate = 1;
+	//	v->isChanged = 0;
+	//}
+	
+	int cpmlabel = 1;
+	for (int i = 0; i < tmpcpm.size(); ++i){
+		for (int j = 0; j < tmpcpm[i].size(); ++j){
+			map<int, NODE*>::iterator mit = net->NODESTABLE.find(tmpcpm[i][j]);
+			if (mit != net->NODESTABLE.end()){
+				if (mit->second->issetequal(lastnet->NODESTABLE.find(tmpcpm[i][j])->second)){
+					mit->second->PQueue.push_back(pair<int, double>(cpmlabel, 1.0));
+					mit->second->influ = 0;
+					++nochg;
+				}
+				else{
+					mit->second->PQueue.push_back(pair<int, double>(mit->second->ID, 1.0));
+					mit->second->influ = 1;
+				}
+				mit->second->isToUpdate = 1;
+			}
+		}
+		++cpmlabel;
+	}
 	for (int i = 0; i < net->N; ++i){
 		v = net->NODES[i];
-		map<int, NODE*>::iterator it;
-		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
-			if (v->nbSet == it->second->nbSet){		//未改变的节点
-				v->PQueue = it->second->PQueue;
-				v->influ = 0;
-				++nochg;
-			}
-			else{		//受影响的节点
-				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
-				v->influ = 1;
-			}
-		}
-		else{			//新增节点
+		if (v->PQueue.size() == 0){
 			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
-			v->influ = 1;
 		}
-		v->isToUpdate = 1;
-		v->isChanged = 0;
+		v->influ = 1;
+		norm_probability(v->PQueue);
 	}
-
 	/*if (remix == 1){
 		map<int, NODE*>::iterator mit;
 		for (int i = 0; i < remixnode.size(); ++i){
@@ -349,13 +376,12 @@ double SLPA::compareNetwork()
 
 	for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
 		v = net->NODES[i];
-		if (v->influ == 1){
+		if (v->influ == 0){
 			continue;
 		}
 		for (int j = 0; j < v->numNbs; ++j){
-			if (v->nbList_P[j]->influ == 1){
-				v->influ = 1;
-				break;
+			if (v->nbList_P[j]->influ == 0){
+				v->nbList_P[j]->influ = 1;
 			}
 		}
 	}
@@ -1453,9 +1479,11 @@ void SLPA::post_threshold_createCPM_pointer(int thrc,string fileName){
 	//---------------------------
 	//release memory
 	//---------------------------
-	for(int i=0;i<cpm.size();i++)
+	tmpcpm.clear();
+	for (int i = 0; i < cpm.size(); i++){
+		tmpcpm.push_back(*cpm[i]);
 		delete cpm[i];
-
+	}
 }
 
 

@@ -77,7 +77,7 @@ public:
 
 	virtual ~NODE();
 	//----------------
-
+	bool issetequal(NODE *v);
 
 };
 

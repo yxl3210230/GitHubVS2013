@@ -56,6 +56,7 @@ public:
 	int remix;
 	vector<int> remixnode;
 	int accStopTime;
+	vector<vector<int> > tmpcpm;
 
 	bool isUseLargestComp; //***
 	//---------------------------

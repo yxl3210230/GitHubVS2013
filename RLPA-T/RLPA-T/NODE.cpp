@@ -38,3 +38,17 @@ NODE& NODE::operator=(const NODE& node){
 	t = 0;
 	return *this;
 }
+
+bool NODE::issetequal(NODE *v)
+{
+	if (nbSet.size() != v->nbSet.size()){
+		return false;
+	}
+	UOrderedSet_INT::iterator ita, itb;
+	for (ita = nbSet.begin(), itb = v->nbSet.begin(); ita != nbSet.end(); ++ita, ++itb){
+		if (*ita != *itb){
+			return false;
+		}
+	}
+	return true;
+}
