@@ -86,6 +86,7 @@
     <ClInclude Include="fileOpts.h" />
     <ClInclude Include="MersenneTwister.h" />
     <ClInclude Include="Net.h" />
+    <ClInclude Include="nmi.h" />
     <ClInclude Include="NODE.h" />
     <ClInclude Include="rndNumbers.h" />
     <ClInclude Include="SLPA.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="fileOpts.cpp" />
     <ClCompile Include="main_SLPA.cpp" />
     <ClCompile Include="Net.cpp" />
+    <ClCompile Include="nmi.cpp" />
     <ClCompile Include="NODE.cpp" />
     <ClCompile Include="rndNumbers.cpp" />
     <ClCompile Include="SLPA.cpp" />
