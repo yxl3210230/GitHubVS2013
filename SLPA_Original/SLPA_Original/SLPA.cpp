@@ -561,7 +561,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 
 void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList)
 {
-	int vol=5;
+	int vol=7;
 	if (pairList.size() > vol){
 		sortVectorInt_Double(pairList);
 		double tmp = pairList[vol - 1].second;
