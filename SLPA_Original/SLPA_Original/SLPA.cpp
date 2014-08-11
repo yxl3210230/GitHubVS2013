@@ -414,22 +414,22 @@ void SLPA::addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
 			v->PQueue.push_back(pairList[i]);
 		}
 	}
-	norm_probability(v);
+	norm_probability(v->PQueue);
 }
 
 
-void SLPA::norm_probability(NODE *v)
+void SLPA::norm_probability(vector<pair<int, double>>& pairList)
 {
 	int i;
 	double sum=0;
-	for (i = 0; i < v->PQueue.size(); i++){
-		sum += v->PQueue[i].second;
+	for (i = 0; i < pairList.size(); i++){
+		sum += pairList[i].second;
 	}
 	if (sum == 1.0){
 		return;
 	}
-	for (i = 0; i < v->PQueue.size(); i++){
-		v->PQueue[i].second /= sum;
+	for (i = 0; i < pairList.size(); i++){
+		pairList[i].second /= sum;
 	}
 }
 
@@ -556,7 +556,25 @@ void SLPA::thresholdLabelInNode(NODE *v)
 			break;
 		}
 	}
-	norm_probability(v);
+	norm_probability(v->PQueue);
+}
+
+void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList)
+{
+	int vol=5;
+	if (pairList.size() > vol){
+		sortVectorInt_Double(pairList);
+		double tmp = pairList[vol - 1].second;
+		while (vol != pairList.size()){ 
+			if (tmp == pairList[vol].second){
+				++vol;
+			}
+			else{
+				break;
+			}
+		}
+		pairList.erase(pairList.begin() + vol, pairList.end());
+	}
 }
 
 void SLPA::labelinflation(NODE *v)
@@ -564,7 +582,7 @@ void SLPA::labelinflation(NODE *v)
 	for (int i = 0; i < v->PQueue.size(); i++){
 		v->PQueue[i].second = pow(v->PQueue[i].second, 2);
 	}
-	norm_probability(v);
+	norm_probability(v->PQueue);
 }
 
 //void SLPA::stateDetection(NODE *v)
@@ -654,6 +672,75 @@ bool SLPA::checkLabelChange(NODE *v, vector<pair<int, double>> pairList)
 	return false;
 }
 
+void SLPA::labelProportionate(vector<pair<int, double>>& pairList, double mix)
+{
+	for (int i = 0; i < pairList.size(); ++i){
+		pairList[i].second *= mix;
+	}
+}
+double SLPA::computeSimilarity(vector<pair<int, double>> set1, vector<pair<int, double>>& set2){
+	norm_probability(set1);
+	sortVectorInt_Double_first(set1);
+	sortVectorInt_Double_first(set2);
+	int i = 0, j = 0;
+	double sum = 0, intersection = 0;
+	while (i < set1.size() && j < set2.size()){
+		if (set1[i].first < set2[j].first){
+			sum += set1[i].second;
+			++i;
+		}
+		else if (set1[i].first > set2[j].first){
+			sum += set2[j].second;
+			++j;
+		}
+		else {
+			sum += (set1[i].second > set2[j].second) ? set1[i].second : set2[j].second;
+			intersection += (set1[i].second < set2[j].second) ? set1[i].second : set2[j].second;
+			++i;
+			++j;
+		}
+	}
+	if (i == set1.size() && j != set2.size()){
+		for (; j < set2.size(); ++j){
+			sum += set2[j].second;
+		}
+	}
+	if (i != set1.size() && j == set2.size()){
+		for (; i < set1.size(); ++i){
+			sum += set1[i].second;
+		}
+	}
+	return intersection / sum;
+
+}
+
+void SLPA::mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
+{
+	int i;
+	double maxp = 0;
+	for (i = 0; i < pairList.size(); ++i){
+		if (maxp < pairList[i].second){
+			maxp = pairList[i].second;
+		}
+	}
+	for (i = 0; i < pairList.size(); ++i){
+		pairList[i].second /= maxp;
+	}
+
+	maxp = 0;
+	for (i = 0; i < v->PQueue.size(); ++i){
+		if (maxp < v->PQueue[i].second){
+			maxp = v->PQueue[i].second;
+		}
+	}
+	for (i = 0; i < v->PQueue.size(); ++i){
+		v->PQueue[i].second /= maxp;
+	}
+
+	addLabeltoNode(pairList, v);
+
+}
+
 void SLPA::GLPA_syn()
 {
 	int i, j, k, t;
@@ -690,6 +777,7 @@ void SLPA::GLPA_syn()
 					nbv = v->nbList_P[j];
 					addLabeltoVector(nbp, nbv);
 				}
+				thresholdLabelInVector(nbp);
 				synlist.push_back(nbp);
 			}
 			else{
@@ -697,19 +785,27 @@ void SLPA::GLPA_syn()
 			}
 		}
 		line.clear();
-		for (i = 0, j = 0, k = 0; i < net->N; i++){
+		for (i = 0, j = 0, k = 0; i < net->N; ++i){
 			v = net->NODES[i];
+			//if (v->ID == 122)system("pause");
 			if (v->isToUpdate){
-				addLabeltoNode(synlist[i], v);
+				line += dbl2str(computeSimilarity(synlist[i], v->PQueue));
+				line += "\t";
+				//norm_probability(synlist[i]);
+				//addLabeltoNode(synlist[i], v);
+				mixLabeltoNode(synlist[i], v);
 				labelinflation(v);
 				thresholdLabelInNode(v);
 				if (checkLabelChange(v, snapshot[j++]) == true){
 					++k;
 				}
 			}
+			else{
+				line += "*\t";
+			}
 			stateDetection(v);
-			line += int2str(v->isToUpdate);
-			line += " ";
+			//line += int2str(v->isToUpdate);
+			//line += " ";
 		}
 		output.push_back(line);
 
@@ -725,7 +821,7 @@ void SLPA::GLPA_syn()
 
 	for(int i=0;i<net->N;i++){
 		v = net->NODES[i];
-		norm_probability(v);
+		norm_probability(v->PQueue);
 		sortVectorInt_Double(v->PQueue);
 		//if (v->PQueue.size() > 1){
 		//	cout << v->ID << " : ";
@@ -820,7 +916,7 @@ void SLPA::GLPA_asyn_pointer(){
 			//dt4+=difftime(time(NULL),st1);
 
 			addLabeltoNode(nbp, v);
-			norm_probability(v);
+			norm_probability(v->PQueue);
 			thresholdLabelInNode(v);
 		}
 

@@ -89,11 +89,15 @@ public:
 	int selectMostFrequentLabel(vector<pair<int,int>>& pairList);
 	void deleteLabel(NODE *v, vector<pair<int,int>>& pairList);
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
-	void norm_probability(NODE *v);
+	void norm_probability(vector<pair<int, double>>& pairList);
 	void thresholdLabelInNode(NODE *v);
+	void thresholdLabelInVector(vector<pair<int, double>>& pairList);
 	void stateDetection(NODE *v);
 	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
 	void labelinflation(NODE *v);
+	void labelProportionate(vector<pair<int, double>>& pairList, double mix);
+	double computeSimilarity(vector<pair<int, double>> set1, vector<pair<int, double>>& set2);
+	void mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);
 
 	void GLPA_syn();
 	void GLPA_asyn_pointer();
