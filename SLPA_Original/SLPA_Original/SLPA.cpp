@@ -524,19 +524,17 @@ void SLPA::norm_probability(vector<pair<int, double>>& pairList)
 //	sum = v->PQueue[0].second;
 //	for (i = 1; i < v->PQueue.size(); i++){
 //		tmp = v->PQueue[i].second / v->PQueue[i - 1].second;
-//		if (tmp < 0.5){
+//		if (tmp < 0.2){
 //			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
-//			norm_probability(v);
 //			break;
 //		}
 //		sum += v->PQueue[i].second;
-//		if (sum > 0.5&&i != v->PQueue.size()-1){
+//		if (sum > 0.61&&i != v->PQueue.size()-1){
 //			v->PQueue.erase(v->PQueue.begin() + i + 1, v->PQueue.end());
-//			norm_probability(v);
 //			break;
 //		}
-//
 //	}
+//	norm_probability(v->PQueue);
 //}
 
 void SLPA::thresholdLabelInNode(NODE *v)
@@ -559,9 +557,9 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	norm_probability(v->PQueue);
 }
 
-void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList)
+void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList, int n)
 {
-	int vol=7;
+	int vol = n;
 	if (pairList.size() > vol){
 		sortVectorInt_Double(pairList);
 		double tmp = pairList[vol - 1].second;
@@ -750,8 +748,18 @@ void SLPA::GLPA_syn()
 	vector<vector<pair<int, double>>> synlist, snapshot;
 	vector<string> output;
 	string line;
+	vector<double> psim(net->N, 0);
+	double sim;
+	vector<int> scount(net->N, 0);
+	bool endflag = false;
 
 	cout << "Start iteration:";
+
+	for (i = 0; i < net->N; ++i){
+		line += int2str(net->NODES[i]->ID);
+		line += "\t";
+	}
+	output.push_back(line);
 
 	for (t = 1; t <= maxT; t++){
 		cout << "*";
@@ -777,7 +785,7 @@ void SLPA::GLPA_syn()
 					nbv = v->nbList_P[j];
 					addLabeltoVector(nbp, nbv);
 				}
-				thresholdLabelInVector(nbp);
+				//thresholdLabelInVector(nbp, v->numNbs);
 				synlist.push_back(nbp);
 			}
 			else{
@@ -787,31 +795,47 @@ void SLPA::GLPA_syn()
 		line.clear();
 		for (i = 0, j = 0, k = 0; i < net->N; ++i){
 			v = net->NODES[i];
-			//if (v->ID == 122)system("pause");
+			//if (v->ID == 10)system("pause");
 			if (v->isToUpdate){
-				line += dbl2str(computeSimilarity(synlist[i], v->PQueue));
+				sim = computeSimilarity(synlist[i], v->PQueue);
+				line += dbl2str(sim);
 				line += "\t";
-				//norm_probability(synlist[i]);
-				//addLabeltoNode(synlist[i], v);
-				mixLabeltoNode(synlist[i], v);
-				labelinflation(v);
-				thresholdLabelInNode(v);
-				if (checkLabelChange(v, snapshot[j++]) == true){
-					++k;
+				if (sim == psim[i]){
+					++scount[i];
+				}
+				else{
+					psim[i] = sim;
+					scount[i] = 0;
+				}
+				if (scount[i] != 5){
+					//addLabeltoNode(synlist[i], v);
+					mixLabeltoNode(synlist[i], v);
+					labelinflation(v);
+					thresholdLabelInNode(v);
+					if (checkLabelChange(v, snapshot[j++]) == true){
+						++k;
+					}
+				}
+				else{
+					v->isToUpdate = 0;
 				}
 			}
 			else{
 				line += "*\t";
 			}
-			stateDetection(v);
+			//stateDetection(v);
 			//line += int2str(v->isToUpdate);
 			//line += " ";
 		}
 		output.push_back(line);
 
-		if (k == 0){
+		if (k == 0 || endflag){
 			//cout << "1";
-			break;
+			endflag = true;
+			cout << "Quit?" << endl;
+			if (getchar() == 'q'){
+				break;
+			}
 		}
 
 	}

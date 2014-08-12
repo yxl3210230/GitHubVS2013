@@ -91,7 +91,7 @@ public:
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
 	void norm_probability(vector<pair<int, double>>& pairList);
 	void thresholdLabelInNode(NODE *v);
-	void thresholdLabelInVector(vector<pair<int, double>>& pairList);
+	void thresholdLabelInVector(vector<pair<int, double>>& pairList, int n);
 	void stateDetection(NODE *v);
 	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
 	void labelinflation(NODE *v);
