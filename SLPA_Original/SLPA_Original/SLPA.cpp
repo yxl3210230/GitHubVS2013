@@ -739,6 +739,53 @@ void SLPA::mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
 
 }
 
+void SLPA::computeCoefficients(vector<vector<double>>& co)
+{
+	int i, j, k, l, count;
+	NODE *v, *nbv;
+	vector<double> coe;
+	double tmp;
+	vector<int> nbl1, nbl2;
+
+	co.clear();
+	for (i = 0; i < net->N; ++i){
+		v = net->NODES[i];
+		tmp = ((double)v->numNbs*(v->numNbs - 1)) / 2;
+		nbl1.clear();
+		for (j = 0; j < v->numNbs; ++j){
+			nbl1.push_back(v->nbList_P[j]->ID);
+		}
+		sort(nbl1.begin(), nbl1.end());
+		coe.clear();
+		for (j = 0; j < v->numNbs; ++j){
+			nbv = v->nbList_P[j];
+			nbl2.clear();
+			for (k = 0; k < nbv->numNbs; ++k){
+				nbl2.push_back(nbv->nbList_P[k]->ID);
+			}
+			sort(nbl2.begin(),nbl2.end());
+			k = 0;
+			l = 0;
+			count = 0;
+			while (k < nbl1.size() && l < nbl2.size()){
+				if (nbl1[k] < nbl2[l]){
+					++k;
+				}
+				else if (nbl1[k] > nbl2[l]){
+					++l;
+				}
+				else{
+					++k;
+					++l;
+					++count;
+				}
+			}
+			coe.push_back((double)count / tmp);
+		}
+		co.push_back(coe);
+	}
+}
+
 void SLPA::GLPA_syn()
 {
 	int i, j, k, t;
@@ -752,6 +799,7 @@ void SLPA::GLPA_syn()
 	double sim;
 	vector<int> scount(net->N, 0);
 	bool endflag = false;
+	vector<vector<double>> co;
 
 	cout << "Start iteration:";
 
@@ -760,6 +808,8 @@ void SLPA::GLPA_syn()
 		line += "\t";
 	}
 	output.push_back(line);
+
+	computeCoefficients(co);
 
 	for (t = 1; t <= maxT; t++){
 		cout << "*";

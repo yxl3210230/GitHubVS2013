@@ -99,6 +99,8 @@ public:
 	double computeSimilarity(vector<pair<int, double>> set1, vector<pair<int, double>>& set2);
 	void mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);
 
+	void computeCoefficients(vector<vector<double>>& co);
+
 	void GLPA_syn();
 	void GLPA_asyn_pointer();
 
