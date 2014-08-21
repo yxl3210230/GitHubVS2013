@@ -380,20 +380,20 @@ void SLPA::deleteLabel1(NODE *v, vector<pair<int,int>>& pairList)
 	}
 }
 
-void SLPA::addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v)
+void SLPA::addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v, double co)
 {
 	int i, j, flag;
 	for (i = 0; i < v->PQueue.size(); i++){
 		flag = 0;
 		for (j = 0; j < pairList.size(); j++){
 			if (v->PQueue[i].first == pairList[j].first){
-				pairList[j].second += v->PQueue[i].second;
+				pairList[j].second += v->PQueue[i].second * co;
 				flag = 1;
 				break;
 			}
 		}
 		if (flag == 0){
-			pairList.push_back(v->PQueue[i]);
+			pairList.push_back(pair<int, double>(v->PQueue[i].first, v->PQueue[i].second * co));
 		}
 	}
 }
@@ -524,12 +524,12 @@ void SLPA::norm_probability(vector<pair<int, double>>& pairList)
 //	sum = v->PQueue[0].second;
 //	for (i = 1; i < v->PQueue.size(); i++){
 //		tmp = v->PQueue[i].second / v->PQueue[i - 1].second;
-//		if (tmp < 0.2){
+//		if (tmp < 0.5){
 //			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
 //			break;
 //		}
 //		sum += v->PQueue[i].second;
-//		if (sum > 0.61&&i != v->PQueue.size()-1){
+//		if (sum > 0.5 && i != v->PQueue.size() - 1){
 //			v->PQueue.erase(v->PQueue.begin() + i + 1, v->PQueue.end());
 //			break;
 //		}
@@ -780,7 +780,7 @@ void SLPA::computeCoefficients(vector<vector<double>>& co)
 					++count;
 				}
 			}
-			coe.push_back((double)count / tmp);
+			coe.push_back(((double)count / tmp) + 1);
 		}
 		co.push_back(coe);
 	}
@@ -833,7 +833,7 @@ void SLPA::GLPA_syn()
 				
 				for (j = 0; j < v->numNbs; j++){
 					nbv = v->nbList_P[j];
-					addLabeltoVector(nbp, nbv);
+					addLabeltoVector(nbp, nbv, pow(co[i][j],2));
 				}
 				//thresholdLabelInVector(nbp, v->numNbs);
 				synlist.push_back(nbp);
@@ -969,7 +969,7 @@ void SLPA::GLPA_asyn_pointer(){
 				//addLabeltoVectorINT_INT(nbWs1,randnum);
 				//dt2+=difftime(time(NULL),st1);
 
-				addLabeltoVector(nbp, nbv);
+				addLabeltoVector(nbp, nbv, 1);
 
 			}
 			//when call addLabeltoVectorINT_INT1
