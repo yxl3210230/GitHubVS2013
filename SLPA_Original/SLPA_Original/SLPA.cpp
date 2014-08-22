@@ -833,7 +833,7 @@ void SLPA::GLPA_syn()
 				
 				for (j = 0; j < v->numNbs; j++){
 					nbv = v->nbList_P[j];
-					addLabeltoVector(nbp, nbv, pow(co[i][j],2));
+					addLabeltoVector(nbp, nbv, pow(co[i][j],1));
 				}
 				//thresholdLabelInVector(nbp, v->numNbs);
 				synlist.push_back(nbp);
