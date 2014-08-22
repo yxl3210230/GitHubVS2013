@@ -85,7 +85,7 @@ public:
 	void addLabeltoVectorINT_INT(vector<pair<int,int>>& pairList, int label);
 	void addLabeltoVectorINT_INT1(vector<pair<int,int>>& pairList, int label);
 	void addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v, double co);
-	void addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);
+	void addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v, double co);
 	int selectMostFrequentLabel(vector<pair<int,int>>& pairList);
 	void deleteLabel(NODE *v, vector<pair<int,int>>& pairList);
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
