@@ -94,7 +94,7 @@ public:
 	void thresholdLabelInVector(vector<pair<int, double>>& pairList, int n);
 	void stateDetection(NODE *v);
 	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
-	void labelinflation(NODE *v);
+	void labelinflation(NODE *v, double expo);
 	void labelProportionate(vector<pair<int, double>>& pairList, double mix);
 	double computeSimilarity(vector<pair<int, double>> set1, vector<pair<int, double>>& set2);
 	void mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);

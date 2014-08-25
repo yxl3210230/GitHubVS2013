@@ -543,19 +543,22 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	double tmp, maxl;
 
 	sortVectorInt_Double(v->PQueue);
+	labelinflation(v,2);
 
 	maxl = v->PQueue[0].first;
-	if (maxl < 0.1)return;
-	for (i = 1; i < v->PQueue.size(); i++){
-		if (v->PQueue[i].second == v->PQueue[0].second){
-			continue;
-		}
-		if (v->PQueue[i].second < 0.1){
-			v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
-			break;
+	if (maxl > 0.1){
+		for (i = 1; i < v->PQueue.size(); i++){
+			if (v->PQueue[i].second == v->PQueue[0].second){
+				continue;
+			}
+			if (v->PQueue[i].second < 0.1){
+				v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
+				break;
+			}
 		}
 	}
-	norm_probability(v->PQueue);
+	labelinflation(v, 0.5);
+	//norm_probability(v->PQueue);
 }
 
 void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList, int n)
@@ -576,10 +579,10 @@ void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList, int n)
 	}
 }
 
-void SLPA::labelinflation(NODE *v)
+void SLPA::labelinflation(NODE *v, double expo)
 {
 	for (int i = 0; i < v->PQueue.size(); i++){
-		v->PQueue[i].second = pow(v->PQueue[i].second, 2);
+		v->PQueue[i].second = pow(v->PQueue[i].second, expo);
 	}
 	norm_probability(v->PQueue);
 }
@@ -860,10 +863,9 @@ void SLPA::GLPA_syn()
 					scount[i] = 0;
 				}
 				if (scount[i] != 5){
-					double dco = t == 1 ? 1 : pow(0.9, t);
-					addLabeltoNode(synlist[i], v, dco);
+					//double dco = t == 1 ? 1 : pow(0.9, t);
+					addLabeltoNode(synlist[i], v, 1);
 					//mixLabeltoNode(synlist[i], v);
-					labelinflation(v);
 					thresholdLabelInNode(v);
 					if (checkLabelChange(v, snapshot[j++]) == true){
 						++k;
