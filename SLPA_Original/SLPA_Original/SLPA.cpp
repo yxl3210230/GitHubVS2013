@@ -542,11 +542,11 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	int i, j, n, m;
 	double tmp, maxl;
 
-	sortVectorInt_Double(v->PQueue);
 	labelinflation(v,2);
+	sortVectorInt_Double(v->PQueue);
 
 	maxl = v->PQueue[0].first;
-	if (maxl > 0.1){
+	if (maxl > 0.15){
 		for (i = 1; i < v->PQueue.size(); i++){
 			if (v->PQueue[i].second == v->PQueue[0].second){
 				continue;
@@ -556,9 +556,9 @@ void SLPA::thresholdLabelInNode(NODE *v)
 				break;
 			}
 		}
+		norm_probability(v->PQueue);
 	}
-	labelinflation(v, 0.5);
-	//norm_probability(v->PQueue);
+	
 }
 
 void SLPA::thresholdLabelInVector(vector<pair<int, double>>& pairList, int n)
@@ -745,7 +745,7 @@ void SLPA::mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
 
 void SLPA::computeCoefficients(vector<vector<double>>& co)
 {
-	int i, j, k, l, count;
+	int i, j, k, l, count, z;
 	NODE *v, *nbv;
 	vector<double> coe;
 	double tmp;
@@ -761,6 +761,7 @@ void SLPA::computeCoefficients(vector<vector<double>>& co)
 		}
 		sort(nbl1.begin(), nbl1.end());
 		coe.clear();
+		//z = 0;
 		for (j = 0; j < v->numNbs; ++j){
 			nbv = v->nbList_P[j];
 			nbl2.clear();
@@ -786,7 +787,13 @@ void SLPA::computeCoefficients(vector<vector<double>>& co)
 			}
 			//coe.push_back(((double)count / tmp) + 1);
 			coe.push_back((double)count + 1);
+			//if (count == 0){
+			//	++z;
+			//}
 		}
+		//if (z == v->numNbs){
+		//	coe.assign(v->numNbs, 1);
+		//}
 		co.push_back(coe);
 	}
 }
@@ -837,8 +844,10 @@ void SLPA::GLPA_syn()
 				snapshot.push_back(snapelement);
 				
 				for (j = 0; j < v->numNbs; j++){
-					nbv = v->nbList_P[j];
-					addLabeltoVector(nbp, nbv, co[i][j]);
+					//if (co[i][j] != 0){
+						nbv = v->nbList_P[j];
+						addLabeltoVector(nbp, nbv, co[i][j]);
+					//}
 				}
 				//thresholdLabelInVector(nbp, v->numNbs);
 				synlist.push_back(nbp);
@@ -863,7 +872,7 @@ void SLPA::GLPA_syn()
 					scount[i] = 0;
 				}
 				if (scount[i] != 5){
-					//double dco = t == 1 ? 1 : pow(0.9, t);
+					//double dco = t == 1 ? 1 : pow(0.95, t);
 					addLabeltoNode(synlist[i], v, 1);
 					//mixLabeltoNode(synlist[i], v);
 					thresholdLabelInNode(v);
