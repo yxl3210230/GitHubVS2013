@@ -176,7 +176,7 @@ int main(int argc, char* argv[]) {
 	//			SLPA parameters (default)
 	//----------------------------------------
 	int maxRun=1;
-	int maxT=200;
+	int maxT=10000;
 	bool isOverlapping=true;
 
 	vector<double> THRS;
