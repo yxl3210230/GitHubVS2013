@@ -255,6 +255,36 @@ double findmax(vector<double>& vl)
 	return max;
 }
 
+double findmin(vector<double>& vl)
+{
+	double min = vl[0];
+	for (int i = 1; i < vl.size(); ++i){
+		if (vl[i] < min){
+			min = vl[i];
+		}
+	}
+	return min;
+}
+
+double computeavg(vector<double>& vl)
+{
+	double sum = 0;
+	for (int i = 0; i < vl.size(); ++i){
+		sum += vl[i];
+	}
+	return sum / vl.size();
+}
+
+double computevar(vector<double>& vl)
+{
+	double sum = 0;
+	double avg = computeavg(vl);
+	for (int i = 0; i < vl.size(); ++i){
+		sum += pow(avg - vl[i], 2);
+	}
+	return sum / vl.size();
+}
+
 int main()
 {
 	int i,tmp;
@@ -288,7 +318,12 @@ int main()
 		}
 	}
 
-
+	if (!maxs.empty()){
+		cout << "max =" << findmax(maxs) << endl;
+		cout << "min =" << findmin(maxs) << endl;
+		cout << "avg =" << computeavg(maxs) << endl;
+		cout << "D =" << computevar(maxs) << endl;
+	}
 
 	system("pause");
 
