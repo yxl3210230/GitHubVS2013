@@ -244,15 +244,28 @@ void FindFiles(vector<string>& sFileNames,string sPath)
 
 }
 
+double findmax(vector<double>& vl)
+{
+	double max = vl[0];
+	for (int i = 1; i < vl.size(); ++i){
+		if (vl[i] > max){
+			max = vl[i];
+		}
+	}
+	return max;
+}
+
 int main()
 {
 	int i,tmp;
+	double mi;
 
 	RESULT_COMMUNITY *result,*comp;
 	result=new RESULT_COMMUNITY;
 	comp=new RESULT_COMMUNITY;
 
 	vector<string> inputfiles;
+	vector<double> mil, maxs;
 
 	string filename_comp="community.dat";
 
@@ -266,10 +279,13 @@ int main()
 	for(i=0;i<inputfiles.size();i++){
 		if(readCommunities(".\\input\\"+inputfiles[i],comp)){
 			//show_result_community(comp,stdout);
-
-			cout<<inputfiles[i]<<"\t"<<calculate_nmi(comp,result,tmp)<<endl;
+			mi = calculate_nmi(comp, result, tmp);
+			mil.push_back(mi);
+			cout<<inputfiles[i]<<"\t"<<mi<<endl;
 		}
-
+		if (mil.size() == 10){
+			maxs.push_back(findmax(mil));
+		}
 	}
 
 
