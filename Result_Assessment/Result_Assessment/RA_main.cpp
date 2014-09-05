@@ -285,7 +285,7 @@ double computevar(vector<double>& vl)
 	return sum / vl.size();
 }
 
-int main()
+int main(int argc, char *argv[])
 {
 	int i,tmp;
 	double mi;
@@ -297,7 +297,15 @@ int main()
 	vector<string> inputfiles;
 	vector<double> mil, maxs;
 
+	if (argc != 1 && argc != 2){
+		cout << "arguments error!" << endl;
+		system("pause");
+		return 0;
+	}
 	string filename_comp="community.dat";
+	if (argc == 2){
+		filename_comp = argv[1];
+	}
 
 	FindFiles(inputfiles,".\\input");
 
