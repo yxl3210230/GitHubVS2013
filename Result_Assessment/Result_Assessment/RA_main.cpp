@@ -297,17 +297,22 @@ int main(int argc, char *argv[])
 	vector<string> inputfiles;
 	vector<double> mil, maxs;
 
-	if (argc != 1 && argc != 2){
+	if (argc != 1 && argc != 2 && argc != 3){
 		cout << "arguments error!" << endl;
 		system("pause");
 		return 0;
 	}
-	string filename_comp="community.dat";
+	string filename_comp = "community.dat";
+	string indir = "input";
 	if (argc == 2){
 		filename_comp = argv[1];
 	}
+	if (argc == 3){
+		filename_comp = argv[1];
+		indir = argv[2];
+	}
 
-	FindFiles(inputfiles,".\\input");
+	FindFiles(inputfiles,".\\"+indir);
 
 	cout<<"Find "<<inputfiles.size()<<" files."<<endl;
 
