@@ -307,11 +307,11 @@ int main(int argc, char *argv[])
 	}
 	else if (argc == 2){
 		arg1.push_back(argv[1]);
-		arg1.push_back("input");
+		arg2.push_back("input");
 	}
 	else if (argc == 1){
 		arg1.push_back("community.dat");
-		arg1.push_back("input");
+		arg2.push_back("input");
 	}
 	else{
 		cout << "arguments error!" << endl;
