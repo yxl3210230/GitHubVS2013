@@ -275,14 +275,14 @@ double computeavg(vector<double>& vl)
 	return sum / vl.size();
 }
 
-double computevar(vector<double>& vl)
+double computesd(vector<double>& vl)
 {
 	double sum = 0;
 	double avg = computeavg(vl);
 	for (int i = 0; i < vl.size(); ++i){
 		sum += pow(avg - vl[i], 2);
 	}
-	return sum / vl.size();
+	return pow(sum / vl.size(), 0.5);
 }
 
 int main(int argc, char *argv[])
@@ -320,7 +320,7 @@ int main(int argc, char *argv[])
 	//show_result_community(result,stdout);
 
 	for(i=0;i<inputfiles.size();i++){
-		if(readCommunities(".\\input\\"+inputfiles[i],comp)){
+		if(readCommunities(".\\"+indir+"\\"+inputfiles[i],comp)){
 			//show_result_community(comp,stdout);
 			mi = calculate_nmi(comp, result, tmp);
 			mil.push_back(mi);
@@ -328,6 +328,7 @@ int main(int argc, char *argv[])
 		}
 		if (mil.size() == 10){
 			maxs.push_back(findmax(mil));
+			mil.clear();
 		}
 	}
 
@@ -335,7 +336,7 @@ int main(int argc, char *argv[])
 		cout << "max =" << findmax(maxs) << endl;
 		cout << "min =" << findmin(maxs) << endl;
 		cout << "avg =" << computeavg(maxs) << endl;
-		cout << "D =" << computevar(maxs) << endl;
+		cout << "D =" << computesd(maxs) << endl;
 	}
 
 	system("pause");
