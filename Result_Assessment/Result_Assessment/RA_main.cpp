@@ -287,57 +287,83 @@ double computesd(vector<double>& vl)
 
 int main(int argc, char *argv[])
 {
-	int i,tmp;
+	int i, j, tmp;
 	double mi;
 
 	RESULT_COMMUNITY *result,*comp;
 	result=new RESULT_COMMUNITY;
 	comp=new RESULT_COMMUNITY;
 
-	vector<string> inputfiles;
-	vector<double> mil, maxs;
+	vector<string> inputfiles, arg1, arg2;
+	vector<double> mil, maxs, gmax, gmin, gavg, gsd;
 
-	if (argc != 1 && argc != 2 && argc != 3){
+	
+
+	if (argc % 2 == 1 && argc >= 3){
+		for (i = 2; i < argc; i += 2){
+			arg1.push_back(argv[i - 1]);
+			arg2.push_back(argv[i]);
+		}
+	}
+	else if (argc == 2){
+		arg1.push_back(argv[1]);
+		arg1.push_back("input");
+	}
+	else if (argc == 1){
+		arg1.push_back("community.dat");
+		arg1.push_back("input");
+	}
+	else{
 		cout << "arguments error!" << endl;
 		system("pause");
 		return 0;
 	}
-	string filename_comp = "community.dat";
-	string indir = "input";
-	if (argc == 2){
-		filename_comp = argv[1];
-	}
-	if (argc == 3){
-		filename_comp = argv[1];
-		indir = argv[2];
-	}
 
-	FindFiles(inputfiles,".\\"+indir);
+	for (i = 0; i < arg1.size(); ++i){
 
-	cout<<"Find "<<inputfiles.size()<<" files."<<endl;
+		inputfiles.clear();
 
-	tmp=readCommunitiesComp(filename_comp,result);
-	//show_result_community(result,stdout);
+		FindFiles(inputfiles, ".\\" + arg2[i]);
 
-	for(i=0;i<inputfiles.size();i++){
-		if(readCommunities(".\\"+indir+"\\"+inputfiles[i],comp)){
-			//show_result_community(comp,stdout);
-			mi = calculate_nmi(comp, result, tmp);
-			mil.push_back(mi);
-			cout<<inputfiles[i]<<"\t"<<mi<<endl;
+		cout << "Find " << inputfiles.size() << " files in floder " + arg2[i] + " ." << endl;
+
+		tmp = readCommunitiesComp(arg1[i], result);
+		//show_result_community(result,stdout);
+
+		for (j = 0; j < inputfiles.size(); j++){
+			cout << "*";
+			if (readCommunities(".\\" + arg2[i] + "\\" + inputfiles[j], comp)){
+				//show_result_community(comp,stdout);
+				mi = calculate_nmi(comp, result, tmp);
+				mil.push_back(mi);
+				//cout << inputfiles[i] << "\t" << mi << endl;
+			}
+			if (mil.size() == 10){
+				maxs.push_back(findmax(mil));
+				mil.clear();
+			}
 		}
-		if (mil.size() == 10){
+		cout << endl;
+		if (maxs.empty()){
 			maxs.push_back(findmax(mil));
-			mil.clear();
 		}
-	}
+		gmax.push_back(findmax(maxs));
+		gmin.push_back(findmin(maxs));
+		gavg.push_back(computeavg(maxs));
+		gsd.push_back(computesd(maxs));
+		cout << "max = " << gmax.back() << endl;
+		cout << "min = " << gmin.back() << endl;
+		cout << "avg = " << gavg.back() << endl;
+		cout << "S.D = " << gsd.back() << endl;
 
-	if (!maxs.empty()){
-		cout << "max =" << findmax(maxs) << endl;
-		cout << "min =" << findmin(maxs) << endl;
-		cout << "avg =" << computeavg(maxs) << endl;
-		cout << "D =" << computesd(maxs) << endl;
+		maxs.clear();
+		mil.clear();
 	}
+	cout << "---------------------------------!" << endl;
+	cout << "Global max = " << computeavg(gmax) << endl;
+	cout << "Global min = " << computeavg(gmin) << endl;
+	cout << "Global avg = " << computeavg(gavg) << endl;
+	cout << "Global S.D = " << computeavg(gsd) << endl;
 
 	system("pause");
 
