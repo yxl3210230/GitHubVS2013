@@ -4,6 +4,7 @@
 #include<string>
 #include<vector>
 #include<Windows.h>
+#include<algorithm>
 #include"NMI.h"
 
 using namespace std;
@@ -43,6 +44,7 @@ int readCommunities(string fileName, RESULT_COMMUNITY *comp){
 			while(linestream>>tmp){
 				v.push_back(tmp);
 			}
+			sort(v.begin(), v.end());
 			nv.push_back(v);
 		} //while
 
