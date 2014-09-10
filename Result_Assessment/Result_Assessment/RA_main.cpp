@@ -229,7 +229,7 @@ void FindFiles(vector<string>& sFileNames,string sPath)
 {
 	WIN32_FIND_DATAA wfd;
 
-	sPath += "\\*.icpm";
+	sPath += "\\*.*";
 
 	HANDLE hFile = FindFirstFile(sPath.c_str(),&wfd);
 
@@ -251,6 +251,9 @@ void FindFiles(vector<string>& sFileNames,string sPath)
 
 double findmax(vector<double>& vl)
 {
+	if (vl.size() == 0){
+		return 0;
+	}
 	double max = vl[0];
 	for (int i = 1; i < vl.size(); ++i){
 		if (vl[i] > max){
@@ -262,6 +265,9 @@ double findmax(vector<double>& vl)
 
 double findmin(vector<double>& vl)
 {
+	if (vl.size() == 0){
+		return 0;
+	}
 	double min = vl[0];
 	for (int i = 1; i < vl.size(); ++i){
 		if (vl[i] < min){
@@ -273,6 +279,9 @@ double findmin(vector<double>& vl)
 
 double computeavg(vector<double>& vl)
 {
+	if (vl.size() == 0){
+		return 0;
+	}
 	double sum = 0;
 	for (int i = 0; i < vl.size(); ++i){
 		sum += vl[i];
@@ -282,6 +291,9 @@ double computeavg(vector<double>& vl)
 
 double computesd(vector<double>& vl)
 {
+	if (vl.size() == 0){
+		return 0;
+	}
 	double sum = 0;
 	double avg = computeavg(vl);
 	for (int i = 0; i < vl.size(); ++i){
@@ -329,9 +341,12 @@ int main(int argc, char *argv[])
 		inputfiles.clear();
 
 		FindFiles(inputfiles, ".\\" + arg2[i]);
+		inputfiles.erase(inputfiles.begin(), inputfiles.begin() + 2);
 
 		cout << "Find " << inputfiles.size() << " files in floder " + arg2[i] + " ." << endl;
-
+		if (inputfiles.size() == 0){
+			continue;
+		}
 		tmp = readCommunitiesComp(arg1[i], result);
 		//show_result_community(result,stdout);
 
@@ -352,6 +367,7 @@ int main(int argc, char *argv[])
 		if (maxs.empty()){
 			maxs.push_back(findmax(mil));
 		}
+
 		gmax.push_back(findmax(maxs));
 		gmin.push_back(findmin(maxs));
 		gavg.push_back(computeavg(maxs));
