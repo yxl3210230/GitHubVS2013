@@ -12,7 +12,7 @@ using namespace std;
 int readCommunities(string fileName, RESULT_COMMUNITY *comp){
 	
 
-	string oneLine, whiteSpace=" \t\n";
+	string oneLine,stmp, whiteSpace=" \t\n";
 	fstream fp;
 	stringstream linestream;
 	int i,tmp;
@@ -39,8 +39,11 @@ int readCommunities(string fileName, RESULT_COMMUNITY *comp){
 			linestream.clear();
 			//linestream.str("");
 			linestream<<oneLine;
-
+			linestream >> stmp;
 			v.clear();
+			if (stmp.at(stmp.length() - 1) != ':'){
+				v.push_back(atoi(stmp.c_str()));
+			}
 			while(linestream>>tmp){
 				v.push_back(tmp);
 			}
