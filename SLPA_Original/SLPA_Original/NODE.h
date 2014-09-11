@@ -43,6 +43,9 @@ public:
 	int nlabels;
 
 	vector<pair<int, double>> PQueue;
+
+	map<int, map<int, double>> MQueue;
+
 	int isToUpdate;
 	int isChanged;
 

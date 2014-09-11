@@ -745,11 +745,14 @@ void SLPA::mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v)
 
 void SLPA::computeCoefficients(vector<vector<double>>& co)
 {
-	int i, j, k, l, count, z;
+	int i, j, k, l, count, z, setsize;
 	NODE *v, *nbv;
 	vector<double> coe;
 	double tmp;
 	vector<int> nbl1, nbl2;
+	map<int, int> nset;
+	map<int, int>::iterator it;
+	int setflag,flagminus;
 
 	co.clear();
 	for (i = 0; i < net->N; ++i){
@@ -761,9 +764,14 @@ void SLPA::computeCoefficients(vector<vector<double>>& co)
 		}
 		sort(nbl1.begin(), nbl1.end());
 		coe.clear();
+		nset.clear();
+		setsize = 0;
 		//z = 0;
 		for (j = 0; j < v->numNbs; ++j){
 			nbv = v->nbList_P[j];
+			if (nset.find(nbv->ID) != nset.end()){
+				continue;
+			}
 			nbl2.clear();
 			for (k = 0; k < nbv->numNbs; ++k){
 				nbl2.push_back(nbv->nbList_P[k]->ID);
@@ -772,6 +780,8 @@ void SLPA::computeCoefficients(vector<vector<double>>& co)
 			k = 0;
 			l = 0;
 			count = 0;
+			setflag = 0;
+			flagminus = 0;
 			while (k < nbl1.size() && l < nbl2.size()){
 				if (nbl1[k] < nbl2[l]){
 					++k;
@@ -780,11 +790,28 @@ void SLPA::computeCoefficients(vector<vector<double>>& co)
 					++l;
 				}
 				else{
+					if (setflag == 0){
+						nset[nbv->ID] = setsize + 1;
+					}
+					setflag = 1;
+					it=nset.find(nbl1[k]);
+					if (it == nset.end()){
+						nset[nbl1[k]] = setsize + 1;
+					}
+					else{
+						for (map<int, int>::iterator it2 = nset.begin(); it != nset.end(); it++){
+							if (it2->second == it->second){
+								it2->second = setsize + 1;
+							}
+						}
+						it->second = setsize + 1;
+						flagminus = true;
+					}
 					++k;
 					++l;
-					++count;
 				}
 			}
+			setsize = setsize + setflag - flagminus;
 			//coe.push_back(((double)count / tmp) + 1);
 			coe.push_back((double)count + 1);
 			//if (count == 0){
