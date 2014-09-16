@@ -442,7 +442,6 @@ int main(int argc, char *argv[])
 				maxs.push_back(findmaxnmi(fnmi,fstr));
 				readCommunities(fstr, comp);
 				fsl.push_back(comparevertex());
-				//fmax.push_back(fstr);
 				fnmi.clear();
 			}
 		}
