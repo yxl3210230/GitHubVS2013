@@ -2,7 +2,7 @@
 #include<math.h>
 #include"NMI.h"
 
-int element_compariosn(int total, int num1, int *set1, int num2, int *set2, float p[2][2])
+int element_compariosn(int total, int num1, int *set1, int num2, int *set2, double p[2][2])
 {
 	int i=0,j=0,count=0;
 
@@ -20,27 +20,27 @@ int element_compariosn(int total, int num1, int *set1, int num2, int *set2, floa
 
 	}
 
-	p[1][1]=(float)count/total;
-	p[1][0]=(float)(num1-count)/total;
-	p[0][1]=(float)(num2-count)/total;
+	p[1][1]=(double)count/total;
+	p[1][0]=(double)(num1-count)/total;
+	p[0][1]=(double)(num2-count)/total;
 	p[0][0]=1-p[1][1]-p[1][0]-p[0][1];
 
 	return 1;
 }
 
-float h(float p)
+double h(double p)
 {
 	return p==0?0:-p*log10(p);
 }
 
-float result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int total)
+double result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int total)
 {
 	int i,j,k;
-	float p[2][2];
-	float *list;
-	float hxky,hxy,hx,t1,t2,sum=0;
+	double p[2][2];
+	double *list;
+	double hxky,hxy,hx,t1,t2,sum=0;
 
-	list=(float *)malloc(result->ncommunities*sizeof(float));
+	list=(double *)malloc(result->ncommunities*sizeof(double));
 
 	for(i=0;i<result->ncommunities;i++){
 		list[i]=-1;
@@ -48,7 +48,7 @@ float result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int to
 
 	for(i=0;i<comp->ncommunities;i++){
 		k=0;
-		hx=h((float)comp->nvertices[i]/total)+h(1-(float)comp->nvertices[i]/total);
+		hx=h((double)comp->nvertices[i]/total)+h(1-(double)comp->nvertices[i]/total);
 		for(j=0;j<result->ncommunities;j++){
 			//¼ÆËãp
 			element_compariosn(total,comp->nvertices[i],comp->vertices[i],result->nvertices[j],result->vertices[j],p);
@@ -83,7 +83,7 @@ float result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int to
 	return sum;
 }
 
-float calculate_nmi(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int total)
+double calculate_nmi(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int total)
 {
 	return 1-(result_comparison(comp,result,total)+result_comparison(result,comp,total))/2;
 }

@@ -332,10 +332,10 @@ double comparevertex()
 				exit(0);
 			}
 			if (mit->second[0] == 0){
-				mit->second[0] = i;
+				mit->second[0] = i + 1;
 			}
 			else{
-				mit->second.push_back(i);
+				mit->second.push_back(i + 1);
 			}
 		}
 	}
@@ -353,11 +353,28 @@ double comparevertex()
 			++c3;
 		}
 	}
-	int tmp1 = (double)c3 / c1;
-	int tmp2 = (double)c3 / c2;
+	double tmp1 = (double)c3 / c1;
+	double tmp2 = (double)c3 / c2;
 
-	return 2 * tmp1*tmp2 / (tmp1 + tmp2);
+	return (tmp1 + tmp2) ? 2 * tmp1*tmp2 / (tmp1 + tmp2) : 0;
 
+}
+
+
+double findmaxnmi(vector<pair<string, double> > &fnmi, string &fstr)
+{
+	if (fnmi.size() == 0){
+		return 0;
+	}
+	double maxv = fnmi[0].second;
+	fstr = fnmi[0].first;
+	for (int i = 1; i < fnmi.size(); ++i){
+		if (maxv < fnmi[i].second){
+			maxv = fnmi[i].second;
+			fstr = fnmi[i].first;
+		}
+	}
+	return maxv;
 }
 
 
@@ -365,14 +382,15 @@ int main(int argc, char *argv[])
 {
 	int i, j, tmp;
 	double mi;
+	string fstr;
 
 	RESULT_COMMUNITY *result,*comp;
 	result=new RESULT_COMMUNITY;
 	comp=new RESULT_COMMUNITY;
 
 	vector<string> inputfiles, arg1, arg2;
-	vector<double> mil, maxs, gmax, gmin, gavg, gsd;
-
+	vector<double> maxs, gmax, gmin, gavg, gsd, gfs, fsl;
+	vector<pair<string, double> > fnmi;
 	
 
 	if (argc % 2 == 1 && argc >= 3){
@@ -398,6 +416,8 @@ int main(int argc, char *argv[])
 	for (i = 0; i < arg1.size(); ++i){
 
 		inputfiles.clear();
+		fnmi.clear();
+		fsl.clear();
 
 		FindFiles(inputfiles, ".\\" + arg2[i]);
 		inputfiles.erase(inputfiles.begin(), inputfiles.begin() + 2);
@@ -411,39 +431,47 @@ int main(int argc, char *argv[])
 
 		for (j = 0; j < inputfiles.size(); j++){
 			cout << "*";
-			if (readCommunities(".\\" + arg2[i] + "\\" + inputfiles[j], comp)){
+			fnmi.push_back(pair<string, double>(".\\" + arg2[i] + "\\" + inputfiles[j], 0));
+			if (readCommunities(fnmi[j].first, comp)){
 				//show_result_community(comp,stdout);
 				mi = calculate_nmi(comp, result, tmp);
-				mil.push_back(mi);
+				fnmi[j].second = mi;
 				//cout << inputfiles[i] << "\t" << mi << endl;
 			}
-			if (mil.size() == 10){
-				maxs.push_back(findmax(mil));
-				mil.clear();
+			if (fnmi.size() == 10){
+				maxs.push_back(findmaxnmi(fnmi,fstr));
+				readCommunities(fstr, comp);
+				fsl.push_back(comparevertex());
+				//fmax.push_back(fstr);
+				fnmi.clear();
 			}
 		}
 		cout << endl;
 		if (maxs.empty()){
-			maxs.push_back(findmax(mil));
+			maxs.push_back(findmaxnmi(fnmi, fstr));
+			readCommunities(fstr, comp);
+			fsl.push_back(comparevertex());
 		}
 
 		gmax.push_back(findmax(maxs));
 		gmin.push_back(findmin(maxs));
 		gavg.push_back(computeavg(maxs));
 		gsd.push_back(computesd(maxs));
+		gfs.push_back(computeavg(fsl));
 		cout << "max = " << gmax.back() << endl;
 		cout << "min = " << gmin.back() << endl;
 		cout << "avg = " << gavg.back() << endl;
 		cout << "S.D = " << gsd.back() << endl;
+		cout << "F-score = " << gfs.back() << endl;
 
 		maxs.clear();
-		mil.clear();
 	}
 	cout << "---------------------------------!" << endl;
 	cout << "Global max = " << computeavg(gmax) << endl;
 	cout << "Global min = " << computeavg(gmin) << endl;
 	cout << "Global avg = " << computeavg(gavg) << endl;
 	cout << "Global S.D = " << computeavg(gsd) << endl;
+	cout << "Global F-score = " << computeavg(gfs) << endl;
 
 	system("pause");
 
