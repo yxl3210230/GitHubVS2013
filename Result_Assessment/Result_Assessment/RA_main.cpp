@@ -3,11 +3,15 @@
 #include<fstream>
 #include<string>
 #include<vector>
+#include<map>
 #include<Windows.h>
 #include<algorithm>
 #include"NMI.h"
 
 using namespace std;
+
+vector<vector<int> > corvertex, comvertex;
+
 
 int readCommunities(string fileName, RESULT_COMMUNITY *comp){
 	
@@ -18,7 +22,7 @@ int readCommunities(string fileName, RESULT_COMMUNITY *comp){
 	int i,tmp;
 
 	vector<int> v;
-	vector<vector<int>> nv;
+	vector<vector<int> > nv;
 
 	fp.open(fileName.c_str(),fstream::in); //|fstream::out|fstream::app
 
@@ -57,6 +61,8 @@ int readCommunities(string fileName, RESULT_COMMUNITY *comp){
 		cout<<"open failed"<<endl;
 		return 0;
 	}
+
+	comvertex.assign(nv.begin(), nv.end());
 
 	comp->ncommunities=nv.size();
 	comp->nvertices=new int[nv.size()];
@@ -178,6 +184,8 @@ int readCommunitiesComp(string fileName, RESULT_COMMUNITY *comp){
 		system("pause");
 		exit(1);
 	}
+
+	corvertex.assign(nv.begin(), nv.end());
 
 	comp1->nvertices=nv.size();
 	comp1->numbelong=new int[nv.size()];
@@ -301,6 +309,57 @@ double computesd(vector<double>& vl)
 	}
 	return pow(sum / vl.size(), 0.5);
 }
+
+double comparevertex()
+{
+	int c1, c2, c3;
+	map<int, vector<int> > tran;
+	map<int, vector<int> >::iterator mit;
+	vector<int> tmp;
+
+	for (int i = 0; i < corvertex.size(); ++i){
+		tmp.clear();
+		tmp.push_back(0);
+		tran.insert(pair<int, vector<int> >(i + 1, tmp));
+	}
+
+	for (int i = 0; i < comvertex.size(); ++i){
+		for (int j = 0; j < comvertex[i].size(); ++j){
+			mit = tran.find(comvertex[i][j]);
+			if (mit == tran.end()){
+				cout << "error comparevertex!" << endl;
+				system("pause");
+				exit(0);
+			}
+			if (mit->second[0] == 0){
+				mit->second[0] = i;
+			}
+			else{
+				mit->second.push_back(i);
+			}
+		}
+	}
+
+	c1 = c2 = c3 = 0;
+	
+	for (int i = 0; i < corvertex.size(); ++i){
+		if (tran[i + 1].size() > 1){
+			++c1;
+		}
+		if (corvertex[i].size() > 1){
+			++c2;
+		}
+		if (corvertex[i].size() > 1 && tran[i + 1].size() > 1){
+			++c3;
+		}
+	}
+	int tmp1 = (double)c3 / c1;
+	int tmp2 = (double)c3 / c2;
+
+	return 2 * tmp1*tmp2 / (tmp1 + tmp2);
+
+}
+
 
 int main(int argc, char *argv[])
 {
