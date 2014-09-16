@@ -353,8 +353,8 @@ double comparevertex()
 			++c3;
 		}
 	}
-	double tmp1 = (double)c3 / c1;
-	double tmp2 = (double)c3 / c2;
+	double tmp1 = c1 ? (double)c3 / c1 : 0;
+	double tmp2 = c1 ? (double)c3 / c2 : 0;
 
 	return (tmp1 + tmp2) ? 2 * tmp1*tmp2 / (tmp1 + tmp2) : 0;
 
