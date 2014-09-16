@@ -443,6 +443,7 @@ int main(int argc, char *argv[])
 				readCommunities(fstr, comp);
 				fsl.push_back(comparevertex());
 				fnmi.clear();
+
 			}
 		}
 		cout << endl;
