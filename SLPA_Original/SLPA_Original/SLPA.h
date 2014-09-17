@@ -90,16 +90,16 @@ public:
 	void deleteLabel(NODE *v, vector<pair<int,int>>& pairList);
 	void deleteLabel1(NODE *v, vector<pair<int,int>>& pairList);
 	void norm_probability(vector<pair<int, double>>& pairList);
-	void thresholdLabelInNode(NODE *v);
+	void thresholdLabelInNode(vector<pair<int, double>>& pairList);
 	void thresholdLabelInVector(vector<pair<int, double>>& pairList, int n);
 	void stateDetection(NODE *v);
 	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
-	void labelinflation(NODE *v, double expo);
+	void labelinflation(vector<pair<int, double>>& pairList, double expo);
 	void labelProportionate(vector<pair<int, double>>& pairList, double mix);
 	double computeSimilarity(vector<pair<int, double>> set1, vector<pair<int, double>>& set2);
 	void mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);
 
-	void computeCoefficients(vector<vector<double>>& co);
+	void computeCoefficients(vector<map<int, int> >& co);
 
 	void GLPA_syn();
 	void GLPA_asyn_pointer();
