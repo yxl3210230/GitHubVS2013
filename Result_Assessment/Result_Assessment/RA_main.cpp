@@ -430,17 +430,19 @@ int main(int argc, char *argv[])
 		//show_result_community(result,stdout);
 
 		for (j = 0; j < inputfiles.size(); j++){
-			cout << "*";
+			//cout << "*";
 			fnmi.push_back(pair<string, double>(".\\" + arg2[i] + "\\" + inputfiles[j], 0));
 			if (readCommunities(fnmi.back().first, comp)){
 				//show_result_community(comp,stdout);
 				mi = calculate_nmi(comp, result, tmp);
+				cout << "( "<<mi<<" , "<<comparevertex()<<" )    ";
 				fnmi.back().second = mi;
 				//cout << inputfiles[i] << "\t" << mi << endl;
 			}
 			if (fnmi.size() == 10){
 				maxs.push_back(findmaxnmi(fnmi,fstr));
 				readCommunities(fstr, comp);
+				cout << fstr << endl;
 				fsl.push_back(comparevertex());
 				fnmi.clear();
 
@@ -450,6 +452,7 @@ int main(int argc, char *argv[])
 		if (maxs.empty()){
 			maxs.push_back(findmaxnmi(fnmi, fstr));
 			readCommunities(fstr, comp);
+			cout << fstr << endl;
 			fsl.push_back(comparevertex());
 		}
 

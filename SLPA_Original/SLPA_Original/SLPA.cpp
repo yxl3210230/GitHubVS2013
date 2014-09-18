@@ -67,7 +67,7 @@ SLPA::~SLPA() {
 void SLPA::pre_initial_THRCS(){
 	THRCS.clear();
 	for(int i=0;i<THRS.size();i++){
-		THRCS.push_back((int)myround(THRS[i]*maxT));
+		THRCS.push_back((int)myround(THRS[i]*100));
 	}
 }
 
@@ -906,7 +906,7 @@ void SLPA::GLPA_syn()
 	writeToTxt("output.txt", false, output);
 
 	cout << endl;
-
+	int noverlap = 0;
 	for(int i=0;i<net->N;i++){
 		v = net->NODES[i];
 		norm_probability(v->PQueue);
@@ -914,6 +914,9 @@ void SLPA::GLPA_syn()
 		//if (v->PQueue.size() > 1){
 		//	cout << v->ID << " : ";
 		//}
+		if (v->PQueue.size() != 1){
+			++noverlap;
+		}
 		for (j = 0; j < v->PQueue.size(); j++){
 			//if (v->PQueue.size() > 1){
 			//	cout << v->PQueue[j].first << "(" << v->PQueue[j].second << ") ";
@@ -924,7 +927,7 @@ void SLPA::GLPA_syn()
 		//	cout << endl;
 		//}
 	}
-
+	cout << "overlap = " << noverlap << endl;
 	cout << "Iteration(" << t << ") is over (takes " << difftime(time(NULL), st) << " seconds)" << endl;
 }
 
