@@ -84,7 +84,7 @@ public:
 	void addLabeltoLQueue1(NODE *v, int label);
 	void addLabeltoVectorINT_INT(vector<pair<int,int>>& pairList, int label);
 	void addLabeltoVectorINT_INT1(vector<pair<int,int>>& pairList, int label);
-	void addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v, double co);
+	void addLabeltoVector(vector<pair<int, double>>& vl_to, vector<pair<int, double>>& vl_from, double co);
 	void addLabeltoNode(vector<pair<int, double>>& pairList, NODE *v, double co);
 	int selectMostFrequentLabel(vector<pair<int,int>>& pairList);
 	void deleteLabel(NODE *v, vector<pair<int,int>>& pairList);
@@ -93,13 +93,22 @@ public:
 	void thresholdLabelInNode(vector<pair<int, double>>& pairList);
 	void thresholdLabelInVector(vector<pair<int, double>>& pairList, int n);
 	void stateDetection(NODE *v);
-	bool checkLabelChange(NODE *v, vector<pair<int, double>> pairList);
+	bool checkLabelChange(vector<pair<int, double>>& vl1, vector<pair<int, double>>& vl2);
 	void labelinflation(vector<pair<int, double>>& pairList, double expo);
 	void labelProportionate(vector<pair<int, double>>& pairList, double mix);
 	double computeSimilarity(vector<pair<int, double>> set1, vector<pair<int, double>>& set2);
 	void mixLabeltoNode(vector<pair<int, double>>& pairList, NODE *v);
 
 	void computeCoefficients(vector<map<int, int> >& co);
+	void initMQueue();
+	void propagate2Set(map<int, vector<pair<int, double> > >& tmpset, NODE *nbv, NODE *v);
+	void specialPropagate(map<int, vector<pair<int, double> > >& tmpset, NODE *nbv);
+	void mergeSet(NODE *v);
+	void normAllSet(map<int, vector<pair<int, double> > >& sets);
+	void findMaxInVector(vector<pair<int, double> >& vl);
+	double avgSimilarity(map<int, vector<pair<int, double> > >& set1, map<int, vector<pair<int, double> > >& set2);
+	void thresholdLabelInSet(map<int, vector<pair<int, double> > >& sets, double thrv);
+	bool checkLabelChangeInSet(map<int, vector<pair<int, double> > >& set1, map<int, vector<pair<int, double> > >& set2);
 
 	void GLPA_syn();
 	void GLPA_asyn_pointer();

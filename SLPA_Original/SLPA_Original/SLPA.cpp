@@ -100,7 +100,7 @@ void SLPA::start(){
 		//1.initial WQ and clear network
 		//initWQueue_more();
 		//initLQueue();
-		initPQueue();
+		//initPQueue();
 
 		//2.GLPA
 		if(true){
@@ -380,20 +380,20 @@ void SLPA::deleteLabel1(NODE *v, vector<pair<int,int>>& pairList)
 	}
 }
 
-void SLPA::addLabeltoVector(vector<pair<int, double>>& pairList, NODE *v, double co)
+void SLPA::addLabeltoVector(vector<pair<int, double>>& vl_to, vector<pair<int, double>> &vl_from, double co)
 {
 	int i, j, flag;
-	for (i = 0; i < v->PQueue.size(); i++){
+	for (i = 0; i < vl_from.size(); i++){
 		flag = 0;
-		for (j = 0; j < pairList.size(); j++){
-			if (v->PQueue[i].first == pairList[j].first){
-				pairList[j].second += v->PQueue[i].second * co;
+		for (j = 0; j < vl_to.size(); j++){
+			if (vl_from[i].first == vl_to[j].first){
+				vl_to[j].second += vl_from[i].second * co;
 				flag = 1;
 				break;
 			}
 		}
 		if (flag == 0){
-			pairList.push_back(pair<int, double>(v->PQueue[i].first, v->PQueue[i].second * co));
+			vl_to.push_back(pair<int, double>(vl_from[i].first, vl_from[i].second * co));
 		}
 	}
 }
@@ -646,31 +646,26 @@ void SLPA::stateDetection(NODE *v)
 		
 }
 
-bool SLPA::checkLabelChange(NODE *v, vector<pair<int, double>> pairList)
+bool SLPA::checkLabelChange(vector<pair<int, double> >& vl1, vector<pair<int, double> >& vl2)
 {
-	if (v->PQueue.size() != pairList.size()){
-		v->isChanged = 1;
+	if (vl1.size() != vl2.size()){
 		return true;
 	}
-	if (v->PQueue.size() == 1 && pairList.size() == 1){
-		if (v->PQueue[0].first != pairList[0].first){
-			v->isChanged = 1;
+	if (vl1.size() == 1 && vl2.size() == 1){
+		if (vl1[0].first != vl2[0].first){
 			return true;
 		}
 		else{
-			v->isChanged = 0;
 			return false;
 		}
 	}
-	sortVectorInt_Double_first(v->PQueue);
-	sortVectorInt_Double_first(pairList);
-	for (int i = 0; i < pairList.size(); i++){
-		if (v->PQueue[i].first != pairList[i].first){
-			v->isChanged = 1;
+	sortVectorInt_Double_first(vl1);
+	sortVectorInt_Double_first(vl2);
+	for (int i = 0; i < vl2.size(); i++){
+		if (vl1[i].first != vl2[i].first){
 			return true;
 		}
 	}
-	v->isChanged = 0;
 	return false;
 }
 
@@ -751,7 +746,7 @@ void SLPA::computeCoefficients(vector<map<int, int> >& co)
 	double tmp;
 	vector<int> nbl1, nbl2;
 	map<int, int> nset;
-	map<int, int>::iterator it;
+	map<int, int>::iterator it, tmpit;
 	int setflag,flagminus;
 
 	co.clear();
@@ -794,7 +789,7 @@ void SLPA::computeCoefficients(vector<map<int, int> >& co)
 						nset[nbl1[k]] = curs;
 					}
 					else{
-						for (map<int, int>::iterator it2 = nset.begin(); it != nset.end(); it++){
+						for (map<int, int>::iterator it2 = nset.begin(); it2 != nset.end(); ++it2){
 							if (it2->second == curs){
 								it2->second = it->second;
 							}
@@ -805,7 +800,18 @@ void SLPA::computeCoefficients(vector<map<int, int> >& co)
 					++l;
 				}
 			}
-			++maxsetid;
+			for (it = nset.begin(), k = 0; it != nset.end(); ++it){
+				if (it->second == curs){
+					++k;
+					tmpit = it;
+				}
+			}
+			if (k == 1){
+				tmpit->second = 0;
+			}
+			else{
+				++maxsetid;
+			}
 			//coe.push_back(((double)count / tmp) + 1);
 			//coe.push_back((double)count + 1);
 			//if (count == 0){
@@ -820,12 +826,193 @@ void SLPA::computeCoefficients(vector<map<int, int> >& co)
 	}
 }
 
+void SLPA::initMQueue()
+{
+	time_t st = time(NULL);
+	cout << "Progress: Initializing memory......." << endl;
+
+	//label is node id
+	NODE *v;
+	for (int i = 0; i<net->N; i++){
+
+		v = net->NODES[i];
+		v->MQueue.clear();
+		v->MQueue[0] = vector<pair<int, double>>(1, pair<int, double>(v->ID, 1.0));
+		for (map<int, int>::iterator it = v->node2set.begin(); it != v->node2set.end(); ++it){
+			if (v->MQueue.find(it->second) == v->MQueue.end()){
+				v->MQueue[it->second] = vector<pair<int, double>>(1,pair<int,double>(v->ID, 1.0));
+			}
+		}
+		v->isToUpdate = 1;
+		v->isChanged = 0;
+
+	}
+
+	cout << " Take :" << difftime(time(NULL), st) << " seconds." << endl;
+}
+
+void SLPA::propagate2Set(map<int, vector<pair<int, double> > >& tmpset, NODE *nbv, NODE *v)
+{
+	vector<pair<int, double> > tmpvector;
+	map<int, vector<pair<int, double> > >::iterator mit;
+	mit = tmpset.find(v->node2set[nbv->ID]);
+	if (mit == tmpset.end()){
+		addLabeltoVector(tmpvector, nbv->MQueue[nbv->node2set[v->ID]], 1);
+		tmpset[v->node2set[nbv->ID]] = tmpvector;
+	}
+	else{
+		addLabeltoVector(mit->second, nbv->MQueue[nbv->node2set[v->ID]], 1);
+	}
+}
+
+void SLPA::mergeSet(NODE *v)
+{
+	map<int, vector<pair<int, double> > >::iterator mit = v->MQueue.begin();
+	if (v->MQueue.size() > 1){
+		++mit;
+	}
+	for (; mit != v->MQueue.end(); ++mit){
+		v->PQueue.clear();
+		addLabeltoVector(v->PQueue, mit->second, 1);
+	}
+}
+
+void SLPA::specialPropagate(map<int, vector<pair<int, double> > >& tmpset, NODE *nbv)
+{
+	mergeSet(nbv);
+	if (tmpset.find(0) == tmpset.end()){
+		vector<pair<int, double> > tmpvector;
+		addLabeltoVector(tmpvector, nbv->PQueue, 1);
+		tmpset[0] = tmpvector;
+	}
+	else{
+		addLabeltoVector(tmpset[0], nbv->PQueue, 1);
+	}
+}
+
+void SLPA::normAllSet(map<int, vector<pair<int, double> > >& sets)
+{
+	map<int, vector<pair<int, double> > >::iterator mit = sets.begin();
+	if (sets.size() > 1){
+		++mit;
+	}
+	for (; mit != sets.end(); ++mit){
+		norm_probability(mit->second);
+	}
+}
+
+void SLPA::findMaxInVector(vector<pair<int, double> >& vl)
+{
+	int i, j, n, m;
+	double tmp, maxl;
+	if (vl.size() == 0){
+		cout << "error in findMaxInVector!" << endl;
+		system("pause");
+		exit(0);
+	}
+	sortVectorInt_Double(vl);
+
+	maxl = vl[0].first;
+	for (i = 1; i < vl.size(); i++){
+		if (vl[i].second == vl[0].second){
+			continue;
+		}
+		if (vl[i].second < maxl){
+			vl.erase(vl.begin() + i, vl.end());
+			break;
+		}
+	}
+	norm_probability(vl);
+}
+
+double SLPA::avgSimilarity(map<int, vector<pair<int, double> > >& set1, map<int, vector<pair<int, double> > >& set2)
+{
+	if (set1.size() == 0 || set2.size() == 0){
+		cout << "error1 in avgSimilarity!" << endl;
+		system("pause");
+		exit(0);
+	}
+	map<int, vector<pair<int, double> > >::iterator mit1 = set1.begin();
+	map<int, vector<pair<int, double> > >::iterator mit2 = set2.begin();
+
+	double sum = 0;
+
+	if (set1.size() > 1){
+		++mit1;
+		++mit2;
+	}
+
+	while (mit1 != set1.end()){
+		if (mit1->first != mit2->first){
+			cout << "error2 in avgSimilarity!" << endl;
+			system("pause");
+			exit(0);
+		}
+		sum += computeSimilarity(mit1->second, mit2->second);
+		++mit1;
+		++mit2;
+	}
+	return sum / set1.size();
+}
+
+void SLPA::thresholdLabelInSet(map<int, vector<pair<int, double> > >& sets, double thrv)
+{
+	map<int, vector<pair<int, double> > >::iterator mit = sets.begin();
+	if (sets.size() > 1){
+		++mit;
+	}
+	for (; mit != sets.end(); ++mit){
+		sortVectorInt_Double(mit->second);
+		double maxl = mit->second[0].second;
+		for (int i = 1; i < mit->second.size(); ++i){
+			if (mit->second[i].second == maxl){
+				continue;
+			}
+			if (mit->second[i].second < thrv){
+				mit->second.erase(mit->second.begin() + i, mit->second.end());
+			}
+		}
+		norm_probability(mit->second);
+	}
+}
+
+bool SLPA::checkLabelChangeInSet(map<int, vector<pair<int, double> > >& set1, map<int, vector<pair<int, double> > >& set2)
+{
+	if (set1.size() == 0 || set2.size() == 0){
+		cout << "error1 in checkLabelChangeInSet!" << endl;
+		system("pause");
+		exit(0);
+	}
+	map<int, vector<pair<int, double> > >::iterator mit1 = set1.begin();
+	map<int, vector<pair<int, double> > >::iterator mit2 = set2.begin();
+
+	bool result = false;
+
+	if (set1.size() > 1){
+		++mit1;
+		++mit2;
+	}
+	while (mit1 != set1.end()){
+		if (mit1->first != mit2->first){
+			cout << "error2 in checkLabelChangeInSet!" << endl;
+			system("pause");
+			exit(0);
+		}
+		result |= checkLabelChange(mit1->second, mit2->second);
+		++mit1;
+		++mit2;
+	}
+	return result;
+}
+
 void SLPA::GLPA_syn()
 {
 	int i, j, k, t;
 	time_t st = time(NULL);
 	NODE *v, *nbv;
-	vector<pair<int, double>> nbp, snapelement;
+	map<int, vector<pair<int, double> > > snap, tmpset;
+	map<int, vector<pair<int, double> > >::iterator mit;
+	vector<pair<int, double>> nbp;
 	vector<vector<pair<int, double>>> synlist, snapshot;
 	vector<string> output;
 	string line;
@@ -844,38 +1031,40 @@ void SLPA::GLPA_syn()
 	output.push_back(line);
 
 	computeCoefficients(co);
+	initMQueue();
 
 	for (t = 1; t <= maxT; t++){
 		cout << "*";
 		srand(time(NULL)); 
 		//random_shuffle(net->NODES.begin(), net->NODES.end());
-		synlist.clear();
-		synlist.reserve(net->N);
-		snapshot.clear();
 		for (i = 0; i<net->N; i++){
 			v = net->NODES[i];
 			v->isChanged = 0;
+			v->sMQueue.clear();
+
 			if (v->isToUpdate){
-				nbp.clear();
-				nbp.reserve(100);
 				
-				snapelement.clear();
-				for (j = 0; j < v->PQueue.size(); j++){
-					snapelement.push_back(v->PQueue[j]);
-				}
-				snapshot.push_back(snapelement);
-				
+				tmpset.clear();
+				v->bMQueue.clear();
+				//v->bMQueue.insert(v->MQueue.begin(), v->MQueue.end());
+				v->bMQueue = v->MQueue;
 				for (j = 0; j < v->numNbs; j++){
-					//if (co[i][j] != 0){
-						nbv = v->nbList_P[j];
-						addLabeltoVector(nbp, nbv, co[i][j]);
-					//}
+					nbv = v->nbList_P[j];
+					if (v->MQueue.size() == 1){
+						specialPropagate(tmpset,nbv);
+					}
+					else if (v->node2set[nbv->ID] != 0){
+						propagate2Set(tmpset, nbv, v);
+					}
 				}
-				//thresholdLabelInVector(nbp, v->numNbs);
-				synlist.push_back(nbp);
-			}
-			else{
-				synlist.push_back(vector<pair<int,double>>());
+				if (v->MQueue.size() == 1){
+					findMaxInVector(tmpset[0]);
+				}
+				else{
+					tmpset[0] = vector<pair<int, double> >(1, pair<int, double>(v->ID, 1.0));
+				}
+				normAllSet(tmpset);
+				v->sMQueue = tmpset;
 			}
 		}
 		line.clear();
@@ -883,7 +1072,7 @@ void SLPA::GLPA_syn()
 			v = net->NODES[i];
 			//if (v->ID == 10)system("pause");
 			if (v->isToUpdate){
-				sim = computeSimilarity(synlist[i], v->PQueue);
+				sim = avgSimilarity(v->sMQueue, v->MQueue);
 				line += dbl2str(sim);
 				line += "\t";
 				if (sim == psim[i]){
@@ -894,11 +1083,10 @@ void SLPA::GLPA_syn()
 					scount[i] = 0;
 				}
 				if (scount[i] != 5){
-					//double dco = t == 1 ? 1 : pow(0.95, t);
-					addLabeltoNode(synlist[i], v, 1);
-					//mixLabeltoNode(synlist[i], v);
-					thresholdLabelInNode(v->PQueue);
-					if (checkLabelChange(v, snapshot[j++]) == true){
+					normAllSet(v->sMQueue);
+					thresholdLabelInSet(v->sMQueue, 0.1);
+					v->MQueue = v->sMQueue;
+					if (checkLabelChangeInSet(v->MQueue,v->bMQueue) == true){
 						++k;
 					}
 				}
@@ -931,6 +1119,7 @@ void SLPA::GLPA_syn()
 
 	for(int i=0;i<net->N;i++){
 		v = net->NODES[i];
+		mergeSet(v);
 		norm_probability(v->PQueue);
 		sortVectorInt_Double(v->PQueue);
 		//if (v->PQueue.size() > 1){
@@ -1005,7 +1194,7 @@ void SLPA::GLPA_asyn_pointer(){
 				//addLabeltoVectorINT_INT(nbWs1,randnum);
 				//dt2+=difftime(time(NULL),st1);
 
-				addLabeltoVector(nbp, nbv, 1);
+				addLabeltoVector(nbp, nbv->PQueue, 1);
 
 			}
 			//when call addLabeltoVectorINT_INT1
