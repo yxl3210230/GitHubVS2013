@@ -44,7 +44,8 @@ public:
 
 	vector<pair<int, double>> PQueue;
 
-	map<int, map<int, double>> MQueue;
+	map<int, vector<pair<int, double> > > MQueue;
+	map<int, int> node2set;
 
 	int isToUpdate;
 	int isChanged;

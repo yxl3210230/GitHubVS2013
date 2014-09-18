@@ -816,6 +816,7 @@ void SLPA::computeCoefficients(vector<map<int, int> >& co)
 		//	coe.assign(v->numNbs, 1);
 		//}
 		co.push_back(nset);
+		v->node2set = nset;
 	}
 }
 
