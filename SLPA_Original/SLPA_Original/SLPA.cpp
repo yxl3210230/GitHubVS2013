@@ -831,17 +831,18 @@ void SLPA::initMQueue()
 	time_t st = time(NULL);
 	cout << "Progress: Initializing memory......." << endl;
 
-	//label is node id
 	NODE *v;
 	for (int i = 0; i<net->N; i++){
 
 		v = net->NODES[i];
 		v->MQueue.clear();
-		v->MQueue[0] = vector<pair<int, double>>(1, pair<int, double>(v->ID, 1.0));
 		for (map<int, int>::iterator it = v->node2set.begin(); it != v->node2set.end(); ++it){
 			if (v->MQueue.find(it->second) == v->MQueue.end()){
 				v->MQueue[it->second] = vector<pair<int, double>>(1,pair<int,double>(v->ID, 1.0));
 			}
+		}
+		if (v->MQueue.find(0) != v->MQueue.end() && v->MQueue.size() > 1){
+			v->MQueue.erase(0);
 		}
 		v->isToUpdate = 1;
 		v->isChanged = 0;
@@ -856,12 +857,15 @@ void SLPA::propagate2Set(map<int, vector<pair<int, double> > >& tmpset, NODE *nb
 	vector<pair<int, double> > tmpvector;
 	map<int, vector<pair<int, double> > >::iterator mit;
 	mit = tmpset.find(v->node2set[nbv->ID]);
+	mergeSet(nbv);
 	if (mit == tmpset.end()){
-		addLabeltoVector(tmpvector, nbv->MQueue[nbv->node2set[v->ID]], 1);
+		//addLabeltoVector(tmpvector, nbv->MQueue[nbv->node2set[v->ID]], 1);
+		addLabeltoVector(tmpvector, nbv->PQueue, 1);
 		tmpset[v->node2set[nbv->ID]] = tmpvector;
 	}
 	else{
-		addLabeltoVector(mit->second, nbv->MQueue[nbv->node2set[v->ID]], 1);
+		//addLabeltoVector(mit->second, nbv->MQueue[nbv->node2set[v->ID]], 1);
+		addLabeltoVector(mit->second, nbv->PQueue, 1);
 	}
 }
 
@@ -892,11 +896,7 @@ void SLPA::specialPropagate(map<int, vector<pair<int, double> > >& tmpset, NODE 
 
 void SLPA::normAllSet(map<int, vector<pair<int, double> > >& sets)
 {
-	map<int, vector<pair<int, double> > >::iterator mit = sets.begin();
-	if (sets.size() > 1){
-		++mit;
-	}
-	for (; mit != sets.end(); ++mit){
+	for (map<int, vector<pair<int, double> > >::iterator mit = sets.begin(); mit != sets.end(); ++mit){
 		norm_probability(mit->second);
 	}
 }
@@ -937,11 +937,6 @@ double SLPA::avgSimilarity(map<int, vector<pair<int, double> > >& set1, map<int,
 
 	double sum = 0;
 
-	if (set1.size() > 1){
-		++mit1;
-		++mit2;
-	}
-
 	while (mit1 != set1.end()){
 		if (mit1->first != mit2->first){
 			cout << "error2 in avgSimilarity!" << endl;
@@ -957,11 +952,7 @@ double SLPA::avgSimilarity(map<int, vector<pair<int, double> > >& set1, map<int,
 
 void SLPA::thresholdLabelInSet(map<int, vector<pair<int, double> > >& sets, double thrv)
 {
-	map<int, vector<pair<int, double> > >::iterator mit = sets.begin();
-	if (sets.size() > 1){
-		++mit;
-	}
-	for (; mit != sets.end(); ++mit){
+	for (map<int, vector<pair<int, double> > >::iterator mit = sets.begin(); mit != sets.end(); ++mit){
 		sortVectorInt_Double(mit->second);
 		double maxl = mit->second[0].second;
 		for (int i = 1; i < mit->second.size(); ++i){
@@ -988,10 +979,6 @@ bool SLPA::checkLabelChangeInSet(map<int, vector<pair<int, double> > >& set1, ma
 
 	bool result = false;
 
-	if (set1.size() > 1){
-		++mit1;
-		++mit2;
-	}
 	while (mit1 != set1.end()){
 		if (mit1->first != mit2->first){
 			cout << "error2 in checkLabelChangeInSet!" << endl;
@@ -1050,18 +1037,15 @@ void SLPA::GLPA_syn()
 				v->bMQueue = v->MQueue;
 				for (j = 0; j < v->numNbs; j++){
 					nbv = v->nbList_P[j];
-					if (v->MQueue.size() == 1){
-						specialPropagate(tmpset,nbv);
+					if (v->MQueue.find(0) != v->MQueue.end()){
+						specialPropagate(tmpset, nbv);
 					}
 					else if (v->node2set[nbv->ID] != 0){
 						propagate2Set(tmpset, nbv, v);
 					}
 				}
-				if (v->MQueue.size() == 1){
+				if (v->MQueue.find(0) != v->MQueue.end()){
 					findMaxInVector(tmpset[0]);
-				}
-				else{
-					tmpset[0] = vector<pair<int, double> >(1, pair<int, double>(v->ID, 1.0));
 				}
 				normAllSet(tmpset);
 				v->sMQueue = tmpset;
