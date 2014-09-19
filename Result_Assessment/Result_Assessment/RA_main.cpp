@@ -435,7 +435,8 @@ int main(int argc, char *argv[])
 			if (readCommunities(fnmi.back().first, comp)){
 				//show_result_community(comp,stdout);
 				mi = calculate_nmi(comp, result, tmp);
-				cout << "( "<<mi<<" , "<<comparevertex()<<" )    ";
+				cout << "( "<<mi<<" , "<<comparevertex()<<" )   ";
+				if ((j + 1) % 3 == 0){ cout << endl; }
 				fnmi.back().second = mi;
 				//cout << inputfiles[i] << "\t" << mi << endl;
 			}
