@@ -917,6 +917,7 @@ void SLPA::GLPA_syn()
 		if (v->PQueue.size() != 1){
 			++noverlap;
 		}
+		v->LQueue.clear();
 		for (j = 0; j < v->PQueue.size(); j++){
 			//if (v->PQueue.size() > 1){
 			//	cout << v->PQueue[j].first << "(" << v->PQueue[j].second << ") ";
