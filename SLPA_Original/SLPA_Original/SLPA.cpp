@@ -1280,17 +1280,20 @@ void SLPA::post_thresholding(vector<pair<int,int> >& pairList, int thrc, vector<
 		}
 
 		// handle the multiple max counts
-		if(cn==1)
+		if (cn == 1){
 			label=pairList[0].first;  //key
+			WS.push_back(label);	//add one
+		}
 		else{
 			//generator.nextInt(n); 0~n-1
-			int wind=mtrand2.randInt(cn-1);
+			//int wind=mtrand2.randInt(cn-1);
+			for (int j = 0; j < cn; ++j){
+				WS.push_back(pairList[j].first);
+			}
 			//cout<<"wind="<<wind<<endl;
-			label=pairList[wind].first;  //key randInt->[0~n]
+			//label=pairList[wind].first;  //key randInt->[0~n]
 		}
 
-		//add one
-		WS.push_back(label);
 
 	}
 	else{

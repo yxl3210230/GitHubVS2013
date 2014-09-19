@@ -428,32 +428,32 @@ int main(int argc, char *argv[])
 		}
 		tmp = readCommunitiesComp(arg1[i], result);
 		//show_result_community(result,stdout);
-
+		int co = 0;
 		for (j = 0; j < inputfiles.size(); j++){
 			//cout << "*";
 			fnmi.push_back(pair<string, double>(".\\" + arg2[i] + "\\" + inputfiles[j], 0));
 			if (readCommunities(fnmi.back().first, comp)){
 				//show_result_community(comp,stdout);
 				mi = calculate_nmi(comp, result, tmp);
-				cout << "( "<<mi<<" , "<<comparevertex()<<" )   ";
-				if ((j + 1) % 3 == 0){ cout << endl; }
+				cout << "("<<mi<<","<<comparevertex()<<")";
+				if ((j + 1 + co) % 4 == 0){ cout << endl; }
 				fnmi.back().second = mi;
 				//cout << inputfiles[i] << "\t" << mi << endl;
 			}
 			if (fnmi.size() == 10){
+				co += 2;
 				maxs.push_back(findmaxnmi(fnmi,fstr));
 				readCommunities(fstr, comp);
-				cout << fstr << endl;
+				cout << fstr << endl << "-------------------------------------------" << endl;
 				fsl.push_back(comparevertex());
 				fnmi.clear();
 
 			}
 		}
-		cout << endl;
 		if (maxs.empty()){
 			maxs.push_back(findmaxnmi(fnmi, fstr));
 			readCommunities(fstr, comp);
-			cout << fstr << endl;
+			cout << fstr << endl << "-------------------------------------------" << endl;
 			fsl.push_back(comparevertex());
 		}
 
