@@ -312,7 +312,8 @@ double computesd(vector<double>& vl)
 
 double comparevertex()
 {
-	int c1, c2, c3;
+	int c1, c2;
+	double c3;
 	map<int, vector<int> > tran;
 	map<int, vector<int> >::iterator mit;
 	vector<int> tmp;
@@ -340,7 +341,8 @@ double comparevertex()
 		}
 	}
 
-	c1 = c2 = c3 = 0;
+	c1 = c2 = 0;
+	c3 = 0;
 	
 	for (int i = 0; i < corvertex.size(); ++i){
 		if (tran[i + 1].size() > 1){
@@ -350,11 +352,13 @@ double comparevertex()
 			++c2;
 		}
 		if (corvertex[i].size() > 1 && tran[i + 1].size() > 1){
-			++c3;
+			int mtmp1 = corvertex[i].size() - tran[i + 1].size();
+			double mtmp2 = (-1) * (double)abs(mtmp1) / 2;
+			c3 += exp(mtmp2);
 		}
 	}
-	double tmp1 = c1 ? (double)c3 / c1 : 0;
-	double tmp2 = c2 ? (double)c3 / c2 : 0;
+	double tmp1 = c1 ? c3 / c1 : 0;
+	double tmp2 = c2 ? c3 / c2 : 0;
 
 	return (tmp1 + tmp2) ? 2 * tmp1*tmp2 / (tmp1 + tmp2) : 0;
 
@@ -418,6 +422,7 @@ int main(int argc, char *argv[])
 		inputfiles.clear();
 		fnmi.clear();
 		fsl.clear();
+		maxs.clear();
 
 		FindFiles(inputfiles, ".\\" + arg2[i]);
 		inputfiles.erase(inputfiles.begin(), inputfiles.begin() + 2);
@@ -468,7 +473,6 @@ int main(int argc, char *argv[])
 		cout << "S.D = " << gsd.back() << endl;
 		cout << "F-score = " << gfs.back() << endl;
 
-		maxs.clear();
 	}
 	cout << "---------------------------------!" << endl;
 	cout << "Global max = " << computeavg(gmax) << endl;
