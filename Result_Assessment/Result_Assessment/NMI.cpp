@@ -72,7 +72,7 @@ double result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int t
 			}
 		}
 
-		sum+=hxky/hx;
+		sum+=hx?hxky/hx:1;
 
 	}
 	//º∆À„H(X|Y)
