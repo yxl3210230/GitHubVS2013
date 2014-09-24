@@ -30,7 +30,7 @@ int element_compariosn(int total, int num1, int *set1, int num2, int *set2, doub
 
 double h(double p)
 {
-	return p==0?0:-p*log10(p);
+	return p==0?0:-p*log(p);
 }
 
 double result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int total)
@@ -42,13 +42,15 @@ double result_comparison(RESULT_COMMUNITY *comp, RESULT_COMMUNITY *result, int t
 
 	list=(double *)malloc(result->ncommunities*sizeof(double));
 
-	for(i=0;i<result->ncommunities;i++){
-		list[i]=-1;
-	}
 
-	for(i=0;i<comp->ncommunities;i++){
-		k=0;
-		hx=h((double)comp->nvertices[i]/total)+h(1-(double)comp->nvertices[i]/total);
+	for (i = 0; i < comp->ncommunities; i++){
+
+		for (j = 0; j < result->ncommunities; j++){
+			list[j] = -1;
+		}
+
+		k = 0;
+		hx = h((double)comp->nvertices[i] / total) + h(1 - (double)comp->nvertices[i] / total);
 		for(j=0;j<result->ncommunities;j++){
 			//¼ÆËãp
 			element_compariosn(total,comp->nvertices[i],comp->vertices[i],result->nvertices[j],result->vertices[j],p);
