@@ -545,8 +545,8 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	labelinflation(v,2);
 	sortVectorInt_Double(v->PQueue);
 
-	maxl = v->PQueue[0].first;
-	if (maxl > 0.15){
+	//maxl = v->PQueue[0].first;
+	//if (maxl > 0.15){
 		for (i = 1; i < v->PQueue.size(); i++){
 			if (v->PQueue[i].second == v->PQueue[0].second){
 				continue;
@@ -557,7 +557,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 			}
 		}
 		norm_probability(v->PQueue);
-	}
+	//}
 	
 }
 
@@ -805,23 +805,23 @@ void SLPA::GLPA_syn()
 	NODE *v, *nbv;
 	vector<pair<int, double>> nbp, snapelement;
 	vector<vector<pair<int, double>>> synlist, snapshot;
-	vector<string> output;
-	string line;
+	//vector<string> output;
+	//string line;
 	vector<double> psim(net->N, 0);
 	double sim;
 	vector<int> scount(net->N, 0);
 	bool endflag = false;
-	vector<vector<double>> co;
+	//vector<vector<double>> co;
 
 	cout << "Start iteration:";
 
-	for (i = 0; i < net->N; ++i){
-		line += int2str(net->NODES[i]->ID);
-		line += "\t";
-	}
-	output.push_back(line);
+	//for (i = 0; i < net->N; ++i){
+	//	line += int2str(net->NODES[i]->ID);
+	//	line += "\t";
+	//}
+	//output.push_back(line);
 
-	computeCoefficients(co);
+	//computeCoefficients(co);
 
 	for (t = 1; t <= maxT; t++){
 		cout << "*";
@@ -846,7 +846,8 @@ void SLPA::GLPA_syn()
 				for (j = 0; j < v->numNbs; j++){
 					//if (co[i][j] != 0){
 						nbv = v->nbList_P[j];
-						addLabeltoVector(nbp, nbv, co[i][j]);
+						//addLabeltoVector(nbp, nbv, co[i][j]);
+						addLabeltoVector(nbp, nbv, 1);
 					//}
 				}
 				//thresholdLabelInVector(nbp, v->numNbs);
@@ -856,14 +857,14 @@ void SLPA::GLPA_syn()
 				synlist.push_back(vector<pair<int,double>>());
 			}
 		}
-		line.clear();
+		//line.clear();
 		for (i = 0, j = 0, k = 0; i < net->N; ++i){
 			v = net->NODES[i];
 			//if (v->ID == 10)system("pause");
 			if (v->isToUpdate){
 				sim = computeSimilarity(synlist[i], v->PQueue);
-				line += dbl2str(sim);
-				line += "\t";
+				//line += dbl2str(sim);
+				//line += "\t";
 				if (sim == psim[i]){
 					++scount[i];
 				}
@@ -885,38 +886,39 @@ void SLPA::GLPA_syn()
 				}
 			}
 			else{
-				line += "*\t";
+				//line += "*\t";
 			}
 			//stateDetection(v);
 			//line += int2str(v->isToUpdate);
 			//line += " ";
 		}
-		output.push_back(line);
+		//output.push_back(line);
 
 		if (k == 0 || endflag){
 			//cout << "1";
-			endflag = true;
-			cout << "Quit?" << endl;
-			if (getchar() == 'q'){
+			//endflag = true;
+			//cout << "Quit?" << endl;
+			//if (getchar() == 'q'){
 				break;
-			}
+			//}
 		}
 
 	}
-	writeToTxt("output.txt", false, output);
+	//writeToTxt("output.txt", false, output);
 
 	cout << endl;
-	int noverlap = 0;
+	//int noverlap = 0;
 	for(int i=0;i<net->N;i++){
 		v = net->NODES[i];
 		norm_probability(v->PQueue);
 		sortVectorInt_Double(v->PQueue);
+		v->LQueue.clear();
 		//if (v->PQueue.size() > 1){
 		//	cout << v->ID << " : ";
 		//}
-		if (v->PQueue.size() != 1){
-			++noverlap;
-		}
+		//if (v->PQueue.size() != 1){
+		//	++noverlap;
+		//}
 		v->LQueue.clear();
 		for (j = 0; j < v->PQueue.size(); j++){
 			//if (v->PQueue.size() > 1){
@@ -928,7 +930,7 @@ void SLPA::GLPA_syn()
 		//	cout << endl;
 		//}
 	}
-	cout << "overlap = " << noverlap << endl;
+	//cout << "overlap = " << noverlap << endl;
 	cout << "Iteration(" << t << ") is over (takes " << difftime(time(NULL), st) << " seconds)" << endl;
 }
 
