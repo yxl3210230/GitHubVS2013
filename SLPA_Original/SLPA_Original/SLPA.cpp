@@ -542,11 +542,11 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	int i, j, n, m;
 	double tmp, maxl;
 
-	labelinflation(v,2);
 	sortVectorInt_Double(v->PQueue);
+	labelinflation(v,2);
 
-	//maxl = v->PQueue[0].first;
-	//if (maxl > 0.15){
+	maxl = v->PQueue[0].first;
+	if (maxl >= 0.15){
 		for (i = 1; i < v->PQueue.size(); i++){
 			if (v->PQueue[i].second == v->PQueue[0].second){
 				continue;
@@ -557,7 +557,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 			}
 		}
 		norm_probability(v->PQueue);
-	//}
+	}
 	
 }
 
@@ -912,7 +912,6 @@ void SLPA::GLPA_syn()
 		v = net->NODES[i];
 		norm_probability(v->PQueue);
 		sortVectorInt_Double(v->PQueue);
-		v->LQueue.clear();
 		//if (v->PQueue.size() > 1){
 		//	cout << v->ID << " : ";
 		//}
