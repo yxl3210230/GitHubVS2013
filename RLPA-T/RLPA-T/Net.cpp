@@ -41,12 +41,39 @@ Net::Net(string path,string name,string fname){
 	fileName=fname;
 }
 
+Net::Net(const Net& net){
+	N = net.N;
+	M = net.M;
+	networkPath = net.networkPath;
+	netName = net.netName;
+	fileName = net.fileName;
+	NODES = net.NODES;
+	NODESTABLE = net.NODESTABLE;
+}
+
 
 Net::~Net() {
 	while (!NODES.empty()) {
 		delete NODES.back();
 		NODES.pop_back();
 	}
+}
+
+Net& Net::operator=(const Net& net){
+	if (this == &net)//如果自己给自己赋值则直接返回
+	{
+		return *this;
+	}
+
+	N = net.N;
+	M = net.M;
+	networkPath = net.networkPath;
+	netName = net.netName;
+	fileName = net.fileName;
+	NODES = net.NODES;
+	NODESTABLE = net.NODESTABLE;
+
+	return *this;
 }
 
 int Net::getNumberofEdges(){

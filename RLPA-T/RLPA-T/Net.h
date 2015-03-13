@@ -36,15 +36,16 @@ public:
 	vector<NODE *> NODES;
 	map<int,NODE *> NODESTABLE;
 
-	string networkPath;
-	string netName;
-	string fileName; //full path
+	string networkPath;					//没用
+	string netName;						//网络名，不包含扩展名的文件名
+	string fileName; //full path		//网络的完整路径
 	//---------------
 	//---------------
 
 	//---------------
 	//Net();
 	Net(string path,string name,string fname);
+	Net(const Net& net);
 	virtual ~Net();
 	//---------------
 	int getNumberofEdges();
@@ -55,6 +56,8 @@ public:
 	void pre_convert_nbSet2_nbList();
 	void showVertices();
 	void showVertices_Table();
+
+	Net& operator=(const Net& net);		//新增
 
 
 	//void post_UseLargestComponent();

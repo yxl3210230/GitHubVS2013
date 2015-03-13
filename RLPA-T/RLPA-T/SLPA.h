@@ -45,9 +45,11 @@ public:
 	//		network parameters
 	//---------------------------
 	Net* net;
+	Net* lastnet;
 	string netName;
 	string fileName_net;
-	string networkPath;
+	string networkPath;		//Œﬁ”√
+	vector<string> inputFiles;
 
 	bool isUseLargestComp; //***
 	//---------------------------
@@ -79,6 +81,7 @@ public:
 
 	void initLQueue();
 	void initPQueue();
+	void compareNetwork();
 	int chooseLabel(NODE *v);
 	void addLabeltoLQueue(NODE *v, int label);
 	void addLabeltoLQueue1(NODE *v, int label);

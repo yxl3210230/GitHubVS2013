@@ -24,19 +24,10 @@ typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
 bool SLPA::isDEBUG=false;
 
 SLPA::SLPA(vector<string> inputFileName,vector<double> THRS,int maxRun,int maxT,string outputDir,bool isUseLargestComp,int numThreads) {
-	//inputFileName: the full path //inputFileName已改为目录名
+	//inputFileName: the full path 
 	//netName: short filename(non-suf)
 
-	//---------------------------
-	//Extract the fileName
-	//---------------------------
-	string a,b;
-	fileName_net=inputFileName[0];
-
-	extractFileName_FullPath(inputFileName[0],netName,a,b);
-
-	networkPath="";
-	net=new Net(networkPath,netName,fileName_net);
+	inputFiles = inputFileName;
 
 	//---------------------------
 	//		GLPA parameters
@@ -78,10 +69,13 @@ void SLPA::start(){
 	//  load network
 	//---------------------------
 	bool isSymmetrize=true; //symmetrize the edges
+	string a, b;//无用
 
-	net->readNetwork_EdgesList(fileName_net,isUseLargestComp,isSymmetrize);
-	cout<<"Network info: N="<<net->N<< " M="<<net->M<<"(symmetric)"<<endl;
-	cout<<"load "<<fileName_net<< " done.."<<endl;
+	lastnet = new Net("lastNet", "", "");
+
+	//net->readNetwork_EdgesList(fileName_net,isUseLargestComp,isSymmetrize);
+	//cout<<"Network info: N="<<net->N<< " M="<<net->M<<"(symmetric)"<<endl;
+	//cout<<"load "<<fileName_net<< " done.."<<endl;
 
 	//net.showVertices();
 	//net->showVertices_Table();
@@ -94,14 +88,27 @@ void SLPA::start(){
 	//---------------------------
 	//  	game
 	//---------------------------
-	for(int run=1;run<=maxRun;run++){
+	//for(int run=1;run<=maxRun;run++){
+	for (int run = 0; run < inputFiles.size();++run){			//对每个输入的网络进行计算
 		//if(isDEBUG)
-		cout<<" run="<<run<<"......"<<endl;
+		cout << " run=" << inputFiles[run] << "......" << endl;
+
+		extractFileName_FullPath(inputFiles[run], netName, a, b);
+		net = new Net("thisNet", netName, inputFiles[run]);
+		net->readNetwork_EdgesList(net->fileName, isUseLargestComp, isSymmetrize);
+		cout << "Network info: N=" << net->N << " M=" << net->M << "(symmetric)" << endl;
+		cout<<"load "<<fileName_net<< " done.."<<endl;
 
 		//1.initial WQ and clear network
-		//initWQueue_more();
-		//initLQueue();
-		initPQueue();
+		
+		if (run == 0){
+			initPQueue();
+		}
+		else{
+			//比对
+			compareNetwork();
+		}
+		
 
 		//2.GLPA
 		if(true){
@@ -131,6 +138,10 @@ void SLPA::start(){
 
 			//cout<<" Take :" <<difftime(time(NULL),st)<< " seconds."<<endl;
 		}
+
+		delete lastnet;
+		lastnet = net;
+
 	}
 }
 
@@ -199,6 +210,24 @@ void SLPA::initPQueue()
 	}
 
 	cout << " Take :" << difftime(time(NULL), st) << " seconds." << endl;
+}
+
+void SLPA::compareNetwork()
+{
+	NODE *v;
+	for (int i = 0; i < net->N; ++i){
+		v = net->NODES[i];
+		map<int, NODE*>::iterator it;
+		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
+			v->PQueue = it->second->PQueue;
+		}
+		else{
+			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+		}
+		v->isToUpdate = 1;
+		v->isChanged = 0;
+	}
+
 }
 
 

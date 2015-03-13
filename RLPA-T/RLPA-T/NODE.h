@@ -27,24 +27,24 @@ typedef std::tr1::unordered_set<int> UOrderedSet_INT;
 class NODE {
 public:
 	int ID;
-	int numNbs;
+	int numNbs;		//邻节点数
 	//vector<int> nbList;
-	vector<NODE *> nbList_P;   //the pointer version
+	vector<NODE *> nbList_P;   //the pointer version//邻节点集，NODE集
 	//set<int> nbSet;
-	UOrderedSet_INT nbSet;
+	UOrderedSet_INT nbSet;	//邻节点集，int集
 
 	//----------------
 	//SLPA
-	vector<int> WQueue;
+	vector<int> WQueue;		//无用
 	//map<int,int> WQHistgram;
-	vector<pair<int,int> > WQHistMapEntryList;
+	vector<pair<int,int> > WQHistMapEntryList;	//无用
 
-	vector<pair<int,int>> LQueue;
-	int nlabels;
+	vector<pair<int,int>> LQueue;	//无用
+	int nlabels;	//该节点的标签数量	//已无用
 
-	vector<pair<int, double>> PQueue;
-	int isToUpdate;
-	int isChanged;
+	vector<pair<int, double>> PQueue;	//标签集，(标签，评分)
+	int isToUpdate;	//下一轮迭代是否需要更新标签
+	int isChanged;	//本轮迭代该节点标签种类是否发生改变	//已无用
 
 	//----------------
 	int status;
@@ -59,6 +59,20 @@ public:
 		status=0;
 		t=0;
 	};
+
+	NODE(const NODE& node){
+		ID = node.ID;
+		numNbs = node.numNbs;
+		nbList_P = node.nbList_P;
+		nbSet = node.nbSet;
+		PQueue = node.PQueue;
+		isToUpdate = node.isToUpdate;
+
+		status = 0;
+		t = 0;
+	};
+
+	NODE& operator=(const NODE& node);		//新增
 
 	virtual ~NODE();
 	//----------------

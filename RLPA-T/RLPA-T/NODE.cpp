@@ -21,3 +21,20 @@ NODE::NODE() {
 NODE::~NODE() {
 	// TODO Auto-generated destructor stub
 }
+
+NODE& NODE::operator=(const NODE& node){
+	if (this == &node)//如果自己给自己赋值则直接返回
+	{
+		return *this;
+	}
+	ID = node.ID;
+	numNbs = node.numNbs;
+	nbList_P = node.nbList_P;
+	nbSet = node.nbSet;
+	PQueue = node.PQueue;
+	isToUpdate = node.isToUpdate;
+
+	status = 0;
+	t = 0;
+	return *this;
+}
