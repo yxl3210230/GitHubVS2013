@@ -28,6 +28,7 @@ class NODE {
 public:
 	int ID;
 	int numNbs;		//邻节点数
+	int influ;
 	//vector<int> nbList;
 	vector<NODE *> nbList_P;   //the pointer version//邻节点集，NODE集
 	//set<int> nbSet;

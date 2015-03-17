@@ -105,7 +105,7 @@ void SLPA::start(){
 			initPQueue();
 		}
 		else{
-			//比对
+			//比对网络（增量式）
 			compareNetwork();
 		}
 		
@@ -206,11 +206,30 @@ void SLPA::initPQueue()
 		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
 		v->isToUpdate = 1;
 		v->isChanged = 0;
+		v->influ = 1;
 
 	}
 
 	cout << " Take :" << difftime(time(NULL), st) << " seconds." << endl;
 }
+
+//void SLPA::compareNetwork()
+//{
+//	NODE *v;
+//	for (int i = 0; i < net->N; ++i){
+//		v = net->NODES[i];
+//		map<int, NODE*>::iterator it;
+//		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
+//			v->PQueue = it->second->PQueue;
+//		}
+//		else{
+//			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+//		}
+//		v->isToUpdate = 1;
+//		v->isChanged = 0;
+//	}
+//
+//}
 
 void SLPA::compareNetwork()
 {
@@ -219,15 +238,35 @@ void SLPA::compareNetwork()
 		v = net->NODES[i];
 		map<int, NODE*>::iterator it;
 		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
-			v->PQueue = it->second->PQueue;
+			if (v->nbSet == it->second->nbSet){		//未改变的节点
+				v->PQueue = it->second->PQueue;
+				v->influ = 0;
+			}
+			else{		//受影响的节点
+				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+				v->influ = 1;
+			}
 		}
-		else{
+		else{			//新增节点
 			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+			v->influ = 1;
 		}
 		v->isToUpdate = 1;
 		v->isChanged = 0;
 	}
 
+	for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
+		v = net->NODES[i];
+		if (v->influ == 1){
+			continue;
+		}
+		for (int j = 0; j < v->numNbs; ++j){
+			if (v->nbList_P[j]->influ == 1){
+				v->influ = 1;
+				break;
+			}
+		}
+	}
 }
 
 
@@ -842,6 +881,7 @@ void SLPA::GLPA_syn()
 	vector<int> scount(net->N, 0);
 	bool endflag = false;
 	//vector<vector<double>> co;
+	set<NODE *> influs;
 
 	cout << "Start iteration:";
 
@@ -863,7 +903,7 @@ void SLPA::GLPA_syn()
 		for (i = 0; i<net->N; i++){
 			v = net->NODES[i];
 			v->isChanged = 0;
-			if (v->isToUpdate){
+			if (v->isToUpdate && v->influ){
 				nbp.clear();
 				nbp.reserve(100);
 				
@@ -888,10 +928,12 @@ void SLPA::GLPA_syn()
 			}
 		}
 		//line.clear();
+		influs.clear();
 		for (i = 0, j = 0, k = 0; i < net->N; ++i){
+			//if (i == 702)system("pause");
 			v = net->NODES[i];
 			//if (v->ID == 10)system("pause");
-			if (v->isToUpdate){
+			if (v->isToUpdate && v->influ){
 				sim = computeSimilarity(synlist[i], v->PQueue);
 				//line += dbl2str(sim);
 				//line += "\t";
@@ -901,6 +943,9 @@ void SLPA::GLPA_syn()
 				else{
 					psim[i] = sim;
 					scount[i] = 0;
+					for (int ii = 0; ii < v->numNbs; ++ii){		//若相似度改变，则激活周围节点的influ
+						influs.insert(v->nbList_P[ii]);
+					}
 				}
 				if (scount[i] != 5){
 					//double dco = t == 1 ? 1 : pow(0.95, t);
@@ -922,6 +967,11 @@ void SLPA::GLPA_syn()
 			//line += int2str(v->isToUpdate);
 			//line += " ";
 		}
+
+		for (set<NODE *>::iterator setit = influs.begin(); setit != influs.end(); ++setit){
+			(*setit)->influ = 1;
+		}
+
 		//output.push_back(line);
 
 		if (k == 0 || endflag){
