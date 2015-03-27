@@ -22,9 +22,9 @@
 #include <algorithm>
 #include <cctype>
 
-#include "LabelRank.h"
+//#include "LabelRank.h"
 //#include <tr1/unordered_set>
-
+typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
 typedef std::tr1::unordered_set<int> UOrderedSet_INT;
 typedef std::tr1::unordered_set<NODE *> UOrderedSet_NODEptr;
 
@@ -323,7 +323,8 @@ vector<vector<int>*> Net::post_removeSubset_UorderedHashTable_cpmpointer(
 	//vector<int> indicators;
 	//for(int i=0;i<cpm.size();i++)
 	//	indicators.push_back(1);  //1-default ok
-	int indicators[cpm.size()];
+	//int indicators[cpm.size()];
+	int *indicators = new int[cpm.size()];
 	for (int i = 0; i < cpm.size(); i++)
 		indicators[i] = 1;  		  //1-default ok
 
@@ -660,7 +661,7 @@ void Net::pre_findGiantComponents() {
 	//change NODESTABLE and N
 	NODESTABLE.clear();
 	for (int i = 0; i < coms[0].size(); i++)
-		NODESTABLE.insert(pair<int, NODE *>(v->ID, coms[0][i]));
+		NODESTABLE.insert(pair<int, NODE *>(coms[0][i]->ID, coms[0][i]));
 
 	N = NODESTABLE.size();
 	M = getNumberofEdges();

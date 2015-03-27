@@ -51,7 +51,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -78,14 +78,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CommonFuns.h" />
     <ClInclude Include="CommonFuns_Measure.h" />
+    <ClInclude Include="CommonFuns_TMP.h" />
     <ClInclude Include="CommonFuns_TMP_Measure.h" />
     <ClInclude Include="DisjointM.h" />
     <ClInclude Include="fileOpts.h" />
+    <ClInclude Include="MersenneTwister.h" />
     <ClInclude Include="Net.h" />
     <ClInclude Include="NODE.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommonFuns.cpp" />
     <ClCompile Include="CommonFuns_Measure.cpp" />
     <ClCompile Include="DisjointM.cpp" />
     <ClCompile Include="fileOpts.cpp" />

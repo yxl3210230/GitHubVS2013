@@ -14,7 +14,7 @@ using namespace std;
 void FindFiles(vector<string>& sFileNames,string sPath)
 {
 	WIN32_FIND_DATAA wfd;
-
+	string tmp = sPath;
 	sPath += "\\*.*";
 
 	HANDLE hFile = FindFirstFile(sPath.c_str(),&wfd);
@@ -27,7 +27,7 @@ void FindFiles(vector<string>& sFileNames,string sPath)
 
 	do{
 
-		sFileNames.push_back(wfd.cFileName);
+		sFileNames.push_back(tmp+"\\"+wfd.cFileName);
 
 	}while(FindNextFile(hFile,&wfd));
 
@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
 
 
 	if (argc == 3){
-		cpmdir = argv[1];
-		netdir = argv[2];
+		netdir = argv[1];
+		cpmdir = argv[2];
 	}
 	else{
 		cout << "arguments error!" << endl;
@@ -58,10 +58,12 @@ int main(int argc, char *argv[])
 
 	FindFiles(cpmfiles, ".\\" + cpmdir);
 	FindFiles(netfiles, ".\\" + netdir);
+	cpmfiles.erase(cpmfiles.begin(), cpmfiles.begin() + 2);
+	netfiles.erase(netfiles.begin(), netfiles.begin() + 2);
 
 	for (i = 0; i < cpmfiles.size() && i < netfiles.size(); ++i){
 		DisjointM mq;
-		Q = mq.calQ_unw(cpmfiles[i], netfiles[i], NULL, true, true, 0);
+		Q = mq.calQ_unw(cpmfiles[i], netfiles[i], NULL, false, true, 0);
 		cout << cpmfiles[i] << "\t" << Q << endl;
 		if (i % 20 == 0 && i != 0){
 			system("pause");

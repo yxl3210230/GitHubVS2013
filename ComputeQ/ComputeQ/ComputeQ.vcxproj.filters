@@ -33,6 +33,15 @@
     <ClInclude Include="CommonFuns_Measure.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CommonFuns.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonFuns_TMP.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MersenneTwister.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DisjointM.cpp">
@@ -51,6 +60,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="RA_main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonFuns.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
