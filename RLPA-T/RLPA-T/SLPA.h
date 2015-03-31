@@ -51,6 +51,10 @@ public:
 	string networkPath;		//无用
 	vector<string> inputFiles;
 
+	set<int> labelSet;				//标签集
+	vector<vector<int> > splcpm;	//新增的连通分量
+	int remix = 0;
+	vector<int> remixnode;
 	bool isUseLargestComp; //***
 	//---------------------------
 	//		SLPA parameters

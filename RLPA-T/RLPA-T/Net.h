@@ -64,7 +64,7 @@ public:
 	//void post_UseLargestComponent_UnorderSet_cpmpointer();
 	//vector<vector<int> > pre_findAllConnectedComponents_InOneCluster_CPM(vector<vector<int> >& cpm);
 	//vector<vector<int> > pre_findAllConnectedComponents_InOneCluster_CPMpointer_UnorderSet(vector<vector<int> >& cpm);
-
+	vector<vector<int>*> pre_findAllConnectedComponents_InOneCluster_CPM(vector<vector<int>*>& cpm, vector<vector<int> >& splcpm); 
 
 	void pre_findGiantComponents();
 

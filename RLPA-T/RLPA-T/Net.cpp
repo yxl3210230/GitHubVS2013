@@ -236,7 +236,106 @@ void Net::pre_convert_nbSet2_nbList(){
 	}
 }
 
+vector<vector<int>* >  Net::pre_findAllConnectedComponents_InOneCluster_CPM(vector<vector<int>*>& cpm, vector<vector<int> >& splcpm){
+	//***The cluster could be a sub cluster or the whole network***
+	//INPUT: CPM(line contains one cluster wiht node ids). if a com consists of separate components, they become
+	//       separate comms.
+	// Trick: using set instead of list
 
+	//OUTPUT: CPM sorted in **decreasing** cluster size order
+	map<int, NODE *>::iterator mit;
+	NODE *v;
+	int count = 0;
+
+	SLPA::sort_cpm_pointer(cpm);
+
+	vector<vector<int>*> newcpm;
+
+	for (int i = 0; i<cpm.size(); i++){
+		count = 0;
+		//for each community
+		set<int> Com(cpm[i]->begin(), cpm[i]->end());  //copy one com
+		cout << "All" << i << ":";
+		for (set<int>::iterator sit = Com.begin(); sit != Com.end(); ++sit){
+			cout << (*sit) << " ";
+		}
+		cout << endl;
+		while (Com.size()>0){
+			//for each component
+			set<int>  exploredSet;
+			set<int>  unexploredSet;
+			++count;
+			//first node
+			int vid = getFirstElemnet_Set_PRIMITIVE<int>(Com);
+
+			//set<int> nbSet=NODESTABLE.get(vid).nbSet;
+			mit = NODESTABLE.find(vid);
+			v = mit->second;
+			set<int> nbSet(v->nbSet.begin(), v->nbSet.end());
+
+
+			//Key**: confined to one cluster
+			set<int> newnbSet = mySet_Intersect_PRIMITIVE<int>(nbSet, Com);       //CollectionFuns.interSet(nbSet,Com);
+			unexploredSet.insert(newnbSet.begin(), newnbSet.end());  //unexploredSet.addAll(newnbSet);
+			Com = mySet_Diff_PRIMITIVE<int>(Com, newnbSet);                        //Com.removeAll(newnbSet);
+
+			exploredSet.insert(vid);   //exploredSet.add(vid);
+			Com.erase(vid);            //Com.remove(vid);
+
+
+			while (unexploredSet.size()>0){
+				//first node
+				vid = getFirstElemnet_Set_PRIMITIVE<int>(unexploredSet);  //vid=getFirstElemnetInSet(unexploredSet);
+				mit = NODESTABLE.find(vid);					 //nbSet=NODESTABLE.get(vid).nbSet;
+				v = mit->second;
+				nbSet.clear();
+				set<int> xx(v->nbSet.begin(), v->nbSet.end());
+				nbSet = xx;
+
+				//***Key: confined to one cluster
+				newnbSet.clear();
+				newnbSet = mySet_Intersect_PRIMITIVE<int>(nbSet, Com);       //CollectionFuns.interSet(nbSet,Com);
+				unexploredSet.insert(newnbSet.begin(), newnbSet.end());  //unexploredSet.addAll(newnbSet);
+				Com = mySet_Diff_PRIMITIVE<int>(Com, newnbSet);                        //Com.removeAll(newnbSet);
+
+				unexploredSet.erase(vid); //unexploredSet.remove(vid);
+				exploredSet.insert(vid);  //exploredSet.add(vid);
+			}
+
+			//get a connected component
+			//vector<int> oneComponent(exploredSet.begin(),exploredSet.end());
+			vector<int>* oneComponent_ptr = new vector<int>();
+			for (set<int>::iterator it = exploredSet.begin();
+				it != exploredSet.end(); ++it) {
+				oneComponent_ptr->push_back(*it);
+				cout << (*it) << " ";
+			}
+			cout << endl;
+			newcpm.push_back(oneComponent_ptr);
+			if (count>1){
+				splcpm.push_back(*oneComponent_ptr);
+				//getchar();
+			}
+		}
+	}
+
+	//------------------------
+	//sorting
+	SLPA::sort_cpm_pointer(newcpm);   //	Collections.sort(newcpm,ComCPMsizedec);
+
+	//------------------------
+	if (newcpm.size() != cpm.size()){
+		cout << "before K=" << cpm.size() << " after post_sameLabelDisconnectedComponents() K=" << newcpm.size() << endl;
+		//System.out.println("------------before----------");
+		//show_cpm(cpm);
+		//System.out.println("------------after----------");
+		//show_cpm(newcpm);
+	}
+	for (int i = 0; i < cpm.size(); i++)
+		delete cpm[i];
+
+	return newcpm;
+}
 
 
 /*
