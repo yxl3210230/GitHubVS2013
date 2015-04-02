@@ -21,7 +21,7 @@
 #define INFLATION 2
 #define CUTOFF 0.1
 #define STOPN 5
-#define REMIXTIME 200
+#define REMIXTIME 150
 
 typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
 
@@ -329,11 +329,15 @@ void SLPA::compareNetwork()
 	}
 
 	if (remix == 1){
+		map<int, NODE*>::iterator mit;
 		for (int i = 0; i < remixnode.size(); ++i){
-			v = net->NODESTABLE.find(remixnode[i])->second;
-			v->PQueue.clear();
-			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
-			v->influ = 1;
+			mit = net->NODESTABLE.find(remixnode[i]);
+			if (mit != net->NODESTABLE.end()){
+				v = mit->second;
+				v->PQueue.clear();
+				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+				v->influ = 1;
+			}
 		}
 	}
 
