@@ -87,7 +87,7 @@ public:
 
 	void initLQueue();
 	void initPQueue();
-	void compareNetwork();
+	double compareNetwork();
 	int chooseLabel(NODE *v);
 	void addLabeltoLQueue(NODE *v, int label);
 	void addLabeltoLQueue1(NODE *v, int label);

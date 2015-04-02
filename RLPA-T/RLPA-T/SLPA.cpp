@@ -18,10 +18,10 @@
 
 #include <pthread.h>
 
-#define INFLATION 2
-#define CUTOFF 0.1
+#define INFLATION 1
+#define CUTOFF 0.5
 #define STOPN 5
-#define REMIXTIME 150
+#define REMIXTIME 200
 
 typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
 
@@ -51,7 +51,7 @@ SLPA::SLPA(vector<string> inputFileName,vector<double> THRS,int maxRun,int maxT,
 
 	this->numThreads=numThreads;
 	this->remix = 0;
-	this->accStopTime = 0;
+	this->accStopTime = -1;
 
 	start();
 }
@@ -100,7 +100,7 @@ void SLPA::start(){
 			remix = 1;
 			accStopTime = 0;
 			++countremix;
-			cout << "remix the max cpm............................................!!!" << endl;
+			cout << "remix the net............................................!!!" << endl;
 		}
 		cout << " run=" << inputFiles[run] << "......" << endl;
 
@@ -112,12 +112,16 @@ void SLPA::start(){
 
 		//1.initial WQ and clear network
 		
-		if (run == 0){
+		if (run == 0 || remix == 1){
 			initPQueue();
 		}
 		else{
-			//比对网络（增量式）
-			compareNetwork();
+			//比对网络
+			if (compareNetwork() > 0.5){
+				initPQueue();
+				++countremix;
+				cout << "remix the net............................................!!!" << endl;
+			}
 		}
 		
 
@@ -230,83 +234,83 @@ void SLPA::initPQueue()
 }
 
 
-void SLPA::compareNetwork()
+double SLPA::compareNetwork()
 {
 	NODE *v;
-	int labelid, vid, randlabel;
-	set<int> ltmp1, ltmp2;
-	map<int, NODE *>::iterator mit;
-	if (splcpm.size() != 0){
-		/*for(int i = 0; i < splcpm.size(); ++i){
-		for(int j = 0; j < splcpm[i].size(); ++j){
-		cout<<splcpm[i][j]<<" ";
-		}
-		cout<<endl;
-		}*/
+	//int labelid, vid, randlabel;
+	//set<int> ltmp1, ltmp2;
+	//map<int, NODE *>::iterator mit;
+	//if (splcpm.size() != 0){
+	//	/*for(int i = 0; i < splcpm.size(); ++i){
+	//	for(int j = 0; j < splcpm[i].size(); ++j){
+	//	cout<<splcpm[i][j]<<" ";
+	//	}
+	//	cout<<endl;
+	//	}*/
 
-		for (int i = 0; i < splcpm.size(); ++i){
-			ltmp1.clear();
-			vid = splcpm[i][0];
-			mit = lastnet->NODESTABLE.find(vid);
-			v = mit->second;
-			for (int k = 0; k < v->PQueue.size(); ++k){
-				ltmp1.insert(v->PQueue[k].first);
-			}
-			if (ltmp1.size() == 1){
-				labelid = getFirstElemnet_Set_PRIMITIVE<int>(ltmp1);
-			}
-			else{
-				for (int j = 1; j < splcpm[i].size(); ++j){
-					ltmp2.clear();
-					vid = splcpm[i][j];
-					mit = lastnet->NODESTABLE.find(vid);
-					v = mit->second;
-					for (int k = 0; k < v->PQueue.size(); ++k){
-						ltmp2.insert(v->PQueue[k].first);
-					}
-					ltmp1 = mySet_Intersect_PRIMITIVE(ltmp1, ltmp2);
-					if (ltmp1.size() == 1){
-						labelid = getFirstElemnet_Set_PRIMITIVE<int>(ltmp1);
-						break;
-					}
-				}
-				if (ltmp1.size() != 1){
-					cout << "ltmp != 1!!" << ltmp1.size() << endl;
-					for (int j = 0; j < splcpm[i].size(); ++j){
-						cout << splcpm[i][j] << ":";
-						v = (lastnet->NODESTABLE.find(splcpm[i][j]))->second;
-						/*for(int k = 0; k < v->PQueue.size(); ++k){
-						cout<<"("<<v->PQueue[k].first<<","<<v->PQueue[k].second<<")";
-						}
-						cout<<endl;*/
-						v->PQueue.clear();
-						srand((unsigned)time(NULL));
-						do{
-							randlabel = rand();
-						} while (labelSet.find(randlabel) != labelSet.end());
-						v->PQueue.push_back(pair<int, double>(randlabel, 1.0));
-					}
-					//exit(1);
-					//labelid = getFirstElemnet_Set_PRIMITIVE<int>(ltmp1);
-				}
-			}
-			srand((unsigned)time(NULL));
-			do{
-				randlabel = rand();
-			} while (labelSet.find(randlabel) != labelSet.end());
-			for (int j = 0; j < splcpm[i].size(); ++j){
-				vid = splcpm[i][j];
-				mit = lastnet->NODESTABLE.find(vid);
-				v = mit->second;
-				for (int k = 0; k < v->PQueue.size(); ++k){
-					if (v->PQueue[k].first == labelid){
-						v->PQueue[k].first = randlabel;
-					}
-				}
-			}
-		}
-	}
-
+	//	for (int i = 0; i < splcpm.size(); ++i){
+	//		ltmp1.clear();
+	//		vid = splcpm[i][0];
+	//		mit = lastnet->NODESTABLE.find(vid);
+	//		v = mit->second;
+	//		for (int k = 0; k < v->PQueue.size(); ++k){
+	//			ltmp1.insert(v->PQueue[k].first);
+	//		}
+	//		if (ltmp1.size() == 1){
+	//			labelid = getFirstElemnet_Set_PRIMITIVE<int>(ltmp1);
+	//		}
+	//		else{
+	//			for (int j = 1; j < splcpm[i].size(); ++j){
+	//				ltmp2.clear();
+	//				vid = splcpm[i][j];
+	//				mit = lastnet->NODESTABLE.find(vid);
+	//				v = mit->second;
+	//				for (int k = 0; k < v->PQueue.size(); ++k){
+	//					ltmp2.insert(v->PQueue[k].first);
+	//				}
+	//				ltmp1 = mySet_Intersect_PRIMITIVE(ltmp1, ltmp2);
+	//				if (ltmp1.size() == 1){
+	//					labelid = getFirstElemnet_Set_PRIMITIVE<int>(ltmp1);
+	//					break;
+	//				}
+	//			}
+	//			if (ltmp1.size() != 1){
+	//				cout << "ltmp != 1!!" << ltmp1.size() << endl;
+	//				for (int j = 0; j < splcpm[i].size(); ++j){
+	//					cout << splcpm[i][j] << ":";
+	//					v = (lastnet->NODESTABLE.find(splcpm[i][j]))->second;
+	//					/*for(int k = 0; k < v->PQueue.size(); ++k){
+	//					cout<<"("<<v->PQueue[k].first<<","<<v->PQueue[k].second<<")";
+	//					}
+	//					cout<<endl;*/
+	//					v->PQueue.clear();
+	//					srand((unsigned)time(NULL));
+	//					do{
+	//						randlabel = rand();
+	//					} while (labelSet.find(randlabel) != labelSet.end());
+	//					v->PQueue.push_back(pair<int, double>(randlabel, 1.0));
+	//				}
+	//				//exit(1);
+	//				//labelid = getFirstElemnet_Set_PRIMITIVE<int>(ltmp1);
+	//			}
+	//		}
+	//		srand((unsigned)time(NULL));
+	//		do{
+	//			randlabel = rand();
+	//		} while (labelSet.find(randlabel) != labelSet.end());
+	//		for (int j = 0; j < splcpm[i].size(); ++j){
+	//			vid = splcpm[i][j];
+	//			mit = lastnet->NODESTABLE.find(vid);
+	//			v = mit->second;
+	//			for (int k = 0; k < v->PQueue.size(); ++k){
+	//				if (v->PQueue[k].first == labelid){
+	//					v->PQueue[k].first = randlabel;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
+	int nochg = 0;
 	for (int i = 0; i < net->N; ++i){
 		v = net->NODES[i];
 		map<int, NODE*>::iterator it;
@@ -314,6 +318,7 @@ void SLPA::compareNetwork()
 			if (v->nbSet == it->second->nbSet){		//未改变的节点
 				v->PQueue = it->second->PQueue;
 				v->influ = 0;
+				++nochg;
 			}
 			else{		//受影响的节点
 				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
@@ -328,7 +333,7 @@ void SLPA::compareNetwork()
 		v->isChanged = 0;
 	}
 
-	if (remix == 1){
+	/*if (remix == 1){
 		map<int, NODE*>::iterator mit;
 		for (int i = 0; i < remixnode.size(); ++i){
 			mit = net->NODESTABLE.find(remixnode[i]);
@@ -339,7 +344,8 @@ void SLPA::compareNetwork()
 				v->influ = 1;
 			}
 		}
-	}
+		remix = 0;
+	}*/
 
 	for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
 		v = net->NODES[i];
@@ -353,6 +359,11 @@ void SLPA::compareNetwork()
 			}
 		}
 	}
+	double chgnet = 1 - ((double)nochg / net->N);
+	double chglastnet = 1 - ((double)nochg / lastnet->N);
+	double chgrate = chgnet>chglastnet ? chgnet : chglastnet;
+	cout << "change rate = " << chgrate << endl;
+	return chgrate;
 
 }
 
@@ -1429,9 +1440,9 @@ void SLPA::post_threshold_createCPM_pointer(int thrc,string fileName){
 	//	remix = 0;
 	//	remixnode.clear();
 	//}
-	if (accStopTime > REMIXTIME){
+	/*if (accStopTime > REMIXTIME){
 		remixnode = *cpm[0];
-	}
+	}*/
 	st=time(NULL);
 	write2txt_CPM_pointer(fileName,cpm);
 	//cout<<"write2tx takes :" <<difftime(time(NULL),st)<< " seconds."<<endl;
