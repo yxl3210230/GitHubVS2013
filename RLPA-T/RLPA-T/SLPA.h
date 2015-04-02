@@ -53,8 +53,10 @@ public:
 
 	set<int> labelSet;				//标签集
 	vector<vector<int> > splcpm;	//新增的连通分量
-	int remix = 0;
+	int remix;
 	vector<int> remixnode;
+	int accStopTime;
+
 	bool isUseLargestComp; //***
 	//---------------------------
 	//		SLPA parameters

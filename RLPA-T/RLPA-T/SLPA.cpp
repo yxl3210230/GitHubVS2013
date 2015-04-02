@@ -18,6 +18,10 @@
 
 #include <pthread.h>
 
+#define INFLATION 2
+#define CUTOFF 0.1
+#define STOPN 5
+#define REMIXTIME 200
 
 typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
 
@@ -46,8 +50,8 @@ SLPA::SLPA(vector<string> inputFileName,vector<double> THRS,int maxRun,int maxT,
 	this->outputDir=outputDir;
 
 	this->numThreads=numThreads;
-
-
+	this->remix = 0;
+	this->accStopTime = 0;
 
 	start();
 }
@@ -70,6 +74,7 @@ void SLPA::start(){
 	//---------------------------
 	bool isSymmetrize=true; //symmetrize the edges
 	string a, b;//无用
+	int countremix = 0;
 
 	lastnet = new Net("lastNet", "", "");
 
@@ -90,10 +95,12 @@ void SLPA::start(){
 	//---------------------------
 	//for(int run=1;run<=maxRun;run++){
 	for (int run = 0; run < inputFiles.size();++run){			//对每个输入的网络进行计算
-		
-		if (remix == 1){
-			--run;
-			cout << "recalculate............................................!!!" << endl;
+		cout << "accStopTime = " << accStopTime << endl;
+		if (accStopTime > REMIXTIME){
+			remix = 1;
+			accStopTime = 0;
+			++countremix;
+			cout << "remix the max cpm............................................!!!" << endl;
 		}
 		cout << " run=" << inputFiles[run] << "......" << endl;
 
@@ -142,13 +149,13 @@ void SLPA::start(){
 
 			//cout<<" Take :" <<difftime(time(NULL),st)<< " seconds."<<endl;
 		}
-		if (remix == 0){
+		//if (remix == 0){
 			delete lastnet;
 			lastnet = net;
-		}
-		else{
-			delete net;
-		}
+		//}
+		//else{
+			//delete net;
+		//}
 		
 
 	}
@@ -688,7 +695,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	double tmp, maxl;
 
 	sortVectorInt_Double(v->PQueue);
-	labelinflation(v,4);
+	labelinflation(v,INFLATION);
 
 	maxl = v->PQueue[0].first;
 	//if (maxl >= 0.15){
@@ -696,7 +703,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 			if (v->PQueue[i].second == v->PQueue[0].second){
 				continue;
 			}
-			if (v->PQueue[i].second < 0.3){
+			if (v->PQueue[i].second < CUTOFF){
 				v->PQueue.erase(v->PQueue.begin() + i, v->PQueue.end());
 				break;
 			}
@@ -969,7 +976,7 @@ void SLPA::GLPA_syn()
 
 	//computeCoefficients(co);
 	prek = conk = 0;
-	for (t = 1; t <= maxT; t++){
+	for (t = 0; t <= maxT; t++){
 		cout << "*";
 		srand(time(NULL)); 
 		//random_shuffle(net->NODES.begin(), net->NODES.end());
@@ -1023,7 +1030,7 @@ void SLPA::GLPA_syn()
 						influs.insert(v->nbList_P[ii]);
 					}
 				}
-				if (scount[i] != 5){
+				if (scount[i] != STOPN){
 					//double dco = t == 1 ? 1 : pow(0.95, t);
 					addLabeltoNode(synlist[i], v, 1);
 					//mixLabeltoNode(synlist[i], v);
@@ -1070,7 +1077,7 @@ void SLPA::GLPA_syn()
 
 	}
 	//writeToTxt("output.txt", false, output);
-
+	accStopTime += t;
 	cout << endl;
 	//int noverlap = 0;
 	for(int i=0;i<net->N;i++){
@@ -1403,20 +1410,23 @@ void SLPA::post_threshold_createCPM_pointer(int thrc,string fileName){
 	st=time(NULL);
 	sort_cpm_pointer(cpm);  //sort each com by increasing ID for; and by decrasing community size
 	//cout<<"sorting takes :" <<difftime(time(NULL),st)<< " seconds."<<endl;
-	double maxcpmrate = (double)cpm[0]->size() / net->N;
-	if (maxcpmrate > 0.12){
-		if (remix == 0){
-			remix = 1;
-			remixnode = *cpm[0];
-		}
-		else{
-			remix = 0;
-			remixnode.clear();
-		}
-	}
-	else{
-		remix = 0;
-		remixnode.clear();
+	//double maxcpmrate = (double)cpm[0]->size() / net->N;
+	//if (maxcpmrate > 0.12){
+	//	if (remix == 0){
+	//		remix = 1;
+	//		remixnode = *cpm[0];
+	//	}
+	//	else{
+	//		remix = 0;
+	//		remixnode.clear();
+	//	}
+	//}
+	//else{
+	//	remix = 0;
+	//	remixnode.clear();
+	//}
+	if (accStopTime > REMIXTIME){
+		remixnode = *cpm[0];
 	}
 	st=time(NULL);
 	write2txt_CPM_pointer(fileName,cpm);
