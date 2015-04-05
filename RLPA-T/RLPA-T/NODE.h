@@ -33,7 +33,7 @@ public:
 	vector<NODE *> nbList_P;   //the pointer version//邻节点集，NODE集
 	//set<int> nbSet;
 	UOrderedSet_INT nbSet;	//邻节点集，int集
-
+	bool flag;
 	//----------------
 	//SLPA
 	vector<int> WQueue;		//无用

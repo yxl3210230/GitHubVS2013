@@ -148,7 +148,7 @@ void assignParameter(map<string,string>& argTable,int& maxT,bool& isUseLargestCo
 void pre_load_THRS(vector<double> & THRS){
 	THRS.clear();
 
-	THRS.push_back(0.01);
+	/*THRS.push_back(0.01);
 	THRS.push_back(0.05);
 	THRS.push_back(0.1);
 	THRS.push_back(0.15);
@@ -157,7 +157,8 @@ void pre_load_THRS(vector<double> & THRS){
 	THRS.push_back(0.3);
 	THRS.push_back(0.35);
 	THRS.push_back(0.4);
-	THRS.push_back(0.45);
+	THRS.push_back(0.45);*/
+	THRS.push_back(0.5);
 }
 
 int main(int argc, char* argv[]) {

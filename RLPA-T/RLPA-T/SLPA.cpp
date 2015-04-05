@@ -21,7 +21,7 @@
 #define INFLATION 1
 #define CUTOFF 0.5
 #define STOPN 5
-#define REMIXTIME 200
+#define REMIXTIME 100000
 
 typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
 
@@ -212,6 +212,32 @@ void SLPA::initLQueue()
 }
 
 
+//void SLPA::initPQueue()
+//{
+//	time_t st = time(NULL);
+//	cout << "Progress: Initializing memory......." << endl;
+//
+//	//label is node id
+//	NODE *v;
+//	for (int i = 0; i<net->N; i++){
+//
+//		v = net->NODES[i];
+//		v->PQueue.clear();
+//		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+//		v->isToUpdate = 1;
+//		v->isChanged = 0;
+//		v->influ = 1;
+//
+//	}
+//
+//	cout << " Take :" << difftime(time(NULL), st) << " seconds." << endl;
+//}
+
+bool sortNodes(NODE *v1, NODE *v2)
+{
+	return v1->numNbs > v2->numNbs;
+}
+
 void SLPA::initPQueue()
 {
 	time_t st = time(NULL);
@@ -219,11 +245,23 @@ void SLPA::initPQueue()
 
 	//label is node id
 	NODE *v;
-	for (int i = 0; i<net->N; i++){
-
-		v = net->NODES[i];
+	vector<NODE*> vnode;
+	for (int i = 0; i < net->N; i++){
+		vnode.push_back(net->NODES[i]);
+		net->NODES[i]->flag = true;
+	}
+	sort(vnode.begin(), vnode.end(), sortNodes);
+	int numlabel = 0;
+	for (int i = 0; i<vnode.size(); i++){
+		v = vnode[i];
 		v->PQueue.clear();
-		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+		if (v->flag && v->numNbs != 1){
+			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+			for (int j = 0; j < v->numNbs; ++j){
+				v->nbList_P[j]->flag = false;
+			}
+			++numlabel;
+		}
 		v->isToUpdate = 1;
 		v->isChanged = 0;
 		v->influ = 1;
@@ -231,6 +269,7 @@ void SLPA::initPQueue()
 	}
 
 	cout << " Take :" << difftime(time(NULL), st) << " seconds." << endl;
+	cout << " number of labels :" << numlabel << endl;
 }
 
 
@@ -734,7 +773,9 @@ void SLPA::thresholdLabelInNode(NODE *v)
 {
 	int i, j, n, m;
 	double tmp, maxl;
-
+	if (v->PQueue.size() == 0){
+		return;
+	}
 	sortVectorInt_Double(v->PQueue);
 	labelinflation(v,INFLATION);
 
@@ -1355,7 +1396,9 @@ void SLPA::dothreshold_createCPM_pointer(int thrc,vector<vector<int>* >& cpm){
 		//vector<pair<int,int> > pairList;
 		//sortMapInt_Int(v->MQueue,pairList);
 		//post_thresholding(pairList,thrc,WS);
-
+		if (v->LQueue.size() == 0){
+			v->LQueue.push_back(pair<int, int>(v->ID, 1));
+		}
 		post_thresholding(v->LQueue,thrc,WS);
 
 		//post_thresholding(v->WQHistMapEntryList,thrc,WS); //***TO IMP
