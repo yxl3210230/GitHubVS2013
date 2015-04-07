@@ -255,7 +255,7 @@ void SLPA::initPQueue()
 	for (int i = 0; i<vnode.size(); i++){
 		v = vnode[i];
 		v->PQueue.clear();
-		if (v->flag && v->numNbs != 1){
+		if (v->flag){
 			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
 			for (int j = 0; j < v->numNbs; ++j){
 				v->nbList_P[j]->flag = false;
@@ -350,29 +350,52 @@ double SLPA::compareNetwork()
 	//	}
 	//}
 	int nochg = 0;
-	//for (int i = 0; i < net->N; ++i){
-	//	v = net->NODES[i];
-	//	map<int, NODE*>::iterator it;
-	//	if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
-	//		if (v->nbSet == it->second->nbSet){		//未改变的节点
-	//			v->PQueue = it->second->PQueue;
-	//			v->influ = 0;
-	//			++nochg;
-	//		}
-	//		else{		//受影响的节点
-	//			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
-	//			v->influ = 1;
-	//		}
-	//	}
-	//	else{			//新增节点
-	//		v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
-	//		v->influ = 1;
-	//	}
-	//	v->isToUpdate = 1;
-	//	v->isChanged = 0;
-	//}
-	
-	int cpmlabel = 1;
+	vector<NODE*> vnode;
+	for (int i = 0; i < net->N; ++i){
+		v = net->NODES[i];
+		map<int, NODE*>::iterator it;
+		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
+			if (v->nbSet == it->second->nbSet){		//未改变的节点
+				v->PQueue = it->second->PQueue;
+				v->influ = 0;
+				++nochg;
+			}
+			else{		//受影响的节点
+				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+				v->influ = 1;
+			}
+		}
+		else{			//新增节点
+			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
+			v->influ = 1;
+		}
+		v->isToUpdate = 1;
+		v->isChanged = 0;
+		v->flag = true;
+		vnode.push_back(net->NODES[i]);
+	}
+
+	sort(vnode.begin(), vnode.end(), sortNodes);
+
+	int numlabel = 0;
+	for (int i = 0; i<vnode.size(); i++){
+		v = vnode[i];
+		if (v->flag){
+			for (int j = 0; j < v->numNbs; ++j){
+				v->nbList_P[j]->flag = false;
+			}
+			++numlabel;
+		}
+		else{
+			v->PQueue.clear();
+		}
+		v->isToUpdate = 1;
+		v->isChanged = 0;
+
+	}
+
+	cout << " number of labels :" << numlabel << endl;
+	/*int cpmlabel = 1;
 	for (int i = 0; i < tmpcpm.size(); ++i){
 		for (int j = 0; j < tmpcpm[i].size(); ++j){
 			map<int, NODE*>::iterator mit = net->NODESTABLE.find(tmpcpm[i][j]);
@@ -398,7 +421,7 @@ double SLPA::compareNetwork()
 		}
 		v->influ = 1;
 		norm_probability(v->PQueue);
-	}
+	}*/
 	/*if (remix == 1){
 		map<int, NODE*>::iterator mit;
 		for (int i = 0; i < remixnode.size(); ++i){
@@ -413,17 +436,17 @@ double SLPA::compareNetwork()
 		remix = 0;
 	}*/
 
-	for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
-		v = net->NODES[i];
-		if (v->influ == 0){
-			continue;
-		}
-		for (int j = 0; j < v->numNbs; ++j){
-			if (v->nbList_P[j]->influ == 0){
-				v->nbList_P[j]->influ = 1;
-			}
-		}
-	}
+	//for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
+	//	v = net->NODES[i];
+	//	if (v->influ == 0){
+	//		continue;
+	//	}
+	//	for (int j = 0; j < v->numNbs; ++j){
+	//		if (v->nbList_P[j]->influ == 0){
+	//			v->nbList_P[j]->influ = 1;
+	//		}
+	//	}
+	//}
 	double chgnet = 1 - ((double)nochg / net->N);
 	double chglastnet = 1 - ((double)nochg / lastnet->N);
 	double chgrate = chgnet>chglastnet ? chgnet : chglastnet;
@@ -1068,21 +1091,22 @@ void SLPA::GLPA_syn()
 		for (i = 0; i<net->N; i++){
 			v = net->NODES[i];
 			v->isChanged = 0;
-			if (v->isToUpdate && v->influ){
+			//if (v->isToUpdate && v->influ){
+			if (v->isToUpdate){
 				nbp.clear();
 				nbp.reserve(100);
-				
+
 				snapelement.clear();
 				for (j = 0; j < v->PQueue.size(); j++){
 					snapelement.push_back(v->PQueue[j]);
 				}
 				snapshot.push_back(snapelement);
-				
+
 				for (j = 0; j < v->numNbs; j++){
 					//if (co[i][j] != 0){
-						nbv = v->nbList_P[j];
-						//addLabeltoVector(nbp, nbv, co[i][j]);
-						addLabeltoVector(nbp, nbv, 1);
+					nbv = v->nbList_P[j];
+					//addLabeltoVector(nbp, nbv, co[i][j]);
+					addLabeltoVector(nbp, nbv, 1);
 					//}
 				}
 				//thresholdLabelInVector(nbp, v->numNbs);
@@ -1093,12 +1117,13 @@ void SLPA::GLPA_syn()
 			}
 		}
 		//line.clear();
-		influs.clear();
+		//influs.clear();
 		for (i = 0, j = 0, k = 0; i < net->N; ++i){
 			//if (i == 702)system("pause");
 			v = net->NODES[i];
 			//if (v->ID == 10)system("pause");
-			if (v->isToUpdate && v->influ){
+			if (v->isToUpdate){
+			//if (v->isToUpdate && v->influ){
 				sim = computeSimilarity(synlist[i], v->PQueue);
 				//line += dbl2str(sim);
 				//line += "\t";
@@ -1108,9 +1133,9 @@ void SLPA::GLPA_syn()
 				else{
 					psim[i] = sim;
 					scount[i] = 0;
-					for (int ii = 0; ii < v->numNbs; ++ii){		//若相似度改变，则激活周围节点的influ
-						influs.insert(v->nbList_P[ii]);
-					}
+					//for (int ii = 0; ii < v->numNbs; ++ii){		//若相似度改变，则激活周围节点的influ
+					//	influs.insert(v->nbList_P[ii]);
+					//}
 				}
 				if (scount[i] != STOPN){
 					//double dco = t == 1 ? 1 : pow(0.95, t);
@@ -1140,9 +1165,9 @@ void SLPA::GLPA_syn()
 			conk = 0;
 		}
 		prek = k;
-		for (set<NODE *>::iterator setit = influs.begin(); setit != influs.end(); ++setit){
-			(*setit)->influ = 1;
-		}
+		//for (set<NODE *>::iterator setit = influs.begin(); setit != influs.end(); ++setit){
+		//	(*setit)->influ = 1;
+		//}
 
 		//output.push_back(line);
 
