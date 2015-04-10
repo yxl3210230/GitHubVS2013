@@ -51,7 +51,7 @@ public:
 	string networkPath;		//无用
 	vector<string> inputFiles;
 
-	set<int> labelSet;				//标签集
+	set<int> labelSet, maxdegnodes;				//标签集
 	vector<vector<int> > splcpm;	//新增的连通分量
 	int remix;
 	vector<int> remixnode;
@@ -117,6 +117,7 @@ public:
 	int ceateHistogram_selRandMax(const vector<int>& wordsList);
 	void post_createWQHistogram_MapEntryList();
 	void post_thresholding(vector<pair<int,int> >& pairList, int thrc, vector<int>& WS);
+	void find_maxdegreenodesinCPM(vector<vector<int>* >& cpm);
 
 	//need to change
 	//vector<vector<int> > post_sameLabelDisconnectedComponents(vector<vector<int> >& cpm);

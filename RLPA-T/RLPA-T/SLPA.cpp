@@ -20,7 +20,7 @@
 
 #define INFLATION 2
 #define CUTOFF 0.1
-#define STOPN 2
+#define STOPN 5
 #define REMIXTIME 100000
 
 typedef std::tr1::unordered_map<int, int> UOrderedH_INT_INT;
@@ -235,7 +235,7 @@ void SLPA::initLQueue()
 
 bool sortNodes(NODE *v1, NODE *v2)
 {
-	return v1->numNbs < v2->numNbs;
+	return v1->numNbs > v2->numNbs;
 }
 
 void SLPA::initPQueue()
@@ -350,24 +350,32 @@ double SLPA::compareNetwork()
 	//	}
 	//}
 	int nochg = 0;
-	/*vector<NODE*> vnode;
+	vector<NODE*> vnode;
 	for (int i = 0; i < net->N; ++i){
 		v = net->NODES[i];
 		map<int, NODE*>::iterator it;
 		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
 			if (v->nbSet == it->second->nbSet){		//未改变的节点
-				v->PQueue = it->second->PQueue;
+				if (maxdegnodes.find(v->ID) != maxdegnodes.end()){
+					v->PQueue = it->second->PQueue;
+					//v->isToUpdate = 0;
+				}
+				else{
+					//v->isToUpdate = 1;
+				}
 				v->influ = 0;
 				++nochg;
 			}
 			else{		//受影响的节点
 				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
 				v->influ = 1;
+				//v->isToUpdate = 1;
 			}
 		}
 		else{			//新增节点
 			v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
 			v->influ = 1;
+			//v->isToUpdate = 1;
 		}
 		v->isToUpdate = 1;
 		v->isChanged = 0;
@@ -377,25 +385,31 @@ double SLPA::compareNetwork()
 
 	sort(vnode.begin(), vnode.end(), sortNodes);
 
-	int numlabel = 0;
+	//int numlabel = 0;
 	for (int i = 0; i<vnode.size(); i++){
 		v = vnode[i];
+		if (v->influ == 0){
+			continue;
+		}
 		if (v->flag){
 			for (int j = 0; j < v->numNbs; ++j){
 				v->nbList_P[j]->flag = false;
 			}
-			++numlabel;
+			//++numlabel;
 		}
 		else{
-			v->PQueue.clear();
+			//if (v->isToUpdate == 0){
+				v->PQueue.clear();
+				//v->isToUpdate = 1;
+			//}
 		}
-		v->isToUpdate = 1;
+		//v->isToUpdate = 1;
 		v->isChanged = 0;
 
 	}
 
-	cout << " number of labels :" << numlabel << endl;*/
-	int cpmlabel = 1;
+	//cout << " number of labels :" << numlabel << endl;
+	/*int cpmlabel = 1;
 	for (int i = 0; i < tmpcpm.size(); ++i){
 		for (int j = 0; j < tmpcpm[i].size(); ++j){
 			map<int, NODE*>::iterator mit = net->NODESTABLE.find(tmpcpm[i][j]);
@@ -444,7 +458,7 @@ double SLPA::compareNetwork()
 		//v->isToUpdate = 1;
 		v->isChanged = 0;
 
-	}
+	}*/
 
 	/*if (remix == 1){
 		map<int, NODE*>::iterator mit;
@@ -460,17 +474,17 @@ double SLPA::compareNetwork()
 		remix = 0;
 	}*/
 
-	for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
+	/*for (int i = 0; i < net->N; ++i){			//将influ=1的节点的邻节点激活
 		v = net->NODES[i];
-		if (v->influ == 0){
+		if (v->isToUpdate == 0){
 			continue;
 		}
 		for (int j = 0; j < v->numNbs; ++j){
-			if (v->nbList_P[j]->influ == 0){
-				v->nbList_P[j]->influ = 1;
+			if (v->nbList_P[j]->isToUpdate == 0){
+				v->nbList_P[j]->isToUpdate = 1;
 			}
 		}
-	}
+	}*/
 	double chgnet = 1 - ((double)nochg / net->N);
 	double chglastnet = 1 - ((double)nochg / lastnet->N);
 	double chgrate = chgnet>chglastnet ? chgnet : chglastnet;
@@ -947,7 +961,7 @@ bool SLPA::checkLabelChange(NODE *v, vector<pair<int, double>> pairList)
 	sortVectorInt_Double_first(v->PQueue);
 	sortVectorInt_Double_first(pairList);
 	for (int i = 0; i < pairList.size(); i++){
-		if (v->PQueue[i].first != pairList[i].first || v->PQueue[i].second != pairList[i].second){
+		if (v->PQueue[i].first != pairList[i].first){
 			v->isChanged = 1;
 			return true;
 		}
@@ -1158,11 +1172,11 @@ void SLPA::GLPA_syn()
 				else{
 					psim[i] = sim;
 					scount[i] = 0;
-					for (int ii = 0; ii < v->numNbs; ++ii){		//若相似度改变，则激活周围节点的influ
-						if (v->nbList_P[ii]->isToUpdate == 0){
-							influs.insert(v->nbList_P[ii]);
-						}
-					}
+					//for (int ii = 0; ii < v->numNbs; ++ii){		//若相似度改变，则激活周围节点的influ
+					//	if (v->nbList_P[ii]->isToUpdate == 0){
+					//		influs.insert(v->nbList_P[ii]);
+					//	}
+					//}
 				}
 				if (scount[i] != STOPN){
 					//double dco = t == 1 ? 1 : pow(0.95, t);
@@ -1192,9 +1206,9 @@ void SLPA::GLPA_syn()
 			conk = 0;
 		}
 		prek = k;
-		for (set<NODE *>::iterator setit = influs.begin(); setit != influs.end(); ++setit){
-			(*setit)->isToUpdate = 1;
-		}
+		//for (set<NODE *>::iterator setit = influs.begin(); setit != influs.end(); ++setit){
+		//	(*setit)->isToUpdate = 1;
+		//}
 
 		//output.push_back(line);
 
@@ -1449,6 +1463,7 @@ void SLPA::dothreshold_createCPM_pointer(int thrc,vector<vector<int>* >& cpm){
 		//sortMapInt_Int(v->MQueue,pairList);
 		//post_thresholding(pairList,thrc,WS);
 		if (v->LQueue.size() == 0){
+			system("pause");
 			v->LQueue.push_back(pair<int, int>(v->ID, 1));
 		}
 		post_thresholding(v->LQueue,thrc,WS);
@@ -1486,7 +1501,21 @@ void SLPA::dothreshold_createCPM_pointer(int thrc,vector<vector<int>* >& cpm){
 	//cout<<"Creating CPM takes :" <<difftime(time(NULL),st)<< " seconds."<<endl;
 }
 
-
+void SLPA::find_maxdegreenodesinCPM(vector<vector<int>* >& cpm){
+	maxdegnodes.clear();
+	for (int i = 0; i < cpm.size(); ++i){
+		int maxd = 0;
+		int nid = 0;
+		for (int j = 0; j < cpm[i]->size(); ++j){
+			int nd = net->NODESTABLE.find((*cpm[i])[j])->second->numNbs;
+			if (nd > maxd){
+				maxd = nd;
+				nid = (*cpm[i])[j];
+			}
+		}
+		maxdegnodes.insert(nid);
+	}
+}
 
 void SLPA::post_threshold_createCPM_pointer(int thrc,string fileName){
 	bool isDEBUG=false;
@@ -1539,7 +1568,7 @@ void SLPA::post_threshold_createCPM_pointer(int thrc,string fileName){
 
 	//if(isDEBUG) cout<<"---After---"<<endl;
 	//if(isDEBUG) printVectVect_PRIMITIVE<int>(cpm);
-
+	find_maxdegreenodesinCPM(cpm);
 	//---------------------------
 	//4. save cpm
 	//---------------------------
@@ -1574,9 +1603,9 @@ void SLPA::post_threshold_createCPM_pointer(int thrc,string fileName){
 	//---------------------------
 	//release memory
 	//---------------------------
-	tmpcpm.clear();
+	//tmpcpm.clear();
 	for (int i = 0; i < cpm.size(); i++){
-		tmpcpm.push_back(*cpm[i]);
+		//tmpcpm.push_back(*cpm[i]);
 		delete cpm[i];
 	}
 }
