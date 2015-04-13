@@ -351,18 +351,46 @@ double SLPA::compareNetwork()
 	//}
 	int nochg = 0;
 	vector<NODE*> vnode;
+	map<int, int> label_degree, label_countnet, label_countlast;
+	map<int, NODE*> label_node;
 	for (int i = 0; i < net->N; ++i){
 		v = net->NODES[i];
 		map<int, NODE*>::iterator it;
 		if ((it = lastnet->NODESTABLE.find(v->ID)) != lastnet->NODESTABLE.end()){
 			if (v->nbSet == it->second->nbSet){		//未改变的节点
-				if (maxdegnodes.find(v->ID) != maxdegnodes.end()){
-					v->PQueue = it->second->PQueue;
+				for (int j = 0; j < it->second->PQueue.size(); ++j){
+					int lindx = it->second->PQueue[j].first;
+					map<int, int>::iterator mit;
+					if ((mit = label_degree.find(lindx)) != label_degree.end()){
+						if (v->numNbs > mit->second){
+							mit->second = v->numNbs;
+							label_node[lindx] = v;
+						}
+					}
+					else{
+						label_degree[lindx] = v->numNbs;
+						label_node[lindx] = v;
+					}
+					if (label_countnet.count(lindx) == 0){
+						label_countnet[lindx] = 1;
+					}
+					else{
+						++label_countnet[lindx];
+					}
+					if (label_countlast.count(lindx) == 0){
+						label_countlast[lindx] = 1;
+					}
+					else{
+						++label_countlast[lindx];
+					}
+				}
+				//if (maxdegnodes.find(v->ID) != maxdegnodes.end()){
+					//v->PQueue = it->second->PQueue;
 					//v->isToUpdate = 0;
-				}
-				else{
+				//}
+				//else{
 					//v->isToUpdate = 1;
-				}
+				//}
 				v->influ = 0;
 				++nochg;
 			}
@@ -370,6 +398,15 @@ double SLPA::compareNetwork()
 				v->PQueue.push_back(pair<int, double>(v->ID, 1.0));
 				v->influ = 1;
 				//v->isToUpdate = 1;
+				for (int j = 0; j < it->second->PQueue.size(); ++j){
+					int lindx = it->second->PQueue[j].first;
+					if (label_countlast.count(lindx) == 0){
+						label_countlast[lindx] = 1;
+					}
+					else{
+						++label_countlast[lindx];
+					}
+				}
 			}
 		}
 		else{			//新增节点
@@ -381,6 +418,16 @@ double SLPA::compareNetwork()
 		v->isChanged = 0;
 		v->flag = true;
 		vnode.push_back(net->NODES[i]);
+	}
+
+	for (map<int, NODE*>::iterator mit = label_node.begin(); mit != label_node.end(); ++mit){
+		double rate = (double)label_countnet[mit->first] / label_countlast[mit->first];
+		if (rate > 0.5){
+			mit->second->PQueue = lastnet->NODESTABLE[mit->second->ID]->PQueue;
+		}
+		else{
+			mit->second->influ = 1;
+		}
 	}
 
 	sort(vnode.begin(), vnode.end(), sortNodes);
@@ -407,6 +454,8 @@ double SLPA::compareNetwork()
 		v->isChanged = 0;
 
 	}
+
+	
 
 	//cout << " number of labels :" << numlabel << endl;
 	/*int cpmlabel = 1;
