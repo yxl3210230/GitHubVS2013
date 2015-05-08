@@ -18,7 +18,7 @@
 
 #include <pthread.h>
 
-#define INFLATION 2
+#define INFLATION 4
 #define CUTOFF 0.1
 #define STOPN 5
 #define REMIXTIME 100000
@@ -884,7 +884,7 @@ void SLPA::thresholdLabelInNode(NODE *v)
 	int i, j, n, m;
 	double tmp, maxl;
 	if (v->PQueue.size() == 0){
-		system("pause");
+		//system("pause");
 		return;
 	}
 	sortVectorInt_Double(v->PQueue);
@@ -1150,8 +1150,8 @@ void SLPA::GLPA_syn()
 	NODE *v, *nbv;
 	vector<pair<int, double>> nbp, snapelement;
 	vector<vector<pair<int, double>>> synlist, snapshot;
-	//vector<string> output;
-	//string line;
+	vector<string> output;
+	string line;
 	vector<double> psim(net->N, 0);
 	double sim;
 	vector<int> scount(net->N, 0);
@@ -1204,7 +1204,7 @@ void SLPA::GLPA_syn()
 				synlist.push_back(vector<pair<int,double>>());
 			}
 		}
-		//line.clear();
+		line.clear();
 		//influs.clear();
 		for (i = 0, j = 0, k = 0; i < net->N; ++i){
 			//if (i == 702)system("pause");
@@ -1213,8 +1213,8 @@ void SLPA::GLPA_syn()
 			if (v->isToUpdate){
 			//if (v->isToUpdate && v->influ){
 				sim = computeSimilarity(synlist[i], v->PQueue);
-				//line += dbl2str(sim);
-				//line += "\t";
+				line += dbl2str(sim);
+				line += "\t";
 				if (sim == psim[i] && sim != 0){
 					++scount[i];
 				}
@@ -1232,23 +1232,24 @@ void SLPA::GLPA_syn()
 					addLabeltoNode(synlist[i], v, 1);
 					//mixLabeltoNode(synlist[i], v);
 					thresholdLabelInNode(v);
-					if (checkLabelChange(v, snapshot[j++]) == true){
-						++k;
-					}
+					//if (checkLabelChange(v, snapshot[j++]) == true){
+					//	++k;
+					//}
 				}
 				else{
 					v->isToUpdate = 0;
 				}
+				++k;
 			}
 			else{
-				//line += "*\t";
+				line += "*\t";
 			}
 			//stateDetection(v);
 			//line += int2str(v->isToUpdate);
 			//line += int2str(v->influ);
 			//line += " ";
 		}
-		if (k == prek){
+		if (k == prek && k != net->N){
 			++conk;
 		}
 		else{
@@ -1259,7 +1260,7 @@ void SLPA::GLPA_syn()
 		//	(*setit)->isToUpdate = 1;
 		//}
 
-		//output.push_back(line);
+		output.push_back(line);
 
 		//if (k == 0 || endflag){
 		if (k == 0 || conk == 5){
@@ -1273,7 +1274,7 @@ void SLPA::GLPA_syn()
 		}
 
 	}
-	//writeToTxt("output.txt", false, output);
+	writeToTxt("output.txt", false, output);
 	accStopTime += t;
 	cout << endl;
 	//int noverlap = 0;
