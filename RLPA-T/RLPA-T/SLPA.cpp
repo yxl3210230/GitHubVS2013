@@ -1168,7 +1168,8 @@ void SLPA::GLPA_syn()
 	//output.push_back(line);
 
 	//computeCoefficients(co);
-	prek = conk = 0;
+	conk = 0;
+	prek = net->N;
 	for (t = 0; t <= maxT; t++){
 		cout << "*";
 		srand(time(NULL)); 
@@ -1231,7 +1232,12 @@ void SLPA::GLPA_syn()
 					//double dco = t == 1 ? 1 : pow(0.95, t);
 					addLabeltoNode(synlist[i], v, 1);
 					//mixLabeltoNode(synlist[i], v);
-					thresholdLabelInNode(v);
+					//if (prek > net->N * 0.1){
+						thresholdLabelInNode(v);
+					//}
+					//else{
+						//norm_probability(v->PQueue);
+					//}					
 					//if (checkLabelChange(v, snapshot[j++]) == true){
 					//	++k;
 					//}
@@ -1259,11 +1265,11 @@ void SLPA::GLPA_syn()
 		//for (set<NODE *>::iterator setit = influs.begin(); setit != influs.end(); ++setit){
 		//	(*setit)->isToUpdate = 1;
 		//}
-
+		line = int2str(k) + "\t" + line;
 		output.push_back(line);
 
 		//if (k == 0 || endflag){
-		if (k == 0 || conk == 5){
+		if (k == 0 || conk == 1000){
 			//cout << "1";
 			//endflag = true;
 			//cout << "Quit?" << endl;
